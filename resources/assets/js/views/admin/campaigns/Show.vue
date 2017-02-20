@@ -33,10 +33,7 @@
 </template>
 
 <script type="text/babel">
-    import { mapGetters, mapActions , mapState , mapMutations } from 'vuex'
-    import LineGraph from '../../../components/LineGraph.vue'
-    import BarGraph from '../../../components/BarGraph.vue'
-    import PieGraph from '../../../components/PieGraph.vue'
+    import { mapGetters, mapActions , mapState } from 'vuex'
     import opened from '../../../components/Campaigns/Opened.vue'
     import delivered from '../../../components/Campaigns/Delivered.vue'
     import clicked from '../../../components/Campaigns/Clicked.vue'
@@ -50,13 +47,9 @@
             }
         },
         components : {
-            LineGraph , BarGraph , PieGraph , opened, delivered, clicked, unsubscribed, RevenueVsAbandon , TotalVsCurrentAbandonCart
+        opened, delivered, clicked, unsubscribed, RevenueVsAbandon , TotalVsCurrentAbandonCart
         },
          methods: {
-            ...mapMutations({
-                setQuery: 'setQuery',
-                setCurrentCampaign: 'setCurrentCampaign'
-            }),
             ...mapActions({
                 setCurrentCampaign: 'setCurrentCampaign'
             }),
@@ -65,18 +58,13 @@
         computed: {
             // Your Initial Data
             ...mapState({
-                campaign: state => state.campaigns.current,
-                query: state => state.campaigns.query
+                campaign: state => state.campaigns.current
             }),
-            ...mapGetters({
-                currentCampaign: 'currentCampaign',
-                getQuery: 'getQuery'
-            })
-            // Declare Other Computed Properties
         },
         mounted() {
-            this.setCurrentCampaign(this.$route.params.id)
-        }
+            
+        },
+        
 
     }
 </script>

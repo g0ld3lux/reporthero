@@ -50,11 +50,12 @@ export default {
         },
         methods: {
             ...mapMutations({
-                setQuery: 'setQuery',
-                setCurrentCampaign: 'setCurrentCampaign'
+                setQuery: 'setQuery'
+
             }),
             ...mapActions({
-                getCampaigns: 'getCampaigns'
+                getCampaigns: 'getCampaigns',
+                setCurrentCampaign: 'setCurrentCampaign'
             }),
             // Declare Other Methods Here
              changePage() {
@@ -66,7 +67,8 @@ export default {
             },
             viewStats(campaign) {
                 this.$router.push({ name: 'campaigns.show', params: { id: campaign.id }})
-                this.setCurrentCampaign(campaign)
+                this.setCurrentCampaign(campaign.id)
+                
             }
             
 

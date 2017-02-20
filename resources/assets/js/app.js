@@ -39,6 +39,6 @@ Vue.filter('currency', currency)
  * Global Route Change , Then Do Something!
  */
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title
+  
    next()
 })
