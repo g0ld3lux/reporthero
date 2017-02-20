@@ -30,15 +30,3 @@ const app = new Vue({
     }
 }).$mount('#app')
 
-/**
- * Load All Global Filters Here
- */
-Vue.filter('currency', currency)
-
-/**
- * Global Route Change , Then Do Something!
- */
-router.beforeEach((to, from, next) => {
-  
-   next()
-})

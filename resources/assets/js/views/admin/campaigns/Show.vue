@@ -33,7 +33,7 @@
 </template>
 
 <script type="text/babel">
-    import { mapGetters, mapActions , mapState } from 'vuex'
+    import { mapGetters, mapActions , mapState , mapMutations } from 'vuex'
     import opened from '../../../components/Campaigns/Opened.vue'
     import delivered from '../../../components/Campaigns/Delivered.vue'
     import clicked from '../../../components/Campaigns/Clicked.vue'
@@ -60,9 +60,13 @@
             ...mapState({
                 campaign: state => state.campaigns.current
             }),
+            ...mapGetters({
+                currentCampaign: 'currentCampaign'
+            })
+            // Declare Other Computed Properties
         },
         mounted() {
-            
+            this.setCurrentCampaign(this.$route.params.id)
         },
         
 
