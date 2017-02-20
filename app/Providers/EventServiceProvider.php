@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraspace\Providers;
+namespace Reporthero\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Laraspace\Events\SomeEvent' => [
-            'Laraspace\Listeners\EventListener',
+        'Reporthero\Events\SomeEvent' => [
+            'Reporthero\Listeners\EventListener',
         ],
     ];
 

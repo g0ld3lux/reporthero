@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laraspace',
+    'name' => 'Reporthero',
 
     /*
     |--------------------------------------------------------------------------
@@ -166,14 +166,15 @@ return [
         /*
          * Application Service Providers...
          */
-        Laraspace\Providers\AppServiceProvider::class,
-        Laraspace\Providers\AuthServiceProvider::class,
-//        Laraspace\Providers\BroadcastServiceProvider::class,
-        Laraspace\Providers\EventServiceProvider::class,
-        Laraspace\Providers\RouteServiceProvider::class,
+        Reporthero\Providers\AppServiceProvider::class,
+        Reporthero\Providers\AuthServiceProvider::class,
+//        Reporthero\Providers\BroadcastServiceProvider::class,
+        Reporthero\Providers\EventServiceProvider::class,
+        Reporthero\Providers\RouteServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class
     ],
 
     /*

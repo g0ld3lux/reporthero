@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraspace\Http\Controllers;
+namespace Reporthero\Http\Controllers;
 
 use Illuminate\Http\Request;
 use JWTAuth;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraspace\Providers;
+namespace Reporthero\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

@@ -1,0 +1,56 @@
+.ct-chart-line {
+
+    width: 95%;
+    min-height: 550px;
+    margin: 0 auto; 
+   
+}
+
+ul.ct-legend {
+list-style-type: none;
+text-align: center;
+font-size: 18px;
+color: #5b4421;
+}
+.ct-legend {
+    padding-top: 20px;
+    position: relative;
+    z-index: 10;
+    
+    
+    li {
+        position: relative;
+        padding-left: 25px;
+        margin-left: 15px;
+        display: inline;
+    }
+
+    li:before {
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        left: 0;
+        content: '';
+        border: 3px solid transparent;
+        border-radius: 2px;
+    }
+
+    li.inactive:before {
+        background: transparent;
+    }
+
+    &.ct-legend-inside {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        
+    }
+
+    @for $i from 0 to length($ct-series-colors) {
+        .ct-series-#{$i}:before {
+            background-color: nth($ct-series-colors, $i + 1);
+            border-color: nth($ct-series-colors, $i + 1);
+        }
+    }
+}

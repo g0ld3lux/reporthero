@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    Laraspace\Http\Kernel::class
+    Reporthero\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    Laraspace\Console\Kernel::class
+    Reporthero\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    Laraspace\Exceptions\Handler::class
+    Reporthero\Exceptions\Handler::class
 );
 
 /*

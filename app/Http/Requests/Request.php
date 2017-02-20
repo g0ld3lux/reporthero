@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraspace\Http\Requests;
+namespace Reporthero\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

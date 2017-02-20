@@ -18,9 +18,9 @@
                     </label>
                 </div>
             </div>
-            <div class="col-sm-6 text-sm-right">
-                <a href="#" class="forgot-link">Forgot Password?</a>
-            </div>
+            <!-- <div class="col-sm-6 text-sm-right">
+                 <a href="#" class="forgot-link">Forgot Password?</a>
+                 </div> -->
         </div>
         <button class="btn btn-theme btn-full">Login</button>
     </form>
@@ -33,8 +33,8 @@
         data() {
             return {
                 loginData: {
-                    email: 'admin@laraspace.in',
-                    password: 'admin@123',
+                    email: 'admin@reporthero.io',
+                    password: 'adminpass',
                     remember: ''
                 }
             }
@@ -45,7 +45,7 @@
 
                 if (!this.errors.any()) {
                     Auth.login(this.loginData).then(() => {
-                        this.$router.push('/admin/dashboard/basic')
+                        this.$router.push('/campaigns')
                     })
                 }
             }

@@ -4,7 +4,7 @@
     <title>Laraspace - Laravel Admin</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
     <script src="/assets/js/core/pace.js"></script>
-    <link href="{{mix("/assets/css/laraspace.css")}}" rel="stylesheet" type="text/css">
+    <link href="{{asset("/assets/css/laraspace.css")}}" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/admin/img/favicons/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/assets/admin/img/favicons/apple-touch-icon-60x60.png">
@@ -34,11 +34,7 @@
         <router-view></router-view>
     </transition>
 </div>
-@if(getenv('APP_ENV') == 'production')
-    <script type="text/javascript" src="{{mix('/assets/js/core/plugins.js')}}"></script>
-@else
     <script type="text/javascript" src="{{asset('/assets/js/core/plugins.js')}}"></script>
-@endif
-<script type="text/javascript" src="{{mix("/assets/js/app.js")}}"></script>
+    <script type="text/javascript" src="{{mix("/assets/js/app.js")}}"></script>
 </body>
 </html>

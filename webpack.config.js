@@ -105,7 +105,9 @@ module.exports.module = {
 
         {
             test: /\.jsx?$/,
-            exclude: /(node_modules|bower_components)/,
+            // exclude: /(node_modules|bower_components)/,
+            // loader: 'babel-loader' + Mix.babelConfig()
+            exclude: /node_modules(?!\/(vue-tables-2|vue-pagination-2))/,
             loader: 'babel-loader' + Mix.babelConfig()
         },
 
@@ -257,7 +259,7 @@ module.exports.devtool = Mix.sourcemaps;
 module.exports.devServer = {
     historyApiFallback: true,
     noInfo: true,
-    //compress: true,
+    compress: true,
     quiet: true
 }
 

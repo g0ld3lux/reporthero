@@ -2,12 +2,12 @@
     <div class="template-container">
         <header class="site-header">
             <a href="#" class="brand-main">
-                <img src="/assets/img/logo-desk.png" id="logo-desk" alt="Laraspace Logo" class="hidden-sm-down">
+                <img src="/logo-dark.png" id="logo-desk" alt="Laraspace Logo" class="hidden-sm-down">
             </a>
 
             <ul class="action-list">
                 <li>
-                    <router-link to="/admin/dashboard/basic">Admin Dashboard</router-link>
+                    <router-link to="/campaigns">Reports</router-link>
                 </li>
             </ul>
         </header>

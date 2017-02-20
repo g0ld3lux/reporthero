@@ -9,46 +9,12 @@ import AuthService from './services/auth'
  |--------------------------------------------------------------------------|
  */
 
-//Dashboard
-import Basic from './views/admin/dashboard/Basic.vue'
-import Ecommerce from './views/admin/dashboard/Ecommerce.vue'
-import Finance from './views/admin/dashboard/Finance.vue'
 
 //Layouts
-import LayoutBasic from './views/layouts/LayoutBasic.vue'
 import LayoutHorizontal from './views/layouts/LayoutHorizontal.vue'
-import LayoutIconSidebar from './views/layouts/LayoutIconSidebar.vue'
-import LayoutLogin from './views/layouts/LayoutLogin.vue'
 import LayoutFront from './views/layouts/LayoutFront.vue'
+import LayoutLogin from './views/layouts/LayoutLogin.vue'
 
-//Basic UI
-import Buttons from './views/admin/basic-ui/Buttons.vue'
-import Cards from './views/admin/basic-ui/Cards.vue'
-import Tabs from './views/admin/basic-ui/Tabs.vue'
-import Typography from './views/admin/basic-ui/Typography.vue'
-import Tables from './views/admin/basic-ui/Tables.vue'
-
-//Components
-import Datatables from './views/admin/components/Datatables.vue'
-import Notifications from './views/admin/components/Notifications.vue'
-import Graphs from './views/admin/components/Graphs.vue'
-
-//Forms
-import General from './views/admin/forms/General.vue'
-import Advanced from './views/admin/forms/Advanced.vue'
-import Layouts from './views/admin/forms/FormLayouts.vue'
-import Validation from './views/admin/forms/FormValidation.vue'
-import Editors from './views/admin/forms/Editors.vue'
-import VeeValidate from './views/admin/forms/VeeValidate.vue'
-
-//Settings
-import Settings from './views/admin/Settings.vue'
-
-/*
- |--------------------------------------------------------------------------
- | Other
- |--------------------------------------------------------------------------|
- */
 
 //Auth
 import Login from './views/auth/Login.vue'
@@ -74,33 +40,7 @@ const routes = [
      |--------------------------------------------------------------------------|
      */
 
-    {
-        path: '/admin/layouts', component: LayoutBasic,
-        children: [
-            {
-                path: 'sidebar',
-                component: Basic
-            },
-        ]
-    },
-    {
-        path: '/admin/layouts', component: LayoutHorizontal,
-        children: [
-            {
-                path: 'horizontal',
-                component: Basic
-            },
-        ]
-    },
-    {
-        path: '/admin/layouts', component: LayoutIconSidebar,
-        children: [
-            {
-                path: 'icon-sidebar',
-                component: Basic
-            },
-        ]
-    },
+
 
     /*
      |--------------------------------------------------------------------------
@@ -125,92 +65,29 @@ const routes = [
      |--------------------------------------------------------------------------|
      */
     {
-        path: '/admin', component: LayoutBasic,  // Change the desired Layout here
+        path: '/campaigns', component: LayoutHorizontal,  // Change the desired Layout here
         meta: { requiresAuth: true },
         children: [
 
-            //Dashboard
             {
-                path: 'dashboard/basic',
-                component: Basic,
-                name: 'dashboard',
+                path: '/campaigns',
+                name: 'campaigns.index',
+                component: require('./views/admin/campaigns/Index.vue'),
+                meta: {
+                title: 'Klaviyo Campaigns',
+                breadcrumb: 'Campaigns'
+                },
             },
             {
-                path: 'dashboard/ecommerce',
-                component: Ecommerce
+                path: '/campaign/:id',
+                name: 'campaigns.show',
+                component: require('./views/admin/campaigns/Show.vue'),
+                keepAlive: true,
+                meta: {
+                breadcrumb: 'Campaign'
+                },
             },
-            {
-                path: 'dashboard/finance',
-                component: Finance
-            },
-
-            //Basic UI
-            {
-                path: 'basic-ui/buttons',
-                component: Buttons
-            },
-            {
-                path: 'basic-ui/cards',
-                component: Cards
-            },
-            {
-                path: 'basic-ui/tabs',
-                component: Tabs
-            },
-            {
-                path: 'basic-ui/typography',
-                component: Typography
-            },
-            {
-                path: 'basic-ui/tables',
-                component: Tables
-            },
-
-            //Components
-            {
-                path: 'components/datatables',
-                component: Datatables
-            },
-            {
-                path: 'components/notifications',
-                component: Notifications
-            },
-            {
-                path: 'components/graphs',
-                component: Graphs
-            },
-
-            //Forms
-            {
-                path: 'forms/general',
-                component: General
-            },
-            {
-                path: 'forms/advanced',
-                component: Advanced
-            },
-            {
-                path: 'forms/layouts',
-                component: Layouts
-            },
-            {
-                path: 'forms/validation',
-                component: Validation
-            },
-            {
-                path: 'forms/editors',
-                component: Editors
-            },
-            {
-                path: 'forms/vee',
-                component: VeeValidate
-            },
-
-            //Settings
-            {
-                path: 'settings',
-                component: Settings
-            },
+            
         ]
     },
 

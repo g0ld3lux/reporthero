@@ -1,14 +1,16 @@
-import router from './router.js'
-
-import Layout from './helpers/layout'
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * include Vue and Vue Resource. This gives a great starting point for
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+import './bootstrap';
+import router from './router.js'
+import Layout from './helpers/layout'
+import { currency } from './filters/currency'
+import store from './vuex/store/';
+import 'babel-polyfill';
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -16,14 +18,27 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import Plugin from './helpers/plugin'
-window.Plugin = Plugin
+
 
 const app = new Vue({
     router,
+    store,
     methods : {
         onOverlayClick(){
             Layout.toggleSidebar()
         }
     }
 }).$mount('#app')
+
+/**
+ * Load All Global Filters Here
+ */
+Vue.filter('currency', currency)
+
+/**
+ * Global Route Change , Then Do Something!
+ */
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+   next()
+})

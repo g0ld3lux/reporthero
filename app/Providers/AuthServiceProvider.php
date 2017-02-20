@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraspace\Providers;
+namespace Reporthero\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Laraspace\Model' => 'Laraspace\Policies\ModelPolicy',
+        'Reporthero\Model' => 'Reporthero\Policies\ModelPolicy',
     ];
 
     /**

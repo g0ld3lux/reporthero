@@ -1,7 +1,7 @@
 <template>
     <header class="site-header">
         <a href="#" class="brand-main">
-            <img src="/assets/img/logo-desk.png" id="logo-desk" alt="Laraspace Logo" class="hidden-sm-down">
+            <img src="/logo-dark.png" id="logo-desk" alt="Laraspace Logo" class="hidden-sm-down">
             <img src="/assets/img/logo-mobile.png" id="logo-mobile" alt="Laraspace Logo" class="hidden-md-up">
         </a>
 
@@ -12,23 +12,6 @@
         </a>
 
         <ul class="action-list">
-            <li>
-                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus"></i></a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#"><i class="fa fa-edit"></i> New Post</a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-tag"></i> New Category</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><i class="fa fa-star"></i> Separated link</a>
-                </div>
-            </li>
-            <li>
-                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i></a>
-                <div class="dropdown-menu dropdown-menu-right notification-dropdown">
-                    <h6 class="dropdown-header">Notifications</h6>
-                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> New User was Registered</a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-comment"></i> A Comment has been posted.</a>
-                </div>
-            </li>
             <li>
                 <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="avatar"><img src="/assets/img/avatars/avatar.png" alt="Avatar"></a>
                 <div class="dropdown-menu dropdown-menu-right notification-dropdown">

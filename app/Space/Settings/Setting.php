@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraspace\Space\Settings;
+namespace Reporthero\Space\Settings;
 
 use Illuminate\Database\Eloquent\Model;
 

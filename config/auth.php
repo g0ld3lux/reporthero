@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Laraspace\User::class,
+            'model' => Reporthero\User::class,
         ],
 
         // 'users' => [

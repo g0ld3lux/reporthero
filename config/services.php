@@ -30,9 +30,35 @@ return [
     ],
 
     'stripe' => [
-        'model' => Laraspace\User::class,
+        'model' => Reporthero\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT_URL'),
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URL'),
+    ],
+
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('GITHUB_REDIRECT_URL'),
+    ],
+
+    'klaviyo' => [ 
+    'api_key' => env('KLAVIYO_PRIVATE_API_KEY'),
+    'token' => env('KLAVIYO_PUBLIC_API_KEY'),
+    'email' => env('KLAVIYO_EMAIL'),
+    'host' => env('KLAVIYO_HOST', 'https://a.klaviyo.com/'),
+    'version' => env('KLAVIYO_API_VERSION', 'api/v1/'),
+    ]
 
 ];

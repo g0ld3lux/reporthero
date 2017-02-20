@@ -1,8 +1,8 @@
 <?php
 
-namespace Laraspace\Http\Requests;
+namespace Reporthero\Http\Requests;
 
-use Laraspace\Http\Requests\Request;
+use Reporthero\Http\Requests\Request;
 
 class SettingsRequest extends Request
 {

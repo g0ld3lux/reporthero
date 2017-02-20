@@ -1,10 +1,10 @@
 <?php
 
-namespace Laraspace\Http\Controllers;
+namespace Reporthero\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Laraspace\Http\Requests;
+use Reporthero\Http\Requests;
 
 class FrontendController extends Controller
 {

@@ -2,12 +2,12 @@
     <div class="login-wrapper">
         <div class="login-box">
             <div class="brand-main">
-                <a href="/admin"><img src="/assets/img/logo-large.png" alt="Laraspace Logo"></a>
+                <a href="/"><img src="/logo-light.png" alt="Laraspace Logo"></a>
             </div>
             <router-view></router-view>
             <div class="page-copyright">
-                <p>Powered by <a href="http://bytefury.com" target="_blank">Bytefury</a></p>
-                <p>Laraspace © 2016</p>
+                <p>All Right Reserve <a href="/" target="_blank">Report Hero</a></p>
+                <p>Copyright © 2017</p>
             </div>
         </div>
     </div>

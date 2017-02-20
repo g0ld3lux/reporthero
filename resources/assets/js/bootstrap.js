@@ -1,17 +1,29 @@
+import lodash from 'lodash'
+import Vue from 'vue'
+import moment from 'moment'
 import VueRouter from 'vue-router'
-import VeeValidate from 'vee-validate';
-import Axios from 'axios';
+import VeeValidate from 'vee-validate'
+import Axios from 'axios'
 import Ls from './services/ls'
+import Chartist from 'chartist'
+import Plugins from './helpers/plugin'
+import Vuex from 'vuex';
+import VuePagination from 'vue-pagination-2';
 
-window._ = require('lodash');
 
-/**
- * Vue is a modern JavaScript library for building interactive web interfaces
- * using reactive data binding and reusable components. Vue's API is clean
- * and simple, leaving you to focus on building your next great project.
- */
+window._ = lodash
+window.Vue = Vue
+window.moment = moment
+window.router = VueRouter
+window.Chartist = Chartist
+window.vuex = Vuex;
+window.axios = Axios
+window.Plugin = Plugins
 
-window.Vue = require('vue');
+Vue.use(VueRouter)
+Vue.use(VeeValidate);
+Vue.use(Vuex);
+Vue.use(VuePagination,[Vuex])
 
 
 /**
@@ -19,14 +31,9 @@ window.Vue = require('vue');
  * the outgoing requests issued by this application. The CSRF middleware
  * included with Laravel will automatically verify the header's value.
  */
-
-window.axios = require('axios');
-
 window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest'
 };
-
-
 /**
  * Interceptors
  */
@@ -45,21 +52,6 @@ axios.interceptors.request.use(function (config) {
     return Promise.reject(error);
 });
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
-// import Echo from "laravel-echo"
-
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'your-pusher-key'
-// });
 
 
 
-Vue.use(VueRouter)
-
-Vue.use(VeeValidate);

@@ -10,14 +10,7 @@
                         <router-link to="/admin/dashboard/finance" tag="li"><a>Finance</a></router-link>
                     </ul>
                 </li>
-                <li :class="{ active : isActive('/admin/layouts') }">
-                    <a href="#" aria-expanded="true"><i class="fa fa-th-large"></i> Layouts <span class="fa arrow fa-fw"></span></a>
-                    <ul aria-expanded="true">
-                        <router-link to="/admin/layouts/sidebar" tag="li"><a>Sidebar</a></router-link>
-                        <router-link to="/admin/layouts/horizontal" tag="li"><a>Horizontal</a></router-link>
-                        <router-link to="/admin/layouts/icon-sidebar" tag="li"><a>Icon Sidebar</a></router-link>
-                    </ul>
-                </li>
+                
                 <li :class="{ active : isActive('/admin/basic-ui') }">
                     <a href="#" aria-expanded="true"><i class="fa fa-star"></i> Basic UI <span class="fa arrow fa-fw"></span></a>
                     <ul aria-expanded="true">
