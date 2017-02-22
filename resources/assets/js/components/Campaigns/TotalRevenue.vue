@@ -3,7 +3,7 @@
     <a class="dashbox" href="#">
         <i :class="[icon, color]"></i>
         <span class="title">
-            {{ total }}
+            Revenue: ${{ total }}
         </span>
         <span class="desc">
             {{ name }}
@@ -16,53 +16,57 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
         props: {
             name: {
                 type: String,
                 default() { 
-                    return 'Opened'; 
+                    return 'Place Order'; 
                 }
             },
             icon: {
                 type: String,
                 default() { 
-                    return 'fa fa-eye'; 
+                    return 'fa fa-money'; 
                 }
             },
             color: {
                 type: String,
                 default() { 
-                    return 'text-info'; 
+                    return 'text-success'; 
                 }
-            },
-            campaignName: {
-                type: String
             }
             
 
         },
         data() {
             return {
-                metricID: 'xM3sVS',
+                metricID: 'vFvk9B',
                 fetchData: [],
                 count: 0,
             }
         },
-        mounted() {
-            this.getData()
+        mounted: function () {
+            this.getData();
         },
         methods: {
             getData() {
             axios.get('/api/v1/metric/' + this.metricID + '/export', {
             params: {
-                measurement: 'unique',
-                where: JSON.stringify([["Campaign Name","=", this.campaignName]])
+                measurement: 'value',
+                where: JSON.stringify([["$attributed_message","=", this.$route.params.id]])
             }
             }).then(({data}) => this.fetchData = data.results[0].data);
             },
         },
+        components : {
+           
+        },
         computed: {
+            ...mapState({
+                campaign: state => state.campaigns.current
+            }),
             total() {
             for(let data of this.fetchData)
             {
@@ -70,9 +74,15 @@ export default {
             }
             return this.count;
             }
-        },
-        watch: {
-        campaignName: 'getData'
         }
+        
+       
+       
 }
 </script>
+
+<style lang="scss">
+.dash-panel {
+
+}
+</style>

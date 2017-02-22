@@ -36,6 +36,8 @@ class Klaviyo
     public $time;
 
     public $track_once_enable;
+
+    public $endpoint;
     
 
     public function getClient()
@@ -77,12 +79,12 @@ class Klaviyo
 
     public function setEndPoint($url)
     {
-        return $endpoint = $this->getApiVersion() . $url;
+        return $this->endpoint = $this->getApiVersion() . $url;
     }
 
     public function getEndPoint()
     {
-        return $endpoint = request()->path();
+        return $this->endpoint ? $this->endpoint : request()->path();
     }
 
     public function getHost()

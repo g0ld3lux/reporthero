@@ -97,12 +97,26 @@ class MetricsController extends Controller
      *
      * @return  Export event data from Klaviyo, optionally filtering and segmented on available event properties.
      */
-    public function exportMetricData($metricID)
+    public function exportMetricData($metricID, $endpoint = false, $params = [])
     {
-        // We Have Access Here Of $metricID if we Ever Needed it in the Future!
+        // We Have Access Here Of $metricID if we Ever Needed it in the Future!+
         
+        if($endpoint === true){
+        
+        $url = 'metric/'.$metricID . '/export';
+        // api/v1/ is appended in setEndPoint
+        $this->api->setEndPoint($url);
+
+        }
+        // Use this for report , since we will not pass request object , but use data in the controller
+        if(!empty($params))
+        {
+        $this->api->setCustomProps($params);
+        }
+
         // Set Our Filters For this Api
         $filters = $this->api->setFilters($this->exportMetricDataArgs());
+
         // Get the Data
         $data = $this->api->makeCall($this->api->getMethod(), $this->api->getEndPoint(), $this->api->buildArgs());
 

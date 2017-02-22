@@ -1,6 +1,5 @@
 <template>
 <div>
-<p>Abandon Revenue Weekly Total: {{ abandonRevenue }}</p>
 <p>Revenue Weekly Total: {{ revenue }}</p>
 </br>
 <div id="barChart" class="ct-chart-bar">
@@ -41,11 +40,8 @@ export default {
                     {
                         name: 'Revenue',
                         data: []
-                    },
-                    {
-                        name: 'Abandonded Cart Revenue',
-                        data: []
-                    },
+                    }
+
                 ],
                 metrics: [
                     {
@@ -53,7 +49,7 @@ export default {
                         id: 'vFvk9B', 
                     },
                 ],
-                abandonCount: null,
+
                 revenueCount: null
 
                 
@@ -62,7 +58,6 @@ export default {
     mounted() {
             this.getLabels()
             this.getPlacedOrder()
-            this.getAbandonedCart()
             this.getChart()
         },
         methods: {
@@ -95,33 +90,6 @@ export default {
                 }).catch((error) => {console.log(error)});
  
             },
-            getAbandonedCart() {
-
-                let start_date = moment().subtract(6,'d').format('YYYY-MM-DD')
-                let end_date = moment().format('YYYY-MM-DD')
-                let measurement = 'value'
-                let where1 = JSON.stringify([["Campaign Name","=", this.campaignID]])
-                let where2 = JSON.stringify([["$attributed_flow","=", this.attributedFlowID]])
-
-                axios.get('/api/v1/metric/' + this.metrics[0].id + '/export?start_date=' + start_date +
-                '&end_date=' + end_date +
-                '&measurement=' + measurement +
-                '&where=' + where1 +
-                '&where=' + where2
-                )
-                
-                .then(({data}) => {
-                    
-                    for (let i = 0; i < data.results[0].data.length; i++) {
-                    
-                       this.series[1]['data'].push(data.results[0].data[i].values[0])
-
-                    }
-
-                }).catch((error) => {console.log(error)});
-   
-                
-            },
 
             getChart() {
                 new Chartist.Bar('.ct-chart-bar', {
@@ -142,19 +110,12 @@ export default {
         },
         watch: {
  
-        abandonCount: 'getChart',
         revenueCount: 'getChart'
 
 
         },
         computed: {
-            abandonRevenue() {
-            for(let data of this.series[1].data)
-            {
-                this.abandonCount += parseInt(data);
-            }
-            return this.abandonCount;
-            },
+            
             revenue() {
             for(let data of this.series[0].data)
             {

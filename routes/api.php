@@ -70,3 +70,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('check','AuthController@check');
 });
 
+Route::get('report/rateOfNewCustomer', 'ReportController@rateOfNewCustomer');
+Route::get('report/rateOfReturningCUstomer', 'ReportController@rateOfReturningCUstomer');
+Route::get('report/conversionRate', 'ReportController@conversionRate');
+

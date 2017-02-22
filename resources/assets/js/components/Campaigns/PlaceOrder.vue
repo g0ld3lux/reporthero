@@ -3,7 +3,7 @@
     <a class="dashbox" href="#">
         <i :class="[icon, color]"></i>
         <span class="title">
-            {{ total }}
+            Count: {{ total }}
         </span>
         <span class="desc">
             {{ name }}
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
         props: {
             name: {
@@ -60,15 +61,22 @@ export default {
             },
         },
         components : {
-            // import a component
+           
         },
         computed: {
+            ...mapState({
+                campaign: state => state.campaigns.current
+            }),
             total() {
             for(let data of this.fetchData)
             {
                 this.count += parseInt(data.values[0]);
             }
             return this.count;
+            },
+            rate() {
+            return (this.total / this.campaign.num_recipients * 100).toFixed(2)
+
             }
         }
         

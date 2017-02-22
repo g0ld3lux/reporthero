@@ -26,8 +26,21 @@ class CampaignsController extends Controller
            ]; 
     }
 
-    public function getAllCampaign()
+    public function getAllCampaign($endpoint = false, $params = [])
     {
+        if($endpoint === true){
+        
+        $url = 'campaigns';
+        // api/v1/ is appended in setEndPoint
+        $this->api->setEndPoint($url);
+
+        }
+        if(!empty($params))
+        {
+        $this->api->setCustomProps($params);
+        }
+
+
         $filters = $this->api->setFilters($this->getAllCampaignArgs());
         return $data = $this->api->makeCall($this->api->getMethod(), $this->api->getEndPoint(), $this->api->buildArgs());
     }

@@ -20,6 +20,7 @@ window.vuex = Vuex;
 window.axios = Axios
 window.Plugin = Plugins
 
+
 Vue.use(VueRouter)
 Vue.use(VeeValidate);
 Vue.use(Vuex);

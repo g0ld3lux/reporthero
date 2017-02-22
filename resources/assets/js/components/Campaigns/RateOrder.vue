@@ -3,7 +3,7 @@
     <a class="dashbox" href="#">
         <i :class="[icon, color]"></i>
         <span class="title">
-            {{ total }}
+            Rate: {{ rate }}
         </span>
         <span class="desc">
             {{ name }}
@@ -16,63 +16,77 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
         props: {
             name: {
                 type: String,
                 default() { 
-                    return 'Opened'; 
+                    return 'Conversion Rate'; 
                 }
             },
             icon: {
                 type: String,
                 default() { 
-                    return 'fa fa-eye'; 
+                    return 'fa fa-percent'; 
                 }
             },
             color: {
                 type: String,
                 default() { 
-                    return 'text-info'; 
+                    return 'text-success'; 
                 }
-            },
-            campaignName: {
-                type: String
             }
             
 
         },
         data() {
             return {
-                metricID: 'xM3sVS',
+                metricID: 'vFvk9B',
                 fetchData: [],
                 count: 0,
             }
         },
-        mounted() {
-            this.getData()
+        mounted: function () {
+            this.getData();
         },
         methods: {
             getData() {
             axios.get('/api/v1/metric/' + this.metricID + '/export', {
             params: {
-                measurement: 'unique',
-                where: JSON.stringify([["Campaign Name","=", this.campaignName]])
+                measurement: 'count',
+                where: JSON.stringify([["$attributed_message","=", this.$route.params.id]])
             }
             }).then(({data}) => this.fetchData = data.results[0].data);
             },
         },
+        components : {
+           
+        },
         computed: {
+            ...mapState({
+                campaign: state => state.campaigns.current
+            }),
             total() {
             for(let data of this.fetchData)
             {
                 this.count += parseInt(data.values[0]);
             }
             return this.count;
+            },
+            rate() {
+            return (this.total / this.campaign.num_recipients * 100).toFixed(2)
+
             }
-        },
-        watch: {
-        campaignName: 'getData'
         }
+        
+       
+       
 }
 </script>
+
+<style lang="scss">
+.dash-panel {
+
+}
+</style>

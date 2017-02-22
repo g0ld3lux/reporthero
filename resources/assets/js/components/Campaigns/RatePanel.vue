@@ -33,7 +33,7 @@ export default {
             color: {
                 type: String,
                 default() { 
-                    return 'text-info'; 
+                    return 'text-success'; 
                 }
             },
             campaignName: {

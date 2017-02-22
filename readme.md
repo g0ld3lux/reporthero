@@ -276,5 +276,9 @@ $this->api->encodeData($this->api->setTrackOnce($args))
 - [x] Method (GET) /#/templates
 - [x] Method (GET) /#/person/:id
 
+Extra Note:
+
+Make Sure you Use the fix vue-datepicker check the pull request for the 
+
 
 

@@ -3,7 +3,7 @@
     <a class="dashbox" href="#">
         <i :class="[icon, color]"></i>
         <span class="title">
-            {{ total }}
+            {{ rate }}
         </span>
         <span class="desc">
             {{ name }}
@@ -16,18 +16,19 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
         props: {
             name: {
                 type: String,
                 default() { 
-                    return 'Opened'; 
+                    return 'Open Rate'; 
                 }
             },
             icon: {
                 type: String,
                 default() { 
-                    return 'fa fa-eye'; 
+                    return 'fa fa-percent'; 
                 }
             },
             color: {
@@ -63,13 +64,21 @@ export default {
             },
         },
         computed: {
+            ...mapState({
+                campaign: state => state.campaigns.current
+            }),
             total() {
             for(let data of this.fetchData)
             {
                 this.count += parseInt(data.values[0]);
             }
             return this.count;
+            },
+            rate() {
+            return (this.total / this.campaign.num_recipients * 100).toFixed(2)
+
             }
+        
         },
         watch: {
         campaignName: 'getData'

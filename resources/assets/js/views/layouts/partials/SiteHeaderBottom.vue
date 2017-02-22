@@ -5,12 +5,6 @@
                 <router-link to="/campaigns/"><i class="fa fa-area-chart"></i> Campaigns</router-link>
             </li>
 
-            <li :class="{ active: isActive('/campaign/') }" v-if="isActive('/campaign/')">
-                <a href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar"></i> Filter By Date</a>
-                <div class="dropdown-menu">
-                    <router-link to="/campaign/show7dayscomponent" class="dropdown-item">7 Days Report</router-link>
-                </div>
-            </li>
         </ul>
     </div>
 </template>
