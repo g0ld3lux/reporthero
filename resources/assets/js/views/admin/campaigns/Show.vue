@@ -35,10 +35,10 @@
             <div class="col-lg-12 col-xl-6 mt-2">
                 <div class="card">
                     <div class="card-header">
-                        <h6><i class="fa fa-bar-chart text-success"></i> Abandon Cart Revenue</h6>
+                        <h6><i class="fa fa-bar-chart text-success"></i> Overall Revenue Breakdown</h6>
                     </div>
                     <div class="card-block">
-                        <total-vs-current-abandon-cart :campaignName="campaign.name" :campaignID="campaign.id"> </total-vs-current-abandon-cart>
+                        <all-revenue-stats> </all-revenue-stats>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
     import clicked from '../../../components/Campaigns/Clicked.vue'
     import unsubscribed from '../../../components/Campaigns/Unsubscribed.vue'
     import RevenueVsAbandon from '../../../components/Campaigns/RevenueVsAbandon.vue'
-    import TotalVsCurrentAbandonCart from '../../../components/Campaigns/TotalVsCurrentAbandonCart.vue'
+    import AllRevenueStats from '../../../components/Campaigns/AllRevenueStats.vue'
     import calendar from 'vue-datepicker'
     import 'vue-event-calendar/dist/style.css'
     import vueEventCalendar from 'vue-event-calendar'
@@ -71,16 +71,7 @@
                 date: {
                     time: '' // string
                 },
-                campaignEvents: [{
-                    date: moment().subtract(30,'d').format('YYYY-MM-DD'),
-                    title: 'Campaign Created',
-                    desc: 'You Have Successfully Createad Your Campaign'
-                },{
-                    date: moment().subtract(5,'d').format('YYYY-MM-DD'),
-                    title: 'Campaign Sent',
-                    desc: 'Your Campaign Has been Sent Successfully'
-                }],
-
+                campaignEvents: [],
                 option: {
                     // allow to pick multi-day
                     type: 'multi-day',
@@ -132,16 +123,65 @@
                         from: moment().subtract(30,'d').format('YYYY-MM-DD'), // Created Date
                         to: moment().format() // Present Date
                     }]
-        }
+            } // End Return
         },
         // create a method to get only the highest and lowest date to be assign as to and from date for the date filter
         components : {
-        opened, delivered, clicked, unsubscribed, RevenueVsAbandon , TotalVsCurrentAbandonCart, calendar,placeOrder, rateOrder,totalRevenue, OpenRate
+        opened, delivered, clicked, unsubscribed, RevenueVsAbandon , AllRevenueStats, calendar,placeOrder, rateOrder,totalRevenue, OpenRate
         },
          methods: {
             ...mapActions({
                 setCurrentCampaign: 'setCurrentCampaign'
             }),
+            setCampaignEvents() {
+
+                let desc = 'Your Campaign Has been Sent Successfully'
+                if(!this.campaign.status_label=='Sent')
+                {
+                    desc = 'Campaign is About to Be Send On ' + moment(this.campaign.send_time).format(YYYY-MM-DD)
+                }
+
+                let events = [{
+                    date: this.campaign.created,
+                    title: 'Campaign Created',
+                    desc: 'You Have Successfully Createad Your Campaign'
+                },{
+                    date: this.campaign.send_time,
+                    title: 'Campaign ' + this.campaign.status_label,
+                    desc
+                }]
+                this.campaignEvents = events
+            },
+
+            setCampaignEvents() {
+                let desc = 'Your Campaign Has been Sent Successfully'
+                if(!this.campaign.status_label=='Sent')
+                {
+                    desc = 'Campaign is About to Be Send On ' + moment(this.campaign.send_time).format(YYYY-MM-DD)
+                }
+
+                let events = [{
+                    date: this.campaign.created,
+                    title: 'Campaign Created',
+                    desc: 'You Have Successfully Createad Your Campaign'
+                },{
+                    date: this.campaign.send_time,
+                    title: 'Campaign ' + this.campaign.status_label,
+                    desc
+                }]
+                this.campaignEvents = events
+                let limit= 
+                [{
+                    type: 'week',
+                    available: [1,2,3,4,5]
+                },
+                {
+                    type: 'fromto',
+                    from: this.campaign.created, // Created Date
+                    to: moment().format() // Present Date
+                }]
+                this.limit = limit
+            }
             // Declare other method
         },
         computed: {
@@ -156,7 +196,12 @@
         },
         mounted() {
             this.setCurrentCampaign(this.$route.params.id)
+
         },
+        watch: {
+           campaign: 'setCampaignEvents'
+
+        }
         
 
     }

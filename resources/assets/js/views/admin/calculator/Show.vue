@@ -78,11 +78,10 @@
                 conversionRate: .02,
                 captureRate: 0,
                 checkedRates: [],
-                newCustomerRate: 0.002,
-                returningRate: 0.003,
-                abandonRate: 0.009,
-                currentRate: 0,
-                checkedNames: []
+                newCustomerRate: 0.001,
+                returningRate: 0.0001,
+                abandonRate: 0.01,
+                currentRate: 0
             }
         },
         mounted(){

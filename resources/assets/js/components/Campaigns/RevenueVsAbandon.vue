@@ -92,7 +92,7 @@ export default {
             },
 
             getChart() {
-                new Chartist.Bar('.ct-chart-bar', {
+                new Chartist.Bar('#barChart', {
                 labels: this.labels,
                 series: this.series
                 }, {

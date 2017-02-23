@@ -37227,6 +37227,429 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+__webpack_require__(105);
+
+exports.default = {
+    props: {
+        starteDate: {
+            type: String,
+            default: function _default() {
+                return moment().subtract(6, 'd').format('YYYY-MM-DD');
+            }
+        },
+        endDate: {
+            type: String,
+            default: function _default() {
+                return moment().format('YYYY-MM-DD');
+            }
+        }
+
+    },
+    data: function data() {
+        return {
+            labels: [],
+            series: [{
+                name: 'Total',
+                data: []
+            }, {
+                name: 'Welcome',
+                data: []
+            }, {
+                name: 'Winback',
+                data: []
+            }, {
+                name: 'Abandon',
+                data: []
+            }, {
+                name: 'Returning',
+                data: []
+            }, {
+                name: 'New',
+                data: []
+            }],
+            metrics: [{
+                name: 'Placed Order',
+                id: 'vFvk9B'
+            }],
+
+            revenueCount: null,
+            abandonCount: null,
+            welcomeCount: null,
+            winbackCount: null,
+            returningCount: null,
+            newCount: null
+
+        };
+    },
+    mounted: function mounted() {
+        this.getLabels();
+        this.getPlacedOrder();
+        this.getAbandonRevenue();
+        this.getNewCustomerRevenue();
+        this.getWinbackRevenue();
+        this.getReturningRevenue();
+        this.getNewRevenue();
+        this.getChart();
+    },
+
+    methods: {
+        // We get Last 7 Days Labels
+        getLabels: function getLabels() {
+            this.labels = [];
+            for (var i = 6; i >= 0; i--) {
+                if (i == 6) {
+                    this.labels.push(moment().format('dddd'));
+                } else if (i < 6) {
+                    this.labels.unshift(moment().subtract(6 - i, 'd').format('dddd'));
+                }
+            }
+        },
+        getPlacedOrder: function getPlacedOrder() {
+            var _this = this;
+
+            axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
+                params: {
+                    start_date: moment().subtract(7, 'd').format('YYYY-MM-DD'),
+                    end_date: moment().format('YYYY-MM-DD'),
+                    measurement: 'value'
+                }
+            }).then(function (_ref) {
+                var data = _ref.data;
+
+
+                for (var i = 0; i < data.results[0].data.length; i++) {
+                    _this.series[0]['data'].push(data.results[0].data[i].values[0]);
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getNewCustomerRevenue: function getNewCustomerRevenue() {
+            var _this2 = this;
+
+            axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
+                params: {
+                    start_date: moment().subtract(7, 'd').format('YYYY-MM-DD'),
+                    end_date: moment().format('YYYY-MM-DD'),
+                    measurement: 'value',
+                    where: JSON.stringify([["$attributed_flow", "=", 'wpkpxU']])
+                }
+            }).then(function (_ref2) {
+                var data = _ref2.data;
+
+
+                for (var i = 0; i < data.results[0].data.length; i++) {
+
+                    _this2.series[1]['data'].push(data.results[0].data[i].values[0]);
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getReturningRevenue: function getReturningRevenue() {
+            var _this3 = this;
+
+            axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
+                params: {
+                    start_date: moment().subtract(7, 'd').format('YYYY-MM-DD'),
+                    end_date: moment().format('YYYY-MM-DD'),
+                    measurement: 'value',
+                    where: JSON.stringify([["$new_vs_returning", "=", 'Returning']])
+                }
+            }).then(function (_ref3) {
+                var data = _ref3.data;
+
+
+                for (var i = 0; i < data.results[0].data.length; i++) {
+
+                    _this3.series[4]['data'].push(data.results[0].data[i].values[0]);
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getNewRevenue: function getNewRevenue() {
+            var _this4 = this;
+
+            axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
+                params: {
+                    start_date: moment().subtract(7, 'd').format('YYYY-MM-DD'),
+                    end_date: moment().format('YYYY-MM-DD'),
+                    measurement: 'value',
+                    where: JSON.stringify([["$new_vs_returning", "=", 'New']])
+                }
+            }).then(function (_ref4) {
+                var data = _ref4.data;
+
+
+                for (var i = 0; i < data.results[0].data.length; i++) {
+
+                    _this4.series[5]['data'].push(data.results[0].data[i].values[0]);
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getWinbackRevenue: function getWinbackRevenue() {
+            var _this5 = this;
+
+            axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
+                params: {
+                    start_date: moment().subtract(7, 'd').format('YYYY-MM-DD'),
+                    end_date: moment().format('YYYY-MM-DD'),
+                    measurement: 'value',
+                    where: JSON.stringify([["$attributed_flow", "=", 'wHEEvc']])
+                }
+            }).then(function (_ref5) {
+                var data = _ref5.data;
+
+
+                for (var i = 0; i < data.results[0].data.length; i++) {
+
+                    _this5.series[2]['data'].push(data.results[0].data[i].values[0]);
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getAbandonRevenue: function getAbandonRevenue() {
+            var _this6 = this;
+
+            axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
+                params: {
+                    start_date: moment().subtract(7, 'd').format('YYYY-MM-DD'),
+                    end_date: moment().format('YYYY-MM-DD'),
+                    measurement: 'value',
+                    where: JSON.stringify([["$attributed_flow", "=", 'y6WggH']])
+                }
+            }).then(function (_ref6) {
+                var data = _ref6.data;
+
+
+                for (var i = 0; i < data.results[0].data.length; i++) {
+
+                    _this6.series[3]['data'].push(data.results[0].data[i].values[0]);
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getChart: function getChart() {
+            new Chartist.Bar('#overAllRevenueBreakDown', {
+                labels: this.labels,
+                series: this.series
+            }, {
+                fullWidth: true,
+                chartPadding: {
+                    right: 40
+                },
+                plugins: [Chartist.plugins.legend()]
+            });
+        }
+    },
+    watch: {
+
+        revenueCount: 'getChart'
+
+    },
+    computed: {
+        revenue: function revenue() {
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.series[0].data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var data = _step.value;
+
+                    this.revenueCount += parseInt(data);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return this.revenueCount;
+        },
+        welcomeRevenue: function welcomeRevenue() {
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = this.series[1].data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var data = _step2.value;
+
+                    this.welcomeCount += parseInt(data);
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            return this.welcomeCount;
+        },
+        winbackRevenue: function winbackRevenue() {
+            var _iteratorNormalCompletion3 = true;
+            var _didIteratorError3 = false;
+            var _iteratorError3 = undefined;
+
+            try {
+                for (var _iterator3 = this.series[2].data[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                    var data = _step3.value;
+
+                    this.winbackCount += parseInt(data);
+                }
+            } catch (err) {
+                _didIteratorError3 = true;
+                _iteratorError3 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                        _iterator3.return();
+                    }
+                } finally {
+                    if (_didIteratorError3) {
+                        throw _iteratorError3;
+                    }
+                }
+            }
+
+            return this.winbackCount;
+        },
+        abandonRevenue: function abandonRevenue() {
+            var _iteratorNormalCompletion4 = true;
+            var _didIteratorError4 = false;
+            var _iteratorError4 = undefined;
+
+            try {
+                for (var _iterator4 = this.series[3].data[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                    var data = _step4.value;
+
+                    this.abandonCount += parseInt(data);
+                }
+            } catch (err) {
+                _didIteratorError4 = true;
+                _iteratorError4 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                        _iterator4.return();
+                    }
+                } finally {
+                    if (_didIteratorError4) {
+                        throw _iteratorError4;
+                    }
+                }
+            }
+
+            return this.abandonCount;
+        },
+        returningRevenue: function returningRevenue() {
+            var _iteratorNormalCompletion5 = true;
+            var _didIteratorError5 = false;
+            var _iteratorError5 = undefined;
+
+            try {
+                for (var _iterator5 = this.series[4].data[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                    var data = _step5.value;
+
+                    this.returningCount += parseInt(data);
+                }
+            } catch (err) {
+                _didIteratorError5 = true;
+                _iteratorError5 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                        _iterator5.return();
+                    }
+                } finally {
+                    if (_didIteratorError5) {
+                        throw _iteratorError5;
+                    }
+                }
+            }
+
+            return this.returningCount;
+        },
+        newRevenue: function newRevenue() {
+            var _iteratorNormalCompletion6 = true;
+            var _didIteratorError6 = false;
+            var _iteratorError6 = undefined;
+
+            try {
+                for (var _iterator6 = this.series[5].data[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                    var data = _step6.value;
+
+                    this.newCount += parseInt(data);
+                }
+            } catch (err) {
+                _didIteratorError6 = true;
+                _iteratorError6 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                        _iterator6.return();
+                    }
+                } finally {
+                    if (_didIteratorError6) {
+                        throw _iteratorError6;
+                    }
+                }
+            }
+
+            return this.newCount;
+        }
+    }
+
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 //
 //
 //
@@ -37332,7 +37755,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 265 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37446,7 +37869,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 266 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37570,7 +37993,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 267 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37684,7 +38107,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 268 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37804,7 +38227,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37924,7 +38347,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38014,7 +38437,7 @@ exports.default = {
             });
         },
         getChart: function getChart() {
-            new Chartist.Bar('.ct-chart-bar', {
+            new Chartist.Bar('#barChart', {
                 labels: this.labels,
                 series: this.series
             }, {
@@ -38074,7 +38497,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38189,150 +38612,6 @@ exports.default = {
     })
 
 };
-
-/***/ }),
-/* 272 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-__webpack_require__(105);
-
-exports.default = {
-    props: {
-        campaignName: {
-            type: String
-        },
-        campaignID: {
-            type: String
-        },
-        starteDate: {
-            type: String,
-            default: function _default() {
-                return moment().subtract(30, 'd').format('YYYY-MM-DD');
-            }
-        },
-        endDate: {
-            type: String,
-            default: function _default() {
-                return moment().format('YYYY-MM-DD');
-            }
-        },
-        metricID: {
-            type: String,
-            default: function _default() {
-                return 'vFvk9B';
-            }
-        },
-        attributedFlowID: {
-            type: String,
-            default: function _default() {
-                return 'y6WggH';
-            }
-        },
-        measurement: {
-            type: String,
-            default: function _default() {
-                return 'value';
-            }
-        }
-
-    },
-    data: function data() {
-        return {
-            labels: ['Total', 'Current'],
-            series: [],
-            total: 0,
-            current: 0,
-            realcurrent: 0
-        };
-    },
-    mounted: function mounted() {
-        this.getoverAllData();
-        this.getcurrentData();
-        this.getChart();
-    },
-
-    methods: {
-        getoverAllData: function getoverAllData() {
-            var _this = this;
-
-            axios.get('/api/v1/metric/' + this.metricID + '/export', {
-                params: {
-                    measurement: 'value',
-                    where: JSON.stringify([["$attributed_flow", "=", this.attributedFlowID]])
-                }
-            }).then(function (_ref) {
-                var data = _ref.data;
-
-
-                for (var i = 0; i < data.results[0].data.length; i++) {
-
-                    _this.total += parseFloat(data.results[0].data[i].values[0]);
-                }
-                _this.series[0] = _this.total;
-            }).catch(function (error) {
-                console.log(error);
-            });
-        },
-        getcurrentData: function getcurrentData() {
-            var _this2 = this;
-
-            var start_date = this.starteDate;
-            var end_date = this.endDate;
-            var measurement = 'unique';
-            var where1 = JSON.stringify([["Campaign Name", "=", this.campaignID]]);
-            var where2 = JSON.stringify([["$attributed_flow", "=", this.attributedFlowID]]);
-
-            axios.get('/api/v1/metric/' + this.metricID + '/export?start_date=' + start_date + '&end_date=' + end_date + '&measurement=' + measurement + '&where=' + where1 + '&where=' + where2).then(function (_ref2) {
-                var data = _ref2.data;
-
-
-                for (var i = 0; i < data.results[0].data.length; i++) {
-
-                    _this2.current += parseFloat(data.results[0].data[i].values[0]);
-                }
-                _this2.series[1] = _this2.current;
-            }).catch(function (error) {
-                console.log(error);
-            });
-        },
-        getChart: function getChart() {
-            new Chartist.Pie('.ct-chart-pie', {
-                labels: ['Total', 'Current'],
-                series: this.series
-            }, {
-                showLabel: true
-
-            });
-        }
-    },
-
-    watch: {
-        totalCount: 'getChart',
-        totalCurrent: 'getChart'
-    },
-    computed: {
-        totalCount: function totalCount() {
-            return this.total;
-        },
-        totalCurrent: function totalCurrent() {
-            return this.current;
-        }
-    }
-
-}; //
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 /* 273 */
@@ -38536,11 +38815,10 @@ exports.default = {
             conversionRate: .02,
             captureRate: 0,
             checkedRates: [],
-            newCustomerRate: 0.002,
-            returningRate: 0.003,
-            abandonRate: 0.009,
-            currentRate: 0,
-            checkedNames: []
+            newCustomerRate: 0.001,
+            returningRate: 0.0001,
+            abandonRate: 0.01,
+            currentRate: 0
         };
     },
     mounted: function mounted() {
@@ -38782,15 +39060,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _vuex = __webpack_require__(34);
 
-var _Opened = __webpack_require__(503);
+var _Opened = __webpack_require__(504);
 
 var _Opened2 = _interopRequireDefault(_Opened);
 
-var _Delivered = __webpack_require__(501);
+var _Delivered = __webpack_require__(502);
 
 var _Delivered2 = _interopRequireDefault(_Delivered);
 
-var _Clicked = __webpack_require__(500);
+var _Clicked = __webpack_require__(501);
 
 var _Clicked2 = _interopRequireDefault(_Clicked);
 
@@ -38798,13 +39076,13 @@ var _Unsubscribed = __webpack_require__(509);
 
 var _Unsubscribed2 = _interopRequireDefault(_Unsubscribed);
 
-var _RevenueVsAbandon = __webpack_require__(506);
+var _RevenueVsAbandon = __webpack_require__(507);
 
 var _RevenueVsAbandon2 = _interopRequireDefault(_RevenueVsAbandon);
 
-var _TotalVsCurrentAbandonCart = __webpack_require__(508);
+var _AllRevenueStats = __webpack_require__(500);
 
-var _TotalVsCurrentAbandonCart2 = _interopRequireDefault(_TotalVsCurrentAbandonCart);
+var _AllRevenueStats2 = _interopRequireDefault(_AllRevenueStats);
 
 var _vueDatepicker = __webpack_require__(499);
 
@@ -38816,23 +39094,25 @@ var _vueEventCalendar = __webpack_require__(498);
 
 var _vueEventCalendar2 = _interopRequireDefault(_vueEventCalendar);
 
-var _PlaceOrder = __webpack_require__(504);
+var _PlaceOrder = __webpack_require__(505);
 
 var _PlaceOrder2 = _interopRequireDefault(_PlaceOrder);
 
-var _RateOrder = __webpack_require__(505);
+var _RateOrder = __webpack_require__(506);
 
 var _RateOrder2 = _interopRequireDefault(_RateOrder);
 
-var _TotalRevenue = __webpack_require__(507);
+var _TotalRevenue = __webpack_require__(508);
 
 var _TotalRevenue2 = _interopRequireDefault(_TotalRevenue);
 
-var _OpenRate = __webpack_require__(502);
+var _OpenRate = __webpack_require__(503);
 
 var _OpenRate2 = _interopRequireDefault(_OpenRate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 Vue.use(_vueEventCalendar2.default, { locale: 'en' });
 exports.default = {
@@ -38842,16 +39122,7 @@ exports.default = {
             date: {
                 time: '' // string
             },
-            campaignEvents: [{
-                date: moment().subtract(30, 'd').format('YYYY-MM-DD'),
-                title: 'Campaign Created',
-                desc: 'You Have Successfully Createad Your Campaign'
-            }, {
-                date: moment().subtract(5, 'd').format('YYYY-MM-DD'),
-                title: 'Campaign Sent',
-                desc: 'Your Campaign Has been Sent Successfully'
-            }],
-
+            campaignEvents: [],
             option: {
                 // allow to pick multi-day
                 type: 'multi-day',
@@ -38902,15 +39173,59 @@ exports.default = {
                 from: moment().subtract(30, 'd').format('YYYY-MM-DD'), // Created Date
                 to: moment().format() // Present Date
             }]
-        };
+        }; // End Return
     },
 
     // create a method to get only the highest and lowest date to be assign as to and from date for the date filter
     components: {
-        opened: _Opened2.default, delivered: _Delivered2.default, clicked: _Clicked2.default, unsubscribed: _Unsubscribed2.default, RevenueVsAbandon: _RevenueVsAbandon2.default, TotalVsCurrentAbandonCart: _TotalVsCurrentAbandonCart2.default, calendar: _vueDatepicker2.default, placeOrder: _PlaceOrder2.default, rateOrder: _RateOrder2.default, totalRevenue: _TotalRevenue2.default, OpenRate: _OpenRate2.default
+        opened: _Opened2.default, delivered: _Delivered2.default, clicked: _Clicked2.default, unsubscribed: _Unsubscribed2.default, RevenueVsAbandon: _RevenueVsAbandon2.default, AllRevenueStats: _AllRevenueStats2.default, calendar: _vueDatepicker2.default, placeOrder: _PlaceOrder2.default, rateOrder: _RateOrder2.default, totalRevenue: _TotalRevenue2.default, OpenRate: _OpenRate2.default
     },
     methods: _extends({}, (0, _vuex.mapActions)({
         setCurrentCampaign: 'setCurrentCampaign'
+    }), _defineProperty({
+        setCampaignEvents: function setCampaignEvents() {
+
+            var desc = 'Your Campaign Has been Sent Successfully';
+            if (!this.campaign.status_label == 'Sent') {
+                desc = 'Campaign is About to Be Send On ' + moment(this.campaign.send_time).format(YYYY - MM - DD);
+            }
+
+            var events = [{
+                date: this.campaign.created,
+                title: 'Campaign Created',
+                desc: 'You Have Successfully Createad Your Campaign'
+            }, {
+                date: this.campaign.send_time,
+                title: 'Campaign ' + this.campaign.status_label,
+                desc: desc
+            }];
+            this.campaignEvents = events;
+        }
+    }, 'setCampaignEvents', function setCampaignEvents() {
+        var desc = 'Your Campaign Has been Sent Successfully';
+        if (!this.campaign.status_label == 'Sent') {
+            desc = 'Campaign is About to Be Send On ' + moment(this.campaign.send_time).format(YYYY - MM - DD);
+        }
+
+        var events = [{
+            date: this.campaign.created,
+            title: 'Campaign Created',
+            desc: 'You Have Successfully Createad Your Campaign'
+        }, {
+            date: this.campaign.send_time,
+            title: 'Campaign ' + this.campaign.status_label,
+            desc: desc
+        }];
+        this.campaignEvents = events;
+        var limit = [{
+            type: 'week',
+            available: [1, 2, 3, 4, 5]
+        }, {
+            type: 'fromto',
+            from: this.campaign.created, // Created Date
+            to: moment().format() // Present Date
+        }];
+        this.limit = limit;
     })),
     computed: _extends({}, (0, _vuex.mapState)({
         campaign: function campaign(state) {
@@ -38921,7 +39236,13 @@ exports.default = {
     })),
     mounted: function mounted() {
         this.setCurrentCampaign(this.$route.params.id);
+    },
+
+    watch: {
+        campaign: 'setCampaignEvents'
+
     }
+
 };
 
 /***/ }),
@@ -67260,7 +67581,41 @@ var Component = __webpack_require__(7)(
   /* script */
   __webpack_require__(264),
   /* template */
-  __webpack_require__(539),
+  __webpack_require__(545),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/mnt/c/Users/uriah/sites/laraspace/resources/assets/js/components/Campaigns/AllRevenueStats.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] AllRevenueStats.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ed188d04", Component.options)
+  } else {
+    hotAPI.reload("data-v-ed188d04", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 501 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(7)(
+  /* script */
+  __webpack_require__(265),
+  /* template */
+  __webpack_require__(538),
   /* scopeId */
   null,
   /* cssModules */
@@ -67287,12 +67642,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 501 */
+/* 502 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(7)(
   /* script */
-  __webpack_require__(265),
+  __webpack_require__(266),
   /* template */
   __webpack_require__(532),
   /* scopeId */
@@ -67321,12 +67676,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 502 */
+/* 503 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(7)(
   /* script */
-  __webpack_require__(266),
+  __webpack_require__(267),
   /* template */
   __webpack_require__(537),
   /* scopeId */
@@ -67355,12 +67710,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 503 */
+/* 504 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(7)(
   /* script */
-  __webpack_require__(267),
+  __webpack_require__(268),
   /* template */
   __webpack_require__(526),
   /* scopeId */
@@ -67389,7 +67744,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 504 */
+/* 505 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -67398,7 +67753,7 @@ __webpack_require__(550)
 
 var Component = __webpack_require__(7)(
   /* script */
-  __webpack_require__(268),
+  __webpack_require__(269),
   /* template */
   __webpack_require__(533),
   /* scopeId */
@@ -67427,7 +67782,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 505 */
+/* 506 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -67436,9 +67791,9 @@ __webpack_require__(552)
 
 var Component = __webpack_require__(7)(
   /* script */
-  __webpack_require__(269),
+  __webpack_require__(270),
   /* template */
-  __webpack_require__(542),
+  __webpack_require__(541),
   /* scopeId */
   null,
   /* cssModules */
@@ -67465,14 +67820,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 506 */
+/* 507 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(7)(
   /* script */
-  __webpack_require__(270),
+  __webpack_require__(271),
   /* template */
-  __webpack_require__(545),
+  __webpack_require__(544),
   /* scopeId */
   null,
   /* cssModules */
@@ -67499,7 +67854,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 507 */
+/* 508 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -67508,7 +67863,7 @@ __webpack_require__(549)
 
 var Component = __webpack_require__(7)(
   /* script */
-  __webpack_require__(271),
+  __webpack_require__(272),
   /* template */
   __webpack_require__(531),
   /* scopeId */
@@ -67530,40 +67885,6 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-37f3974e", Component.options)
   } else {
     hotAPI.reload("data-v-37f3974e", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 508 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(7)(
-  /* script */
-  __webpack_require__(272),
-  /* template */
-  __webpack_require__(538),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/mnt/c/Users/uriah/sites/laraspace/resources/assets/js/components/Campaigns/TotalVsCurrentAbandonCart.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] TotalVsCurrentAbandonCart.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5d831f57", Component.options)
-  } else {
-    hotAPI.reload("data-v-5d831f57", Component.options)
   }
 })()}
 
@@ -67722,7 +68043,7 @@ var Component = __webpack_require__(7)(
   /* script */
   __webpack_require__(277),
   /* template */
-  __webpack_require__(544),
+  __webpack_require__(543),
   /* scopeId */
   null,
   /* cssModules */
@@ -67756,7 +68077,7 @@ var Component = __webpack_require__(7)(
   /* script */
   null,
   /* template */
-  __webpack_require__(541),
+  __webpack_require__(540),
   /* scopeId */
   null,
   /* cssModules */
@@ -67824,7 +68145,7 @@ var Component = __webpack_require__(7)(
   /* script */
   null,
   /* template */
-  __webpack_require__(540),
+  __webpack_require__(539),
   /* scopeId */
   null,
   /* cssModules */
@@ -67994,7 +68315,7 @@ var Component = __webpack_require__(7)(
   /* script */
   __webpack_require__(282),
   /* template */
-  __webpack_require__(543),
+  __webpack_require__(542),
   /* scopeId */
   null,
   /* cssModules */
@@ -68928,12 +69249,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "card"
   }, [_vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "card-block"
-  }, [_c('total-vs-current-abandon-cart', {
-    attrs: {
-      "campaignName": _vm.campaign.name,
-      "campaignID": _vm.campaign.id
-    }
-  })], 1)])])])], 1)
+  }, [_c('all-revenue-stats')], 1)])])])], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "card-header"
@@ -68945,7 +69261,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "card-header"
   }, [_c('h6', [_c('i', {
     staticClass: "fa fa-bar-chart text-success"
-  }), _vm._v(" Abandon Cart Revenue")])])
+  }), _vm._v(" Overall Revenue Breakdown")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -69014,30 +69330,6 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "card-block"
-  }, [_c('div', {
-    staticClass: "ct-chart-pie",
-    attrs: {
-      "id": "pieChart"
-    }
-  })])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5d831f57", module.exports)
-  }
-}
-
-/***/ }),
-/* 539 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-md-12 col-lg-6 col-xl-3"
   }, [_c('a', {
@@ -69062,7 +69354,7 @@ if (false) {
 }
 
 /***/ }),
-/* 540 */
+/* 539 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -69085,7 +69377,7 @@ if (false) {
 }
 
 /***/ }),
-/* 541 */
+/* 540 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -69142,7 +69434,7 @@ if (false) {
 }
 
 /***/ }),
-/* 542 */
+/* 541 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -69170,7 +69462,7 @@ if (false) {
 }
 
 /***/ }),
-/* 543 */
+/* 542 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -69259,7 +69551,7 @@ if (false) {
 }
 
 /***/ }),
-/* 544 */
+/* 543 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -69389,7 +69681,7 @@ if (false) {
 }
 
 /***/ }),
-/* 545 */
+/* 544 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -69405,6 +69697,26 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-e4a1235c", module.exports)
+  }
+}
+
+/***/ }),
+/* 545 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('p', [_vm._v("Total Revenue: " + _vm._s(_vm._f("currency")(_vm.revenue)))]), _vm._v(" "), _c('p', [_vm._v("WinBack Revenue: " + _vm._s(_vm._f("currency")(_vm.winbackRevenue)))]), _vm._v(" "), _c('p', [_vm._v("Welcome Revenue: " + _vm._s(_vm._f("currency")(_vm.welcomeRevenue)))]), _vm._v(" "), _c('p', [_vm._v("Abandon Revenue: " + _vm._s(_vm._f("currency")(_vm.abandonRevenue)))]), _vm._v(" "), _c('p', [_vm._v("Returning Revenue: " + _vm._s(_vm._f("currency")(_vm.returningRevenue)))]), _vm._v(" "), _c('p', [_vm._v("New Revenue: " + _vm._s(_vm._f("currency")(_vm.newRevenue)))]), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', {
+    staticClass: "ct-chart-bar",
+    attrs: {
+      "id": "overAllRevenueBreakDown"
+    }
+  })])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-ed188d04", module.exports)
   }
 }
 
