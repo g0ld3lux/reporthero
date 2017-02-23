@@ -225,10 +225,12 @@ export default {
             },
         },
         watch: {
- 
-        revenueCount: 'getChart'
-
-
+        revenueCount: 'getChart',
+        abandonCount: 'getChart',
+        welcomeCount: 'getChart',
+        winbackCount: 'getChart',
+        returningCount: 'getChart',
+        newCount: 'getChart'
         },
         computed: {
             

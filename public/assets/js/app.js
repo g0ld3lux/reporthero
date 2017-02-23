@@ -37449,9 +37449,12 @@ exports.default = {
         }
     },
     watch: {
-
-        revenueCount: 'getChart'
-
+        revenueCount: 'getChart',
+        abandonCount: 'getChart',
+        welcomeCount: 'getChart',
+        winbackCount: 'getChart',
+        returningCount: 'getChart',
+        newCount: 'getChart'
     },
     computed: {
         revenue: function revenue() {
