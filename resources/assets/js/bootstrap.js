@@ -9,6 +9,8 @@ import Chartist from 'chartist'
 import Plugins from './helpers/plugin'
 import Vuex from 'vuex';
 import VuePagination from 'vue-pagination-2';
+import Vue2Filters from 'vue2-filters'
+
 
 
 window._ = lodash
@@ -25,6 +27,7 @@ Vue.use(VueRouter)
 Vue.use(VeeValidate);
 Vue.use(Vuex);
 Vue.use(VuePagination,[Vuex])
+Vue.use(Vue2Filters)
 
 
 /**

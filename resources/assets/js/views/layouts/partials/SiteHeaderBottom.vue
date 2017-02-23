@@ -4,12 +4,15 @@
             <li :class="{ active: isActive('/campaigns') }">
                 <router-link to="/campaigns/"><i class="fa fa-area-chart"></i> Campaigns</router-link>
             </li>
+            <li :class="{ active: isActive('/calculator') }">
+                <router-link to="/calculator/"><i class="fa fa-calculator"></i> Calculator</router-link>
+            </li>
 
         </ul>
     </div>
 </template>
 
-<script type="text/babel">
+<script>
     export default {
         data() {
             return {

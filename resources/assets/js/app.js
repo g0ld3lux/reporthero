@@ -7,7 +7,6 @@
 import './bootstrap';
 import router from './router.js'
 import Layout from './helpers/layout'
-import { currency } from './filters/currency'
 import store from './vuex/store/';
 import 'babel-polyfill';
 

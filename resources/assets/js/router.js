@@ -90,6 +90,23 @@ const routes = [
             
         ]
     },
+    {
+        path: '/calculator', component: LayoutHorizontal,  // Change the desired Layout here
+        meta: { requiresAuth: true },
+        children: [
+
+            {
+                path: '/',
+                name: 'calculator',
+                component: require('./views/admin/calculator/Show.vue'),
+                meta: {
+                title: 'Calculator',
+                breadcrumb: 'Calculator'
+                },
+            }
+            
+        ]
+    },
 
     /*
      |--------------------------------------------------------------------------

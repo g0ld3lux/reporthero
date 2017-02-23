@@ -24,7 +24,7 @@
 </template>
 
 
-<script type="text/babel">
+<script>
 
     import Layout from '../../../helpers/layout'
     import Auth from '../../../services/auth'
