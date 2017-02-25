@@ -5,7 +5,7 @@
         <span class="title">
             {{ rate }}
         </span>
-        <span class="desc">
+        <span class="desc" style="font-size: 12px; text-align: right;">
             {{ name }}
         </span>
         <slot>

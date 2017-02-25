@@ -1,8 +1,8 @@
 <template>
     <header class="site-header">
         <a href="#" class="brand-main">
-            <img src="/logo-dark.png" id="logo-desk" alt="Laraspace Logo" class="hidden-sm-down">
-            <img src="/assets/img/logo-mobile.png" id="logo-mobile" alt="Laraspace Logo" class="hidden-md-up">
+            <img src="/reporthero-logo-01.png" id="logo-desk" alt="Report Hero Logo" class="hidden-sm-down">
+            <img src="/reporthero-logo-02.png" id="logo-mobile" alt="Report Hero Logo" class="hidden-md-up">
         </a>
 
         <a href="#" class="nav-toggle" @click="onNavToggle">
@@ -48,3 +48,21 @@
 
     }
 </script>
+
+<style>
+.brand-main img {
+    height: 50px;
+    margin-top: -10px;
+
+}
+.site-header {
+    background-color: #b3e5fc !important;
+}
+
+.header-nav {
+    background-color: #0288d1 !important;
+}
+.active {
+    color: #e6ee9c !important;
+}
+</style>

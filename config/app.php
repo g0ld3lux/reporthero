@@ -174,7 +174,8 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        Laravel\Tinker\TinkerServiceProvider::class
+        Laravel\Tinker\TinkerServiceProvider::class,
+        Silber\Bouncer\BouncerServiceProvider::class
     ],
 
     /*
@@ -222,7 +223,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'Bouncer' => Silber\Bouncer\BouncerFacade::class,
 
     ],
 

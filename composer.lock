@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "62cd77fd5f50ed75599933dd3c450bf2",
+    "content-hash": "243c9957fcd0a828231e9bd16799ccbe",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1492,6 +1492,64 @@
                 "uuid"
             ],
             "time": "2016-11-22T19:21:44+00:00"
+        },
+        {
+            "name": "silber/bouncer",
+            "version": "v1.0.0-beta.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JosephSilber/bouncer.git",
+                "reference": "42e17f5fb2254a2e774ce72277799ab8455cc143"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JosephSilber/bouncer/zipball/42e17f5fb2254a2e774ce72277799ab8455cc143",
+                "reference": "42e17f5fb2254a2e774ce72277799ab8455cc143",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "5.1.20 - 5.4",
+                "illuminate/container": "5.1.20 - 5.4",
+                "illuminate/contracts": "5.1.20 - 5.4",
+                "illuminate/database": "5.1.20 - 5.4"
+            },
+            "require-dev": {
+                "illuminate/cache": "5.1.20 - 5.4",
+                "illuminate/console": "5.1.20 - 5.4",
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^4.8"
+            },
+            "suggest": {
+                "illuminate/cache": "Allows caching bouncer's database queries",
+                "illuminate/console": "Allows running registered bouncer seeders via artisan"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Silber\\Bouncer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joseph Silber",
+                    "email": "contact@josephsilber.com"
+                }
+            ],
+            "description": "Bouncer handles roles and abilities for Eloquent models.",
+            "keywords": [
+                "abilities",
+                "acl",
+                "capabilities",
+                "eloquent",
+                "laravel",
+                "permissions",
+                "roles"
+            ],
+            "time": "2017-01-25T15:18:43+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4132,7 +4190,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "silber/bouncer": 10
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

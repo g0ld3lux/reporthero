@@ -3,9 +3,9 @@
     <a class="dashbox" href="#">
         <i :class="[icon, color]"></i>
         <span class="title">
-            Revenue: ${{ total }}
+            ${{ total }}
         </span>
-        <span class="desc">
+        <span class="desc" style="font-size: 12px; text-align: right;">
             {{ name }}
         </span>
         <slot>
@@ -22,7 +22,7 @@ export default {
             name: {
                 type: String,
                 default() { 
-                    return 'Place Order'; 
+                    return 'Revenue'; 
                 }
             },
             icon: {

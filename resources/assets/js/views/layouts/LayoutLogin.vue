@@ -2,7 +2,7 @@
     <div class="login-wrapper">
         <div class="login-box">
             <div class="brand-main">
-                <a href="/"><img src="/logo-light.png" alt="Laraspace Logo"></a>
+                <a href="/"><img src="/reporthero-logo-01.png" alt="Report Hero Logo"></a>
             </div>
             <router-view></router-view>
             <div class="page-copyright">
@@ -13,7 +13,7 @@
     </div>
 </template>
 
-<script type="text/babel">
+<script>
 
     export default {
         methods: {
@@ -31,3 +31,11 @@
         }
     }
 </script>
+
+<style>
+.brand-main img {
+    height: 50px;
+    margin-top: -10px;
+
+}
+</style>

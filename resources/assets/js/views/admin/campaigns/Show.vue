@@ -1,25 +1,52 @@
 <template>
 
     <div class="main-content" id="dashboardPage">
-        <div class="row" id="campaign-calendar">
-         <vue-event-calendar :events="campaignEvents"></vue-event-calendar>
-         <br><br>
-        </div>
         <div class="row">
+            <div class="col-lg-8 col-xl-8">
+                 <div class="row">
+                    <delivered :campaignName="campaign.name"></delivered>
+                    <opened :campaignName="campaign.name"></opened>
+                    <clicked :campaignName="campaign.name"></clicked>
+                    <unsubscribed :campaignName="campaign.name"></unsubscribed>
+                </div>
+                <div class="row">
+                    <place-order></place-order>
+                    <rate-order></rate-order>
+                    <total-revenue></total-revenue>
+                    <open-rate :campaignName="campaign.name"></open-rate>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xl-4">
+                <div class="row" id="campaign-calendar">
+                    <vue-event-calendar :events="campaignEvents"></vue-event-calendar>
+                 </div>
+                 
+            </div>
+        </div>
+
        
-            <delivered :campaignName="campaign.name"></delivered>
-            <opened :campaignName="campaign.name"></opened>
-            <clicked :campaignName="campaign.name"></clicked>
-            <unsubscribed :campaignName="campaign.name"></unsubscribed>
-        </div>
         <div class="row">
-            <place-order></place-order>
-            <rate-order></rate-order>
-            <total-revenue></total-revenue>
-            <open-rate :campaignName="campaign.name"></open-rate>
+        <div class="input-group input-daterange col-xl-2">
+
+            <input type="text" class="form-control ls-datepicker" style="font-size: 13px;" v-model="date_from">
+            <span class="input-group-addon">to</span>
+            <input type="text" class="form-control ls-datepicker" style="font-size: 13px;" v-model="date_to">
         </div>
-        <calendar :date="date" :option="option" :limit="limit">
-        </calendar>
+        <div class="col-xl-2">
+        <select class="form-control ls-select2" v-model="selectedMetrics">
+            <option value="xGqcAu">Clicked</option>
+            <option value="xM3sVS">Opened</option>
+            <option value="s7fMbn">Unsubscribed</option>
+            <option value="vFvk9B">Place Order</option>
+            <option value="vFvk9B">Revenue</option>
+            <option value="teDBUH">Delivered</option>
+        </select>
+        </div>
+        <div class="col-xl-2">
+        <button type="button" class="btn btn-outline-info btn-icon" @click="loadChart()">
+        <i class="fa fa-line-chart text-warning"></i>Load  Metric</button>
+        </div>
+        </div>
         <div class="row">
         
             <div class="col-lg-12 col-xl-6 mt-2">
@@ -28,7 +55,7 @@
                         <h6><i class="fa fa-line-chart text-warning"></i>Last 7 Day Revenue</h6>
                     </div>
                     <div class="card-block">
-                        <revenue-vs-abandon :campaignName="campaign.name" :campaignID="campaign.id"></revenue-vs-abandon>
+                        <metric-chart action="cliked" name="campaign.name" :id="selectedMetrics"></metric-chart>
                     </div>
                 </div>
             </div>
@@ -54,7 +81,6 @@
     import delivered from '../../../components/Campaigns/Delivered.vue'
     import clicked from '../../../components/Campaigns/Clicked.vue'
     import unsubscribed from '../../../components/Campaigns/Unsubscribed.vue'
-    import RevenueVsAbandon from '../../../components/Campaigns/RevenueVsAbandon.vue'
     import AllRevenueStats from '../../../components/Campaigns/AllRevenueStats.vue'
     import calendar from 'vue-datepicker'
     import 'vue-event-calendar/dist/style.css'
@@ -63,8 +89,24 @@
     import rateOrder from '../../../components/Campaigns/RateOrder.vue'
     import totalRevenue from '../../../components/Campaigns/TotalRevenue.vue'
     import OpenRate from '../../../components/Campaigns/OpenRate.vue'
+    import MetricChart from '../../../components/Campaigns/MetricChart.vue'
     Vue.use(vueEventCalendar, {locale: 'en'})
     export default {
+        props: {
+            date_from: {
+                type: String,
+                default() { 
+                    return moment().subtract(30,'d').format('MM-DD-YYYY')
+                }
+            },
+            date_to: {
+                type: String,
+                default() { 
+                    return moment().format('MM-DD-YYYY')
+                }
+            }
+
+        },
         data() {
             return {
                 'header' : 'header',
@@ -122,51 +164,34 @@
                         type: 'fromto',
                         from: moment().subtract(30,'d').format('YYYY-MM-DD'), // Created Date
                         to: moment().format() // Present Date
-                    }]
+                    }],
+                    selectedMetrics: 'xGqcAu'
             } // End Return
         },
         // create a method to get only the highest and lowest date to be assign as to and from date for the date filter
         components : {
-        opened, delivered, clicked, unsubscribed, RevenueVsAbandon , AllRevenueStats, calendar,placeOrder, rateOrder,totalRevenue, OpenRate
+        opened, delivered, clicked, unsubscribed, AllRevenueStats, calendar,placeOrder, rateOrder,totalRevenue, OpenRate, MetricChart
         },
          methods: {
             ...mapActions({
                 setCurrentCampaign: 'setCurrentCampaign'
             }),
-            setCampaignEvents() {
 
+
+            setCampaignEvents() {
                 let desc = 'Your Campaign Has been Sent Successfully'
-                if(!this.campaign.status_label=='Sent')
+                if(this.campaign.status_label == 'Scheduled')
                 {
-                    desc = 'Campaign is About to Be Send On ' + moment(this.campaign.send_time).format(YYYY-MM-DD)
+                    desc = '@ ' + moment(this.campaign.send_time).format('YYYY-MM-DD')
                 }
 
                 let events = [{
                     date: this.campaign.created,
-                    title: 'Campaign Created',
-                    desc: 'You Have Successfully Createad Your Campaign'
+                    title: 'Created',
+                    desc: '@ ' + moment(this.campaign.created).format('YYYY-MM-DD')
                 },{
                     date: this.campaign.send_time,
-                    title: 'Campaign ' + this.campaign.status_label,
-                    desc
-                }]
-                this.campaignEvents = events
-            },
-
-            setCampaignEvents() {
-                let desc = 'Your Campaign Has been Sent Successfully'
-                if(!this.campaign.status_label=='Sent')
-                {
-                    desc = 'Campaign is About to Be Send On ' + moment(this.campaign.send_time).format(YYYY-MM-DD)
-                }
-
-                let events = [{
-                    date: this.campaign.created,
-                    title: 'Campaign Created',
-                    desc: 'You Have Successfully Createad Your Campaign'
-                },{
-                    date: this.campaign.send_time,
-                    title: 'Campaign ' + this.campaign.status_label,
+                    title: this.campaign.status_label,
                     desc
                 }]
                 this.campaignEvents = events
@@ -181,6 +206,16 @@
                     to: moment().format() // Present Date
                 }]
                 this.limit = limit
+            },
+            loadChart() {
+                // get date_from , date_to , and  metric ID
+
+                // user submit ajax request
+                // button change to loading 
+                // data retrive 
+                // update chart 
+                // return button back to normal
+                console.log('chart loaded!')
             }
             // Declare other method
         },
@@ -196,6 +231,7 @@
         },
         mounted() {
             this.setCurrentCampaign(this.$route.params.id)
+            Plugin.initPlugins(['Select2','BootstrapSelect','TimePickers','MultiSelect','DatePicker','SwitchToggles'])
 
         },
         watch: {
@@ -207,27 +243,50 @@
     }
 </script>
 <style lang="scss">
+div.cal-wrapper {
 
-div#campaign-calendar.row {
-    max-height: 365px !important;
-    margin-top: -25px;
-    padding-bottom: 25px;
 }
+div.item {
+        width: 10% !important;
+}
+.weeks .item {
+    font-size: 14px !important;
+}
+.date-num {
+    font-size: 14px !important;
+}
+div#campaign-calendar.row {
+
+}
+
+.is-today {
+    background-color: #fff176 !important;
+    border-color: #fff176 !important;
+}
+
 h2.date{
-    background-color: #ffd54f !important;
+background-color: #fff176 !important;
+
+
+
+}
+div.event-item {
+
+
+
+}
+p.time {
+    display:none;
 }
 div.cal-wrapper {
-    float: left;
+
    margin: 0 !important;
   padding: 0 !important;
 }
 div.events-wrapper {
-    float: right;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    margin-left: 0 !important;
-    background-color: #fff59d !important;
-
-
+    margin-left: 20px !important;
+    margin-bottom: 20px !important;
+    padding: 0 !important;
+    background-color:transparent !important;
 }
 </style>

@@ -3,9 +3,9 @@
     <a class="dashbox" href="#">
         <i :class="[icon, color]"></i>
         <span class="title">
-            Rate: {{ rate }}
+            {{ rate }}
         </span>
-        <span class="desc">
+        <span class="desc" style="font-size: 12px; text-align: right;">
             {{ name }}
         </span>
         <slot>

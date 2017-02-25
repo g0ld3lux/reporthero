@@ -5,7 +5,7 @@
         <span class="title">
             {{ total }}
         </span>
-        <span class="desc">
+        <span class="desc" style="font-size: 12px; text-align: right;">
             {{ name }}
         </span>
         <slot>
@@ -21,7 +21,7 @@ export default {
             name: {
                 type: String,
                 default() { 
-                    return 'Unsubscribed'; 
+                    return 'unsubscribed'; 
                 }
             },
             icon: {

@@ -1,12 +1,14 @@
 <template>
 <div>
-<p>Total Revenue: {{ revenue | currency }}</p>
-<p>WinBack Revenue: {{ winbackRevenue | currency }}</p>
-<p>Welcome Revenue: {{ welcomeRevenue | currency }}</p>
-<p>Abandon Revenue: {{ abandonRevenue | currency }}</p>
-<p>Returning Revenue: {{ returningRevenue | currency }}</p>
-<p>New Revenue: {{ newRevenue | currency }}</p>
+<p v-show="false">Total Revenue: {{ revenue | currency }}</p>
+<p v-show="false">WinBack Revenue: {{ winbackRevenue | currency }}</p>
+<p v-show="false">Welcome Revenue: {{ welcomeRevenue | currency }}</p>
+<p v-show="false">Abandon Revenue: {{ abandonRevenue | currency }}</p>
+<p v-show="false">Returning Revenue: {{ returningRevenue | currency }}</p>
+<p v-show="false">New Revenue: {{ newRevenue | currency }}</p>
 </br>
+<div id="tooltip"><b>Data Value:</b>
+</div>
 <div id="overAllRevenueBreakDown" class="ct-chart-bar">
 
 </div>
@@ -208,7 +210,7 @@ export default {
             },
 
             getChart() {
-                new Chartist.Bar('#overAllRevenueBreakDown', {
+                var chart = new Chartist.Bar('#overAllRevenueBreakDown', {
                 labels: this.labels,
                 series: this.series
                 }, {
@@ -219,7 +221,19 @@ export default {
                 plugins: [
                 Chartist.plugins.legend()
                 ]
+            });
+            var addedEvents = false;
+            chart.on('draw', function() {
+            if (!addedEvents) {
+                $('.ct-bar').on('mouseover', function() {
+                $('#tooltip').html('<b>Data Value: </b>' + $(this).attr('ct:value'));
                 });
+
+                $('.ct-bar').on('mouseout', function() {
+                $('#tooltip').html('<b>Data Value:</b>');
+                });
+            }
+            });
 
 
             },

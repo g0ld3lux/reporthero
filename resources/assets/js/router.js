@@ -19,6 +19,7 @@ import LayoutLogin from './views/layouts/LayoutLogin.vue'
 //Auth
 import Login from './views/auth/Login.vue'
 import Register from './views/auth/Register.vue'
+import Settings from './views/admin/Settings.vue'
 
 import NotFoundPage from './views/errors/404.vue'
 
@@ -107,6 +108,17 @@ const routes = [
             
         ]
     },
+    {
+        path: '/admin', component: LayoutHorizontal,
+        children: [
+            {
+                path: 'settings',
+                component: Settings,
+                name: 'settings'
+            }
+            
+        ]
+    },
 
     /*
      |--------------------------------------------------------------------------
@@ -129,6 +141,7 @@ const routes = [
             },
         ]
     },
+    
 
     // DEFAULT ROUTE
     {   path: '*', component : NotFoundPage }
