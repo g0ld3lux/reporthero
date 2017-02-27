@@ -47,7 +47,7 @@ const actions = {
       let series = [];
       for (let i = 0; i < state.series.length; i++) {
         
-            labels.push(moment(state.series[i].date).format('D DD'))
+            labels.push(moment(state.series[i].date).format('D'))
             series.push(state.series[i].values[0])
       }
       let chart = new Chartist.Line('.ct-chart-line', {

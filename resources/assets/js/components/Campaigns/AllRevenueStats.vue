@@ -107,7 +107,7 @@ export default {
             getPlacedOrder() {
                  axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
                 params: {
-                start_date: moment().subtract(7,'d').format('YYYY-MM-DD'),
+                start_date: moment().subtract(6,'d').format('YYYY-MM-DD'),
                 end_date: moment().format('YYYY-MM-DD'),
                 measurement: 'value',
                 }
@@ -124,7 +124,7 @@ export default {
             getNewCustomerRevenue() {
                 axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
                 params: {
-                    start_date: moment().subtract(7,'d').format('YYYY-MM-DD'),
+                    start_date: moment().subtract(6,'d').format('YYYY-MM-DD'),
                     end_date: moment().format('YYYY-MM-DD'),
                     measurement: 'value',
                     where: JSON.stringify([["$attributed_flow","=", 'wpkpxU']])
@@ -141,7 +141,7 @@ export default {
             getReturningRevenue() {
                 axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
                 params: {
-                    start_date: moment().subtract(7,'d').format('YYYY-MM-DD'),
+                    start_date: moment().subtract(6,'d').format('YYYY-MM-DD'),
                     end_date: moment().format('YYYY-MM-DD'),
                     measurement: 'value',
                     where: JSON.stringify([["$new_vs_returning","=", 'Returning']])
@@ -158,7 +158,7 @@ export default {
             getNewRevenue() {
                 axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
                 params: {
-                    start_date: moment().subtract(7,'d').format('YYYY-MM-DD'),
+                    start_date: moment().subtract(6,'d').format('YYYY-MM-DD'),
                     end_date: moment().format('YYYY-MM-DD'),
                     measurement: 'value',
                     where: JSON.stringify([["$new_vs_returning","=", 'New']])
@@ -176,7 +176,7 @@ export default {
             getWinbackRevenue() {
                 axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
                 params: {
-                    start_date: moment().subtract(7,'d').format('YYYY-MM-DD'),
+                    start_date: moment().subtract(6,'d').format('YYYY-MM-DD'),
                     end_date: moment().format('YYYY-MM-DD'),
                     measurement: 'value',
                     where: JSON.stringify([["$attributed_flow","=", 'wHEEvc']])
@@ -194,7 +194,7 @@ export default {
             getAbandonRevenue() {
                 axios.get('/api/v1/metric/' + this.metrics[0].id + '/export', {
                 params: {
-                    start_date: moment().subtract(7,'d').format('YYYY-MM-DD'),
+                    start_date: moment().subtract(6,'d').format('YYYY-MM-DD'),
                     end_date: moment().format('YYYY-MM-DD'),
                     measurement: 'value',
                     where: JSON.stringify([["$attributed_flow","=", 'y6WggH']])
@@ -298,3 +298,10 @@ export default {
 }
 
 </script>
+
+<style>
+.ct-legend {
+    margin:0;
+    padding:0;
+}
+</style>

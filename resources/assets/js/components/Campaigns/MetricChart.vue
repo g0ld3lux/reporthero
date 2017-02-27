@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style>
-.ct-label.ct-horizontal.ct-end{
+.ct-end{
 display: none;
 }
 </style>
