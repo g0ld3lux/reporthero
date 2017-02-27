@@ -39,7 +39,6 @@
             <option value="xM3sVS">Opened</option>
             <option value="s7fMbn">Unsubscribed</option>
             <option value="vFvk9B">Place Order</option>
-            <option value="vFvk9B">Revenue</option>
             <option value="teDBUH">Delivered</option>
         </select>
 
