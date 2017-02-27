@@ -33,7 +33,8 @@
             <input type="text" class="form-control ls-datepicker" style="font-size: 13px;" v-model="date_to">
         </div>
         <div class="col-xl-2">
-        <select class="form-control ls-select2" v-model="selectedMetrics">
+        <!-- form-control ls-select2 -->
+        <select class="" v-model="selected">
             <option value="xGqcAu">Clicked</option>
             <option value="xM3sVS">Opened</option>
             <option value="s7fMbn">Unsubscribed</option>
@@ -41,21 +42,19 @@
             <option value="vFvk9B">Revenue</option>
             <option value="teDBUH">Delivered</option>
         </select>
+
         </div>
-        <div class="col-xl-2">
-        <button type="button" class="btn btn-outline-info btn-icon" @click="loadChart()">
-        <i class="fa fa-line-chart text-warning"></i>Load  Metric</button>
-        </div>
+ 
         </div>
         <div class="row">
         
             <div class="col-lg-12 col-xl-6 mt-2">
                 <div class="card">
                     <div class="card-header">
-                        <h6><i class="fa fa-line-chart text-warning"></i>Last 7 Day Revenue</h6>
+                        <h6><i class="fa fa-line-chart text-warning"></i>{{ getCurrentMetric.name }}</h6>
                     </div>
                     <div class="card-block">
-                        <metric-chart action="cliked" name="campaign.name" :id="selectedMetrics"></metric-chart>
+                        <metric-chart></metric-chart>
                     </div>
                 </div>
             </div>
@@ -103,6 +102,12 @@
                 type: String,
                 default() { 
                     return moment().format('MM-DD-YYYY')
+                }
+            },
+            selected: {
+                type: String,
+                default() {
+                    return 'xGqcAu'
                 }
             }
 
@@ -165,7 +170,6 @@
                         from: moment().subtract(30,'d').format('YYYY-MM-DD'), // Created Date
                         to: moment().format() // Present Date
                     }],
-                    selectedMetrics: 'xGqcAu'
             } // End Return
         },
         // create a method to get only the highest and lowest date to be assign as to and from date for the date filter
@@ -173,9 +177,18 @@
         opened, delivered, clicked, unsubscribed, AllRevenueStats, calendar,placeOrder, rateOrder,totalRevenue, OpenRate, MetricChart
         },
          methods: {
-            ...mapActions({
-                setCurrentCampaign: 'setCurrentCampaign'
+            ...mapMutations({
+                setSelectedMetric: 'setSelectedMetric'
+
             }),
+            ...mapActions({
+                setCurrentCampaign: 'setCurrentCampaign',
+                listMetrics: 'listMetrics'
+            }),
+
+            setSelected() {
+                this.setSelectedMetric(this.selected);
+            },
 
 
             setCampaignEvents() {
@@ -216,26 +229,39 @@
                 // update chart 
                 // return button back to normal
                 console.log('chart loaded!')
-            }
+            },
+            
+           
+
             // Declare other method
         },
         computed: {
             // Your Initial Data
             ...mapState({
-                campaign: state => state.campaigns.current
+                campaign: state => state.campaigns.current,
+                metrics: state => state.metrics.all,
             }),
             ...mapGetters({
-                currentCampaign: 'currentCampaign'
-            })
+                getSelected: 'getSelected',
+                getCurrentMetric: 'getCurrentMetric'
+            }),
+            
+            // pass here the selectedMetricsID
+
             // Declare Other Computed Properties
         },
         mounted() {
+            // fetch current campaign
             this.setCurrentCampaign(this.$route.params.id)
+            // fetch all metrics
+            this.listMetrics()
             Plugin.initPlugins(['Select2','BootstrapSelect','TimePickers','MultiSelect','DatePicker','SwitchToggles'])
 
         },
         watch: {
-           campaign: 'setCampaignEvents'
+           campaign: 'setCampaignEvents',
+           selected: 'setSelected'
+
 
         }
         

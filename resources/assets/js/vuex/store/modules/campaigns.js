@@ -28,13 +28,13 @@ const getters = {
 const actions = {
   async getCampaigns({commit},query) {
     let payload = (await api.index(query)).data
-    commit('setList', payload.data)
-    commit('setTotal', payload.total)
-    commit('setCount', query.count)
+    commit('setList', await payload.data)
+    commit('setTotal', await payload.total)
+    commit('setCount', await query.count)
   },
     async setCurrentCampaign({commit},id) {
     let payload = (await api.show(id)).data
-    commit('setCurrentCampaign', payload)
+    commit('setCurrentCampaign', await payload)
   }
 
 

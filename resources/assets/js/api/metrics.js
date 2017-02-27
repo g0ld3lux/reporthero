@@ -1,9 +1,27 @@
 export default {
     // list all metrics
-    index() {
-
+    index (query={page: 0, count: 50}) {
+        return axios.get('/api/v1/metrics/', {
+                params: {
+                    page: query.page,
+                    count: query.count
+                }
+            })
     },
-    // batch timeline for all event
+    getMetricData(query={count: 25, start_date: null, end_date: null, unit: null, measurement: 'count', where: null, by: null},id) {
+        return axios.get('/api/v1/metric/' + id + '/export', {
+            params: {
+                start_date: query.start_date,
+                end_date: query.end_date,
+                count: query.count,
+                unit: query.unit,
+                by: query.by,
+                measurement: query.measurement,
+                where: query.where
+            }
+            })
+    },
+
     batchTimeline () {
 
     },

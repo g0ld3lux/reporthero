@@ -1,85 +1,77 @@
 <template>
 <div>
+<div id="metricToolTip">
+<b>Data Value: </b>
+</div>
 <div id="metricChart" class="ct-chart-line">
 <div
 </div>
 </template>
 
 <script>
-export default {
-        props: {
-            // Pass in name of Event i.e : Clicked
-            action: {
-                type: String,
-                required: true
-            },
-            // Pass The Campaign Name
-            name: {
-                type: String,
-                required: true
-            },
-            // Pass the Metric ID
-            id: {
-                type: String,
-                required: true
-            },
-            measurement: {
-                type: String,
-                default() { 
-                    return 'count';
-                }
-            }
-            
 
-        },
+import { mapGetters, mapActions , mapState , mapMutations } from 'vuex'
+export default {
         data() {
             return {
                 series: [],
                 data: [],
                 count: 0,
+                label: []
             }
         },
         mounted() {
-            this.getData()
-            this.loadChart()
+
+        },
+        created() {
+
         },
         methods: {
+            ...mapMutations({
+                setSelectedMetric: 'setSelectedMetric',
+                setCurrentMetric: 'setCurrentMetric',
+                setMetricQuery: 'setMetricQuery',
+            }),
+            ...mapActions({
+                getMetricData: 'getMetricData',
+
+            }),
             getData() {
-            axios.get('/api/v1/metric/' + this.id + '/export', {
-            params: {
-                measurement: this.measurement,
-                where: JSON.stringify([["Campaign Name","=", this.name]])
+            // access query =  this.$route.query.where and params = this.$route.params.id
+            let query = {
+                where: JSON.stringify([["Campaign Name","=", this.campaign.name]]) 
             }
-            }).then(({data}) => this.series = data.results[0].data);
+            this.getMetricData(query);
             },
-            loadChart() {
-                let data = []
-                for (let i = 0; i < this.series.length; i++) {
-                      data[i].x.push(this.series[i].date)
-                       data[i].y.push(this.series[i].values[0])
-                }
-                this.data = data
-                var chart = new Chartist.Line('#metricChart', {
-                series: [
-                {
-                    name: this.action,
-                    data
-                }
-                ]
-                }, {
-                axisX: {
-                type: Chartist.FixedScaleAxis,
-                divisor: this.series.length,
-                labelInterpolationFnc: function(value) {
-                    return moment(value).format('MM D');
-                }
-                }
-                });
-            }
+            
+        },
+        computed: {
+            ...mapState({
+                campaign: state => state.campaigns.current,
+                query: state => state.metrics.query,
+                selected: state => state.metrics.selected,
+                metric: state => state.metrics.current
+
+            }),
+            ...mapGetters({
+                metrics: 'getAllMetrics',
+            }),
         },
         // If We Already Fetch the Series Data then Watch For it and Load Chart!
-        // watch: {
-        // series: 'loadChart'
-        // }
+        watch: {
+        campaign: 'getData',
+        // selected is the metric ID selected
+        selected() {
+            // this.setCurrentMetric()
+            this.getData()
+
+        }
+        }
 }
 </script>
+
+<style>
+.ct-label.ct-horizontal.ct-end{
+display: none;
+}
+</style>
