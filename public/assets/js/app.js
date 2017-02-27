@@ -38806,7 +38806,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 var _vuex = __webpack_require__(33);
 
@@ -69645,10 +69644,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "value": "s7fMbn"
     }
   }, [_vm._v("Unsubscribed")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "vFvk9B"
-    }
-  }, [_vm._v("Place Order")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "teDBUH"
     }
