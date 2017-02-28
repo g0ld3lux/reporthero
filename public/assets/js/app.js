@@ -34155,7 +34155,6 @@ exports.default = {
         }; // End Return
     },
 
-    // create a method to get only the highest and lowest date to be assign as to and from date for the date filter
     components: {
         datePicker: _DatePicker2.default, opened: _Opened2.default, delivered: _Delivered2.default, clicked: _Clicked2.default, unsubscribed: _Unsubscribed2.default, placeOrder: _PlaceOrder2.default, rateOrder: _RateOrder2.default, totalRevenue: _TotalRevenue2.default, OpenRate: _OpenRate2.default, MetricChart: _MetricChart2.default
     },
@@ -34170,19 +34169,6 @@ exports.default = {
         setSelected: function setSelected() {
             this.setSelectedMetric(this.selected);
         },
-
-        // setQuery() {
-
-        //     let start_date = this.$route.query.start_date
-        //     let end_date = this.$route.query.end_date
-        //     let query = {
-        //         start_date,
-        //         end_date
-        //     }
-        //     this.setMetricQuery(query)
-        // },
-
-
         setCampaignEvents: function setCampaignEvents() {
             var desc = 'Your Campaign Has been Sent Successfully';
             if (this.campaign.status_label == 'Scheduled') {
@@ -34235,10 +34221,11 @@ exports.default = {
         campaign: 'setCampaignEvents',
         // Once Selected is Change On Drop Down We Call setSelectedMetric Mutation
         selected: 'setSelected',
+        // If we Are Watchin an Object it is Better to Use This Handler and Deep properties in Watcher
         end_date: {
             handler: function handler(end_date, oldValue) {
                 var query = {
-                    start_date: this.$route.query.start_date,
+                    start_date: this.start_date.time,
                     end_date: end_date.time
                 };
                 this.$router.replace({ query: query });
@@ -34249,7 +34236,7 @@ exports.default = {
             handler: function handler(start_date, oldValue) {
                 var query = {
                     start_date: start_date.time,
-                    end_date: this.$route.query.end_date
+                    end_date: this.end_date.time
                 };
                 this.$router.replace({ query: query });
             },

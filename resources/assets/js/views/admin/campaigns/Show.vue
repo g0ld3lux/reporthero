@@ -135,7 +135,6 @@
 
             } // End Return
         },
-        // create a method to get only the highest and lowest date to be assign as to and from date for the date filter
         components : {
         datePicker, opened, delivered, clicked, unsubscribed,placeOrder, rateOrder,totalRevenue, OpenRate, MetricChart
         },
@@ -153,17 +152,6 @@
             setSelected() {
                 this.setSelectedMetric(this.selected);
             },
-            // setQuery() {
-                
-            //     let start_date = this.$route.query.start_date
-            //     let end_date = this.$route.query.end_date
-            //     let query = {
-            //         start_date,
-            //         end_date
-            //     }
-            //     this.setMetricQuery(query)
-            // },
-
 
             setCampaignEvents() {
                 let desc = 'Your Campaign Has been Sent Successfully'
@@ -226,10 +214,11 @@
            campaign: 'setCampaignEvents',
            // Once Selected is Change On Drop Down We Call setSelectedMetric Mutation
            selected: 'setSelected',
+           // If we Are Watchin an Object it is Better to Use This Handler and Deep properties in Watcher
            end_date: {
                handler: function (end_date, oldValue) { 
                    let query = {
-                       start_date: this.$route.query.start_date,
+                       start_date: this.start_date.time,
                        end_date: end_date.time
                    }
                     this.$router.replace({ query })
@@ -240,7 +229,7 @@
                 handler: function (start_date, oldValue) { 
                     let query = {
                        start_date: start_date.time,
-                       end_date: this.$route.query.end_date
+                       end_date: this.end_date.time
                    }
                     this.$router.replace({ query })
                  },
