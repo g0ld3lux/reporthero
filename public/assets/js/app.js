@@ -33922,6 +33922,9 @@ exports.default = {
         viewStats: function viewStats(campaign) {
             this.$router.push({ name: 'campaigns.show', params: { id: campaign.id } });
             this.setCurrentCampaign(campaign.id);
+        },
+        sendAt: function sendAt(campaign) {
+            return moment(new Date(campaign.sent_at)).calendar();
         }
     }),
     computed: _extends({}, (0, _vuex.mapState)({
@@ -33951,13 +33954,7 @@ exports.default = {
         getTotal: 'getTotal',
         getPage: 'getPage'
 
-    }), {
-        sendAt: function sendAt(campaign) {
-            return moment(campaign.sent_at).calendar();
-        }
-        // Declare Other Computed Properties
-
-    }),
+    })),
     watch: {
         '$route': function $route(to, from) {
             var query = {
@@ -68185,7 +68182,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "btn btn-success btn-sm"
     }, [_c('i', {
       staticClass: "fa fa-check"
-    }), _vm._v(" " + _vm._s(campaign.status_label) + " - " + _vm._s(_vm.sendAt))]) : _vm._e(), _vm._v(" "), _c('button', {
+    }), _vm._v(" " + _vm._s(campaign.status_label) + " - " + _vm._s(_vm.sendAt(campaign)))]) : _vm._e(), _vm._v(" "), _c('button', {
       staticClass: "btn btn-primary btn-sm",
       on: {
         "click": function($event) {

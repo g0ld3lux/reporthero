@@ -12,7 +12,7 @@
                 </div>
                 <div class="actions">
                     <button class="btn btn-warning btn-sm" v-if="campaign.status == 'queued'"> <i class="fa fa-calendar-minus-o"></i> {{ campaign.status_label }} - {{ sendAt }}</button>
-                    <button class="btn btn-success btn-sm" v-if="campaign.status == 'sent'"> <i class="fa fa-check"></i> {{ campaign.status_label }} - {{ sendAt }}</button>
+                    <button class="btn btn-success btn-sm" v-if="campaign.status == 'sent'"> <i class="fa fa-check"></i> {{ campaign.status_label }} - {{ sendAt(campaign) }}</button>
                     <button class="btn btn-primary btn-sm" @click="viewStats(campaign)"> <i class="fa fa-area-chart"></i>Stats</button>
                     
                 </div>
@@ -69,6 +69,9 @@ export default {
                 this.$router.push({ name: 'campaigns.show', params: { id: campaign.id }})
                 this.setCurrentCampaign(campaign.id)
                 
+            },
+            sendAt(campaign) {
+                return moment(new Date(campaign.sent_at)).calendar()
             }
             
 
@@ -92,9 +95,7 @@ export default {
                 getPage: 'getPage',
 
             }),
-            sendAt(campaign) {
-                return moment(campaign.sent_at).calendar()
-            }
+            
             // Declare Other Computed Properties
         },
         watch: {
