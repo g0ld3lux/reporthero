@@ -38,10 +38,11 @@ export default {
             }),
             getData() {
             // access query =  this.$route.query.where and params = this.$route.params.id
+            // we get query here....
             let query = {
 
-                start_date: this.getStartDate,
-                end_date: this.getEndDatetime,
+                start_date: this.$route.query.start_date,
+                end_date: this.$route.query.end_date,
                 measurement: 'unique',
                 where: JSON.stringify([["Campaign Name","=", this.campaign.name]]) 
             }
@@ -69,7 +70,6 @@ export default {
         campaign: 'getData',
         // selected is the metric ID selected
         selected() {
-            // this.setCurrentMetric()
             this.getData()
 
         }

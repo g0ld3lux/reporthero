@@ -32949,10 +32949,11 @@ exports.default = {
     }), {
         getData: function getData() {
             // access query =  this.$route.query.where and params = this.$route.params.id
+            // we get query here....
             var query = {
 
-                start_date: this.getStartDate,
-                end_date: this.getEndDatetime,
+                start_date: this.$route.query.start_date,
+                end_date: this.$route.query.end_date,
                 measurement: 'unique',
                 where: JSON.stringify([["Campaign Name", "=", this.campaign.name]])
             };
@@ -32988,7 +32989,6 @@ exports.default = {
         campaign: 'getData',
         // selected is the metric ID selected
         selected: function selected() {
-            // this.setCurrentMetric()
             this.getData();
         }
     }
@@ -34104,27 +34104,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Vue.use(_vueEventCalendar2.default, { locale: 'en' });
 exports.default = {
     props: {
-        // Set You Go Campaign Object
-        // but we provided a default which is 1 month before
-        limitFrom: {
+        // Use Case of Props as Initial Data and Reference it Inside Your Data
+        initialLimitFrom: {
             type: String,
             default: function _default() {
                 return moment().subtract(30, 'd').format('YYYY-MM-DD');
             }
         },
-        limitTo: {
+        initialLimitTo: {
             type: String,
             default: function _default() {
                 return moment().format('YYYY-MM-DD');
             }
         },
-        selected: {
+        initialSelected: {
             type: String,
             default: function _default() {
                 return 'xGqcAu';
             }
         },
-        start_date: {
+        initialStartDate: {
             tpe: Object,
             default: function _default() {
                 return {
@@ -34132,7 +34131,7 @@ exports.default = {
                 };
             }
         },
-        end_date: {
+        initialEndDate: {
             type: Object,
             default: function _default() {
                 return {
@@ -34146,7 +34145,12 @@ exports.default = {
         return {
             // laraspace specific properties
             'header': 'header',
-            campaignEvents: []
+            campaignEvents: [],
+            selected: this.initialSelected,
+            start_date: this.initialStartDate,
+            end_date: this.initialEndDate,
+            limitTo: this.initialLimitTo,
+            limitFrom: this.initialLimitFrom
 
         }; // End Return
     },
@@ -34156,7 +34160,8 @@ exports.default = {
         datePicker: _DatePicker2.default, opened: _Opened2.default, delivered: _Delivered2.default, clicked: _Clicked2.default, unsubscribed: _Unsubscribed2.default, placeOrder: _PlaceOrder2.default, rateOrder: _RateOrder2.default, totalRevenue: _TotalRevenue2.default, OpenRate: _OpenRate2.default, MetricChart: _MetricChart2.default
     },
     methods: _extends({}, (0, _vuex.mapMutations)({
-        setSelectedMetric: 'setSelectedMetric'
+        setSelectedMetric: 'setSelectedMetric',
+        setMetricQuery: 'setMetricQuery'
 
     }), (0, _vuex.mapActions)({
         setCurrentCampaign: 'setCurrentCampaign',
@@ -34165,6 +34170,19 @@ exports.default = {
         setSelected: function setSelected() {
             this.setSelectedMetric(this.selected);
         },
+
+        // setQuery() {
+
+        //     let start_date = this.$route.query.start_date
+        //     let end_date = this.$route.query.end_date
+        //     let query = {
+        //         start_date,
+        //         end_date
+        //     }
+        //     this.setMetricQuery(query)
+        // },
+
+
         setCampaignEvents: function setCampaignEvents() {
             var desc = 'Your Campaign Has been Sent Successfully';
             if (this.campaign.status_label == 'Scheduled') {
@@ -34213,8 +34231,30 @@ exports.default = {
     },
 
     watch: {
+        // Once we Have Our Campaign Object then Render The Campaign Events Component
         campaign: 'setCampaignEvents',
-        selected: 'setSelected'
+        // Once Selected is Change On Drop Down We Call setSelectedMetric Mutation
+        selected: 'setSelected',
+        end_date: {
+            handler: function handler(end_date, oldValue) {
+                var query = {
+                    start_date: this.$route.query.start_date,
+                    end_date: end_date.time
+                };
+                this.$router.replace({ query: query });
+            },
+            deep: true
+        },
+        start_date: {
+            handler: function handler(start_date, oldValue) {
+                var query = {
+                    start_date: start_date.time,
+                    end_date: this.$route.query.end_date
+                };
+                this.$router.replace({ query: query });
+            },
+            deep: true
+        }
 
     }
 
@@ -36051,8 +36091,8 @@ var mutations = {
   setMetricList: function setMetricList(state, payload) {
     state.all = payload;
   },
-  setMetricQuery: function setMetricQuery(state, payload) {
-    state.query = payload;
+  setMetricQuery: function setMetricQuery(state, query) {
+    state.query = query;
   },
   setCurrentMetric: function setCurrentMetric(state, payload) {
     state.current = payload;

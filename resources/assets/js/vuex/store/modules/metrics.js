@@ -80,7 +80,7 @@ const actions = {
 // mutations
 const mutations = {
   setMetricList: (state, payload ) => {  state.all = payload},
-  setMetricQuery: (state, payload) => { state.query = payload },
+  setMetricQuery: (state, query) => { state.query = query },
   setCurrentMetric: (state, payload) => { state.current = payload },
   setSelectedMetric: (state ,payload) => { state.selected = payload },
   setSeries: (state, payload) => {state.series = payload}
