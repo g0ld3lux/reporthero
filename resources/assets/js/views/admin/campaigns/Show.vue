@@ -1,6 +1,7 @@
 <template>
 
     <div class="main-content" id="dashboardPage">
+    <h6><span style="color:indianred;">Subject:</span> <strong style="color:cadetblue;">{{ campaign.subject }}</strong></h6>
         <div class="row">
             <div class="col-lg-8 col-xl-8">
                  <div class="row">

@@ -34052,6 +34052,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 var _vuex = __webpack_require__(33);
 
@@ -69011,7 +69012,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "dashboardPage"
     }
-  }, [_c('div', {
+  }, [_c('h6', [_c('span', {
+    staticStyle: {
+      "color": "indianred"
+    }
+  }, [_vm._v("Subject:")]), _vm._v(" "), _c('strong', {
+    staticStyle: {
+      "color": "cadetblue"
+    }
+  }, [_vm._v(_vm._s(_vm.campaign.subject))])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-8 col-xl-8"
