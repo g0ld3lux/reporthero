@@ -93,7 +93,7 @@ export default {
 
             }),
             sendAt(campaign) {
-                return moment(campaign.sendtime).calendar()
+                return moment(campaign.sent_at).calendar()
             }
             // Declare Other Computed Properties
         },

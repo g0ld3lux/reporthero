@@ -9,7 +9,9 @@ const state = {
   query: [],
   total: '',
   page: 1,
-  count: 50
+  count: 50,
+  start_date: {},
+  end_date: {}
 }
 
 // getters
@@ -20,7 +22,9 @@ const getters = {
   getQuery: state => state.query,
   getTotal: state => state.total,
   getPage: state => state.page,
-  getCount: state => state.count
+  getCount: state => state.count,
+  getStartDate: state => moment(state.start_date).format('YYYY-MM-DD'),
+  getEndDate: state => moment(state.end_date).format('YYYY-MM-DD')
 }
 
 // actions
@@ -35,6 +39,10 @@ const actions = {
     async setCurrentCampaign({commit},id) {
     let payload = (await api.show(id)).data
     commit('setCurrentCampaign', await payload)
+    let created = moment(payload.created).format('YYYY-MM-DD')
+    commit('setStartDate', await created)
+    let now = moment().format('YYYY-MM-DD')
+    commit('setEndDate', await now)
   }
 
 
@@ -47,6 +55,9 @@ const mutations = {
     setTotal: (state, payload) => { state.total = payload },
     setCount: (state, payload) => { state.count = payload },
     setCurrentCampaign: (state, payload) => { state.current = payload },
+    setStartDate: (state, payload) => { state.start_date = { time:payload } } ,
+    setEndDate: (state, payload) => { state.end_date = { time:payload } },
+    
     // Added vue pagination mutation
     ['pagination/PAGINATE'](state, payload) {
               state.page = payload

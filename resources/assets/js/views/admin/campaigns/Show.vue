@@ -28,9 +28,13 @@
         <div class="row">
         <div class="input-group input-daterange col-xl-2">
 
-            <input type="text" class="form-control ls-datepicker" style="font-size: 13px;" v-model="date_from">
-            <span class="input-group-addon">to</span>
-            <input type="text" class="form-control ls-datepicker" style="font-size: 13px;" v-model="date_to">
+           <date-picker placeholder="Start Date" :date="start_date" :limitFrom="limitFrom" :limitTo="limitTo"></date-picker>
+           
+        </div>
+        <div class="input-group input-daterange col-xl-2">
+
+           <date-picker placeholder="End Date" :date="end_date" :limitFrom="limitFrom" :limitTo="limitTo"></date-picker>   
+           
         </div>
         <div class="col-xl-2">
         <!-- form-control ls-select2 -->
@@ -46,7 +50,7 @@
         </div>
         <div class="row">
         
-            <div class="col-lg-12 col-xl-6 mt-2">
+            <div class="col-lg-12 col-xl-12 mt-2">
                 <div class="card">
                     <div class="card-header">
                         <h6><i class="fa fa-line-chart text-warning"></i>{{ getCurrentMetric.name }}</h6>
@@ -56,16 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 col-xl-6 mt-2">
-                <div class="card">
-                    <div class="card-header">
-                        <h6><i class="fa fa-bar-chart text-success"></i> Overall Revenue Breakdown</h6>
-                    </div>
-                    <div class="card-block">
-                        <all-revenue-stats> </all-revenue-stats>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         
         
@@ -77,9 +72,8 @@
     import opened from '../../../components/Campaigns/Opened.vue'
     import delivered from '../../../components/Campaigns/Delivered.vue'
     import clicked from '../../../components/Campaigns/Clicked.vue'
+    import datePicker from '../../../components/Campaigns/DatePicker.vue'
     import unsubscribed from '../../../components/Campaigns/Unsubscribed.vue'
-    import AllRevenueStats from '../../../components/Campaigns/AllRevenueStats.vue'
-    import calendar from 'vue-datepicker'
     import 'vue-event-calendar/dist/style.css'
     import vueEventCalendar from 'vue-event-calendar'
     import placeOrder from '../../../components/Campaigns/PlaceOrder.vue'
@@ -90,16 +84,18 @@
     Vue.use(vueEventCalendar, {locale: 'en'})
     export default {
         props: {
-            date_from: {
+            // Set You Go Campaign Object
+            // but we provided a default which is 1 month before
+            limitFrom: {
                 type: String,
-                default() { 
-                    return moment().subtract(30,'d').format('MM-DD-YYYY')
+                default() {
+                    return moment().subtract(30,'d').format('YYYY-MM-DD')
                 }
             },
-            date_to: {
+            limitTo: {
                 type: String,
-                default() { 
-                    return moment().format('MM-DD-YYYY')
+                default() {
+                    return moment().format('YYYY-MM-DD')
                 }
             },
             selected: {
@@ -107,72 +103,36 @@
                 default() {
                     return 'xGqcAu'
                 }
+            },
+            start_date: {
+                tpe: Object,
+                default() {
+                    return {
+                        time: moment().subtract(30,'d').format('YYYY-MM-DD')
+                    }
+                }
+            },
+            end_date: {
+                type: Object,
+                default() {
+                    return {
+                        time: moment().format('YYYY-MM-DD')
+                    }
+                }
             }
 
         },
         data() {
             return {
+                // laraspace specific properties
                 'header' : 'header',
-                date: {
-                    time: '' // string
-                },
-                campaignEvents: [],
-                option: {
-                    // allow to pick multi-day
-                    type: 'multi-day',
-                    week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                    month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    format: 'YYYY-MM-DD',
-                    placeholder: 'Filter By Date',
-                    inputStyle: {
-                    'display': 'inline-block',
-                    'padding': '12px',
-                    'line-height': '22px',
-                    'font-size': '16px',
-                    'border': '2px solid #fff',
-                    'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
-                    'text-align': 'center',
-                    'border-radius': '2px',
-                    // Color of Text in Input
-                    'color': '#ffd54f'
-                    },
-                    color: {
-                    header: '#ffca28',
-                    headerText: '#eceff1'
-                    },
-                    buttons: {
-                    ok: 'Ok',
-                    cancel: 'Cancel'
-                    },
-                    overlayOpacity: 0.5, // 0.5 as default
-                    dismissible: true // as true as default
-                    },
-                    timeoption: {
-                        type: 'min',
-                        week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                        month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                        format: 'YYYY-MM-DD HH:mm'
-                    },
-                    multiOption: {
-                        type: 'multi-day',
-                        week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                        month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                        format:"YYYY-MM-DD HH:mm"
-                    },
-                    limit: [{
-                        type: 'week',
-                        available: [1,2,3,4,5]
-                    },
-                    {
-                        type: 'fromto',
-                        from: moment().subtract(30,'d').format('YYYY-MM-DD'), // Created Date
-                        to: moment().format() // Present Date
-                    }],
+                campaignEvents: []
+
             } // End Return
         },
         // create a method to get only the highest and lowest date to be assign as to and from date for the date filter
         components : {
-        opened, delivered, clicked, unsubscribed, AllRevenueStats, calendar,placeOrder, rateOrder,totalRevenue, OpenRate, MetricChart
+        datePicker, opened, delivered, clicked, unsubscribed,placeOrder, rateOrder,totalRevenue, OpenRate, MetricChart
         },
          methods: {
             ...mapMutations({
@@ -218,19 +178,6 @@
                 }]
                 this.limit = limit
             },
-            loadChart() {
-                // get date_from , date_to , and  metric ID
-
-                // user submit ajax request
-                // button change to loading 
-                // data retrive 
-                // update chart 
-                // return button back to normal
-                console.log('chart loaded!')
-            },
-            
-           
-
             // Declare other method
         },
         computed: {
@@ -243,6 +190,7 @@
                 getSelected: 'getSelected',
                 getCurrentMetric: 'getCurrentMetric'
             }),
+
             
             // pass here the selectedMetricsID
 
@@ -253,7 +201,8 @@
             this.setCurrentCampaign(this.$route.params.id)
             // fetch all metrics
             this.listMetrics()
-            Plugin.initPlugins(['Select2','BootstrapSelect','TimePickers','MultiSelect','DatePicker','SwitchToggles'])
+            // Use Jquery Plugins
+            Plugin.initPlugins(['DatePicker'])
 
         },
         watch: {

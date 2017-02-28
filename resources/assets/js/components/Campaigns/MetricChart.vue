@@ -39,6 +39,10 @@ export default {
             getData() {
             // access query =  this.$route.query.where and params = this.$route.params.id
             let query = {
+
+                start_date: this.getStartDate,
+                end_date: this.getEndDatetime,
+                measurement: 'unique',
                 where: JSON.stringify([["Campaign Name","=", this.campaign.name]]) 
             }
             this.getMetricData(query);
@@ -50,11 +54,14 @@ export default {
                 campaign: state => state.campaigns.current,
                 query: state => state.metrics.query,
                 selected: state => state.metrics.selected,
-                metric: state => state.metrics.current
+                metric: state => state.metrics.current,
+                start_date: state => state.campaigns.start_date,
+                end_date: state => state.campaigns.end_date
 
             }),
             ...mapGetters({
                 metrics: 'getAllMetrics',
+
             }),
         },
         // If We Already Fetch the Series Data then Watch For it and Load Chart!

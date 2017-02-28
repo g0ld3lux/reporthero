@@ -3,7 +3,7 @@
     <a class="dashbox" href="#">
         <i :class="[icon, color]"></i>
         <span class="title">
-            {{ rate }}
+            {{ rate }}%
         </span>
         <span class="desc" style="font-size: 12px; text-align: right;">
             {{ name }}

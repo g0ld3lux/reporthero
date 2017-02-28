@@ -32,7 +32,7 @@ const actions = {
     commit('setMetricList', await payload.data)
     
   },
-  // Note we can only Pass 1 Arg which is Quey , so We need to Use State to get Metric ID of selected
+  // Note we can only Pass 1 Arg which is Query , so We need to Use State to get Metric ID of selected
   async getMetricData({commit,state, dispatch}, query) {
     let payload = (await api.getMetricData(query,state.selected)).data
     commit('setSeries', await payload.results[0].data)
