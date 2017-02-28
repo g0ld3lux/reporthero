@@ -64,7 +64,6 @@
             
         </div>
         
-        
     </div>
 </template>
 
@@ -105,7 +104,7 @@
                 }
             },
             initialStartDate: {
-                tpe: Object,
+                type: Object,
                 default() {
                     return {
                         time: moment().subtract(30,'d').format('YYYY-MM-DD')
@@ -205,8 +204,6 @@
             this.setCurrentCampaign(this.$route.params.id)
             // fetch all metrics
             this.listMetrics()
-            // Use Jquery Plugins
-            Plugin.initPlugins(['DatePicker'])
 
         },
         watch: {

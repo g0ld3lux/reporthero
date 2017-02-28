@@ -34049,7 +34049,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 var _vuex = __webpack_require__(33);
 
@@ -34124,7 +34123,7 @@ exports.default = {
             }
         },
         initialStartDate: {
-            tpe: Object,
+            type: Object,
             default: function _default() {
                 return {
                     time: moment().subtract(30, 'd').format('YYYY-MM-DD')
@@ -34212,8 +34211,6 @@ exports.default = {
         this.setCurrentCampaign(this.$route.params.id);
         // fetch all metrics
         this.listMetrics();
-        // Use Jquery Plugins
-        Plugin.initPlugins(['DatePicker']);
     },
 
     watch: {
