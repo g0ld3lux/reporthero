@@ -26,19 +26,19 @@
 
        
         <div class="row">
-        <div class="input-group input-daterange col-xl-2">
+        <div class="input-group input-daterange col-xl-2 col-sm-4 col-md-4">
 
            <date-picker placeholder="Start Date" :date="start_date" :limitFrom="limitFrom" :limitTo="limitTo"></date-picker>
            
         </div>
-        <div class="input-group input-daterange col-xl-2">
+        <div class="input-group input-daterange col-xl-2 col-sm-4 col-md-4">
 
            <date-picker placeholder="End Date" :date="end_date" :limitFrom="limitFrom" :limitTo="limitTo"></date-picker>   
            
         </div>
-        <div class="col-xl-2">
+        <div class="col-xl-2 col-sm-4 col-md-4">
         <!-- form-control ls-select2 -->
-        <select class="" v-model="selected">
+        <select class="styled-select slate" v-model="selected">
             <option value="xGqcAu">Clicked</option>
             <option value="xM3sVS">Opened</option>
             <option value="s7fMbn">Unsubscribed</option>
@@ -262,4 +262,35 @@ div.events-wrapper {
     padding: 0 !important;
     background-color:transparent !important;
 }
+.styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 100%;
+   -webkit-appearance: none;
+}
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 100%;
+}
+.styled-select.slate {
+   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+   height: 34px;
+   width: 100%;
+
+}
+
+.styled-select.slate select {
+   border: 5px solid #ccc;
+   font-size: 16px;
+   height: 34px;
+   width: 100%;
+}
+.slate   { background-color: #ddd; }
+.slate select   { color: #000; }
+
 </style>

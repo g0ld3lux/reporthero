@@ -32686,7 +32686,7 @@ exports.default = {
             type: Object,
             default: function _default() {
                 return {
-                    'display': 'inline-block',
+                    'width': '100%',
                     'padding': '12px',
                     'line-height': '22px',
                     'font-size': '16px',
@@ -44731,7 +44731,7 @@ exports.push([module.i, "", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(21)();
-exports.push([module.i, "\ndiv.item {\n  width: 10% !important;\n}\n.weeks .item {\n  font-size: 14px !important;\n}\n.date-num {\n  font-size: 14px !important;\n}\n.is-today {\n  background-color: #fff176 !important;\n  border-color: #fff176 !important;\n}\nh2.date {\n  background-color: #fff176 !important;\n}\np.time {\n  display: none;\n}\ndiv.cal-wrapper {\n  margin: 0 !important;\n  padding: 0 !important;\n}\ndiv.events-wrapper {\n  margin-left: 20px !important;\n  margin-bottom: 20px !important;\n  padding: 0 !important;\n  background-color: transparent !important;\n}\n", ""]);
+exports.push([module.i, "\ndiv.item {\n  width: 10% !important;\n}\n.weeks .item {\n  font-size: 14px !important;\n}\n.date-num {\n  font-size: 14px !important;\n}\n.is-today {\n  background-color: #fff176 !important;\n  border-color: #fff176 !important;\n}\nh2.date {\n  background-color: #fff176 !important;\n}\np.time {\n  display: none;\n}\ndiv.cal-wrapper {\n  margin: 0 !important;\n  padding: 0 !important;\n}\ndiv.events-wrapper {\n  margin-left: 20px !important;\n  margin-bottom: 20px !important;\n  padding: 0 !important;\n  background-color: transparent !important;\n}\n.styled-select {\n  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;\n  height: 29px;\n  overflow: hidden;\n  width: 100%;\n  -webkit-appearance: none;\n}\n.styled-select select {\n  background: transparent;\n  border: none;\n  font-size: 14px;\n  height: 29px;\n  padding: 5px;\n  /* If you add too much padding here, the options won't show in IE */\n  width: 100%;\n}\n.styled-select.slate {\n  background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;\n  height: 34px;\n  width: 100%;\n}\n.styled-select.slate select {\n  border: 5px solid #ccc;\n  font-size: 16px;\n  height: 34px;\n  width: 100%;\n}\n.slate {\n  background-color: #ddd;\n}\n.slate select {\n  color: #000;\n}\n", ""]);
 
 /***/ }),
 /* 491 */
@@ -69053,7 +69053,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "input-group input-daterange col-xl-2"
+    staticClass: "input-group input-daterange col-xl-2 col-sm-4 col-md-4"
   }, [_c('date-picker', {
     attrs: {
       "placeholder": "Start Date",
@@ -69062,7 +69062,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "limitTo": _vm.limitTo
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "input-group input-daterange col-xl-2"
+    staticClass: "input-group input-daterange col-xl-2 col-sm-4 col-md-4"
   }, [_c('date-picker', {
     attrs: {
       "placeholder": "End Date",
@@ -69071,7 +69071,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "limitTo": _vm.limitTo
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-xl-2"
+    staticClass: "col-xl-2 col-sm-4 col-md-4"
   }, [_c('select', {
     directives: [{
       name: "model",
@@ -69079,6 +69079,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.selected),
       expression: "selected"
     }],
+    staticClass: "styled-select slate",
     on: {
       "change": function($event) {
         _vm.selected = Array.prototype.filter.call($event.target.options, function(o) {

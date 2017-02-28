@@ -38,7 +38,7 @@ export default {
                 type: Object,
                 default() {
                     return {
-                    'display': 'inline-block',
+                    'width': '100%',
                     'padding': '12px',
                     'line-height': '22px',
                     'font-size': '16px',
