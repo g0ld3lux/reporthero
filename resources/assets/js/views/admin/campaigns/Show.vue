@@ -5,24 +5,41 @@
         <div class="row">
             <div class="col-lg-8 col-xl-8">
                  <div class="row">
-                    <delivered :campaignName="campaign.name"></delivered>
-                    <opened :campaignName="campaign.name"></opened>
-                    <clicked :campaignName="campaign.name"></clicked>
-                    <unsubscribed :campaignName="campaign.name"></unsubscribed>
+                    <opened></opened>
+                    <open-rate></open-rate>
+                    <clicked></clicked>
+                    <click-rate></click-rate>
                 </div>
                 <div class="row">
+                    <delivered></delivered>
                     <place-order></place-order>
                     <rate-order></rate-order>
                     <total-revenue></total-revenue>
-                    <open-rate :campaignName="campaign.name"></open-rate>
+                    
                 </div>
             </div>
+
             <div class="col-lg-4 col-xl-4">
+           
                 <div class="row" id="campaign-calendar">
                     <vue-event-calendar :events="campaignEvents"></vue-event-calendar>
                  </div>
-                 
+                
+                
             </div>
+  
+            <!--
+            <div class="col-lg-4 col-xl-4">
+            <div class="row">
+            <unsubscribed></unsubscribed>
+            <bounced></bounced>
+            <spam-count></spam-count>
+            <total-recipients :total="campaign.num_recipients"></total-recipients>
+            </div>
+            <div class="row">
+            </div>
+            </div>
+            -->
         </div>
 
        
@@ -44,6 +61,8 @@
             <option value="xM3sVS">Opened</option>
             <option value="s7fMbn">Unsubscribed</option>
             <option value="teDBUH">Delivered</option>
+            <option value="yq4vyv">Spam</option>sNU69p
+            <option value="sNU69p">Bounced</option>
         </select>
 
         </div>
@@ -81,6 +100,10 @@
     import totalRevenue from '../../../components/Campaigns/TotalRevenue.vue'
     import OpenRate from '../../../components/Campaigns/OpenRate.vue'
     import MetricChart from '../../../components/Campaigns/MetricChart.vue'
+    import ClickRate from '../../../components/Campaigns/ClickRate.vue'
+    import Bounced from '../../../components/Campaigns/Bounced.vue'
+    import SpamCount from '../../../components/Campaigns/SpamCount.vue'
+    import TotalRecipients from '../../../components/Campaigns/TotalRecipients.vue'
     Vue.use(vueEventCalendar, {locale: 'en'})
     export default {
         props: {
@@ -135,7 +158,7 @@
             } // End Return
         },
         components : {
-        datePicker, opened, delivered, clicked, unsubscribed,placeOrder, rateOrder,totalRevenue, OpenRate, MetricChart
+        TotalRecipients,SpamCount,Bounced,ClickRate,datePicker, opened, delivered, clicked, unsubscribed,placeOrder, rateOrder,totalRevenue, OpenRate, MetricChart
         },
          methods: {
             ...mapMutations({

@@ -36,9 +36,6 @@ export default {
                     return 'text-info'; 
                 }
             },
-            campaignName: {
-                type: String
-            }
             
 
         },
@@ -57,7 +54,7 @@ export default {
             axios.get('/api/v1/metric/' + this.metricID + '/export', {
             params: {
                 measurement: 'unique',
-                where: JSON.stringify([["Campaign Name","=", this.campaignName]])
+                where: JSON.stringify([["$message", "=" , this.$route.params.id]])
             }
             }).then(({data}) => this.fetchData = data.results[0].data);
             },
@@ -71,8 +68,8 @@ export default {
             return this.count;
             }
         },
-        watch: {
-        campaignName: 'getData'
-        }
+        // watch: {
+        // campaignName: 'getData'
+        // }
 }
 </script>

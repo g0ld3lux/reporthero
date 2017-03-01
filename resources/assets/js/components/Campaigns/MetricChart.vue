@@ -44,7 +44,7 @@ export default {
                 start_date: this.$route.query.start_date,
                 end_date: this.$route.query.end_date,
                 measurement: 'unique',
-                where: JSON.stringify([["Campaign Name","=", this.campaign.name]]) 
+                where: JSON.stringify([["$message","=", this.$route.params.id]]) 
             }
             this.getMetricData(query);
             },

@@ -1,5 +1,5 @@
 <template>
-<div class="col-md-12 col-lg-6 col-xl-3">
+<div class="col-md-6 col-lg-6 col-xl-6">  
     <a class="dashbox" href="#">
         <i :class="[icon, color]"></i>
         <span class="title">
@@ -50,14 +50,13 @@ export default {
             }
         },
         mounted() {
-
+            this.getData()
         },
         methods: {
             getData() {
             axios.get('/api/v1/metric/' + this.metricID + '/export', {
             params: {
-                measurement: 'value',
-                where: JSON.stringify([["Campaign Name","=", this.campaignName]])
+                where: JSON.stringify([["$message","=", this.$route.params.id]])
             }
             }).then(({data}) => this.fetchData = data.results[0].data);
             },
@@ -71,8 +70,8 @@ export default {
             return this.count;
             }
         },
-        watch: {
-        campaignName: 'getData'
-        }
+        // watch: {
+        // campaignName: 'getData'
+        // }
 }
 </script>

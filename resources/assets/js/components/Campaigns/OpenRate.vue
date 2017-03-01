@@ -37,51 +37,101 @@ export default {
                     return 'text-info'; 
                 }
             },
-            campaignName: {
-                type: String
-            }
             
 
         },
         data() {
             return {
-                metricID: 'xM3sVS',
-                fetchData: [],
-                count: 0,
+                openMetricID: 'xM3sVS',
+                deliverMetricID: 'teDBUH',
+                bounceMetricID: 'sNU69p',
+                openData: [],
+                deliverData: [],
+                bounceData: [],
+
+                openCount: 0,
+                deliverCount: 0,
+                bounceCount: 0,
             }
         },
         mounted() {
-            this.getData()
+            axios.all([this.getOpenData(), this.getDeliveryData(),this.getBounceData()])
+            .then(axios.spread(function (opendata, deliverData, bounceData) {
+                // Do Something in Data
+            }));
         },
         methods: {
-            getData() {
-            axios.get('/api/v1/metric/' + this.metricID + '/export', {
+            
+            getOpenData() {
+            axios.get('/api/v1/metric/' + this.openMetricID + '/export', {
             params: {
                 measurement: 'unique',
-                where: JSON.stringify([["Campaign Name","=", this.campaignName]])
+                where: JSON.stringify([["$message", "=" , this.$route.params.id]])
             }
-            }).then(({data}) => this.fetchData = data.results[0].data);
+            }).then(({data}) => this.openData = data.results[0].data);
             },
+            getDeliveryData() {
+            axios.get('/api/v1/metric/' + this.deliverMetricID + '/export', {
+            params: {
+                measurement: 'unique',
+                where: JSON.stringify([["$message", "=" , this.$route.params.id]])
+            }
+            }).then(({data}) => this.deliverData = data.results[0].data);
+            },
+            getBounceData() {
+            axios.get('/api/v1/metric/' + this.bounceMetricID + '/export', {
+            params: {
+                measurement: 'unique',
+                where: JSON.stringify([["$message", "=" , this.$route.params.id]])
+            }
+            }).then(({data}) => this.bounceData = data.results[0].data);
+            }
         },
         computed: {
             ...mapState({
                 campaign: state => state.campaigns.current
             }),
-            total() {
-            for(let data of this.fetchData)
+            openTotal() {
+            for(let data of this.openData)
             {
-                this.count += parseInt(data.values[0]);
+                this.openCount += parseInt(data.values[0]);
             }
-            return this.count;
+            return this.openCount;
             },
+            deliverTotal() {
+            for(let data of this.deliverData)
+            {
+                this.deliverCount += parseInt(data.values[0]);
+            }
+            return this.deliverCount;
+            },
+            bounceTotal() {
+            for(let data of this.bounceData)
+            {
+                this.bounceCount += parseInt(data.values[0]);
+            }
+            return this.bounceCount; 
+            },
+            // Total open
+            // Successful Delivery
+            // Bounce 
             rate() {
-            return (this.total / this.campaign.num_recipients * 100).toFixed(2)
-
+            return (this.openTotal / (this.deliverTotal - this.bounceTotal) * 100).toFixed(2)
             }
         
         },
         watch: {
-        campaignName: 'getData'
+        // campaignName: 'getData',
+        // end_date: {
+        //        handler: function (end_date, oldValue) { 
+        //            let query = {
+        //                start_date: this.start_date.time,
+        //                end_date: end_date.time
+        //            }
+        //             this.$router.replace({ query })
+        //          },
+        //         deep: true
+        //    },
         }
 }
 </script>

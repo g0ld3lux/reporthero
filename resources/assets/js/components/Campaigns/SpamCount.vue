@@ -1,5 +1,5 @@
 <template>
-<div class="col-md-12 col-lg-6 col-xl-3">
+<div class="col-md-12 col-lg-6 col-xl-6">
     <a class="dashbox" href="#">
         <i :class="[icon, color]"></i>
         <span class="title">
@@ -21,19 +21,19 @@ export default {
             name: {
                 type: String,
                 default() { 
-                    return 'Clicked'; 
+                    return 'Mark as Spam'; 
                 }
             },
             icon: {
                 type: String,
                 default() { 
-                    return 'fa fa-hand-o-up'; 
+                    return 'fa fa-exclamation-triangle'; 
                 }
             },
             color: {
                 type: String,
                 default() { 
-                    return 'text-info'; 
+                    return 'text-danger'; 
                 }
             },
             campaignName: {
@@ -44,7 +44,7 @@ export default {
         },
         data() {
             return {
-                metricID: 'xGqcAu',
+                metricID: 'yq4vyv',
                 fetchData: [],
                 count: 0,
             }
@@ -57,8 +57,8 @@ export default {
             axios.get('/api/v1/metric/' + this.metricID + '/export', {
 
             params: {
-
-                measurement: 'unique',
+                
+                measurement: 'count',
                 where: JSON.stringify([["$message", "=" , this.$route.params.id]])
             }
             }).then(({data}) => this.fetchData = data.results[0].data);
@@ -73,8 +73,6 @@ export default {
             return this.count;
             }
         },
-        // watch: {
-        // campaignName: 'getData'
-        // }
+
 }
 </script>
