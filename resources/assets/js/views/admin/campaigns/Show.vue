@@ -44,16 +44,15 @@
 
        
         <div class="row">
-        <div class="input-group input-daterange col-xl-2 col-sm-4 col-md-4">
-
+        <div class="col-xl-1 col-lg-1 col-md-2 col-sm-3 datepicker-wrapper-left">
+            
            <date-picker placeholder="Start Date" :date="start_date" :limitFrom="limitFrom" :limitTo="limitTo"></date-picker>
            
+            
         </div>
-        <div class="input-group input-daterange col-xl-2 col-sm-4 col-md-4">
-
-           <date-picker placeholder="End Date" :date="end_date" :limitFrom="limitFrom" :limitTo="limitTo"></date-picker>   
-           
-        </div>
+<div class="col-xl-1 col-lg-1 col-md-2 col-sm-3 datepicker-wrapper-right">
+        <date-picker placeholder="End Date" :date="end_date" :limitFrom="limitFrom" :limitTo="limitTo"></date-picker>
+</div>
         <div class="col-xl-2 col-sm-4 col-md-4">
         <!-- form-control ls-select2 -->
         <select class="styled-select slate" v-model="selected">
@@ -263,6 +262,16 @@
     }
 </script>
 <style lang="scss">
+div.datepicker-wrapper-left {
+padding-top: 0; 
+padding-bottom: 0; 
+padding-right: 0;
+}
+div.datepicker-wrapper-right {
+padding-top: 0; 
+padding-bottom: 0; 
+padding-left: 0;
+}
 div.cal-wrapper {
 
 }
