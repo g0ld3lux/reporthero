@@ -18,17 +18,36 @@ class FlowsController extends Controller
         $this->filter = $filter;
     }
 
+    protected function getAllFlowArgs()
+    {
+        return [
+           'page' => $this->filter->byPage(), 
+           'count' => $this->filter->byCount()
+           ]; 
+    }
+
     /**
      * Display All The Data For Metrics
      *
      * @return  data property that contains an array of all the metrics
      */
-    public function getAllFlows()
+    public function getAllFlows($endpoint = false, $params = [])
     {
-        // Get the Data
-        $data = $this->api->makeCall($this->api->getMethod(), $this->api->getEndPoint(), $this->api->buildArgs());
+        if($endpoint === true){
+        
+        $url = 'campaigns';
+        // api/v1/ is appended in setEndPoint
+        $this->api->setEndPoint($url);
 
-        return $data['data'];
+        }
+        if(!empty($params))
+        {
+        $this->api->setCustomProps($params);
+        }
+
+
+        $filters = $this->api->setFilters($this->getAllFlowArgs());
+        return $data = $this->api->makeCall($this->api->getMethod(), $this->api->getEndPoint(), $this->api->buildArgs());
     }
 
     public function showFlow()

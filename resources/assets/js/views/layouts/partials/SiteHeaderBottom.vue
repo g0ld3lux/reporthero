@@ -2,7 +2,10 @@
     <div class="header-bottom">
         <ul class="header-nav">
             <li :class="{ active: isActive('/campaigns') }">
-                <router-link to="/campaigns/"><i class="fa fa-area-chart"></i> Campaigns</router-link>
+                <router-link to="/campaigns/"><i class="fa fa-flag"></i> Campaigns</router-link>
+            </li>
+            <li :class="{ active: isActive('/flows') }">
+                <router-link to="/flows/"><i class="fa fa-usb"></i> Flows</router-link>
             </li>
             <li :class="{ active: isActive('/calculator') }">
                 <router-link to="/calculator/"><i class="fa fa-calculator"></i> Calculator</router-link>

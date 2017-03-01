@@ -1,0 +1,30 @@
+Go to a Campaign
+
+get list Id of that Campaign
+then get list associated to it...
+
+missing piece is the EMAIL LIST...
+
+we import list
+and pass it as argument of emails
+as such email='george.washington@example.com,thomas.jefferson@example.com'
+GET https://a.klaviyo.com/api/v1/list/LusLxg/members?api_key=pk_b293845bc579c6a24a4ff29e0d813f5987
+
+if it is in a list we will have the person ID we will save the person Object as a Use in our backend.
+
+
+then we can then use it to get a person specific activity at this api end point and save it also in the backend
+GET https://a.klaviyo.com/api/v1/person/{{PERSON_ID}}/metric/{{METRIC_ID}}/timeline
+
+The other Work Around is go to the List Api 
+to show all list
+then go to specific list 
+then import email 
+then check if it is in the list 
+then get the person object 
+then save person timeline base on metrics or all metrics
+
+
+This can Get All the Products that have been Sold...
+As a Segment
+https://a.klaviyo.com/api/v1/metric/uXR3bA/export?api_key=pk_b293845bc579c6a24a4ff29e0d813f5987&by=Name

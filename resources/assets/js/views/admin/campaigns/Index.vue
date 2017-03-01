@@ -58,13 +58,6 @@ export default {
                 setCurrentCampaign: 'setCurrentCampaign'
             }),
             // Declare Other Methods Here
-             changePage() {
-             let query = {
-                count: this.count,
-                page: this.page
-            }    
-            this.getCampaigns(query)
-            },
             viewStats(campaign) {
                 this.$router.push({ name: 'campaigns.show', params: { id: campaign.id }})
                 this.setCurrentCampaign(campaign.id)
@@ -108,7 +101,28 @@ export default {
             this.getCampaigns(query)
 
          },
-        page: 'changePage'
+        page: {
+        handler: function (page, oldValue) { 
+            let query = {
+                count: this.count,
+                page
+            }
+            this.$router.replace({ query })
+
+            },
+        deep: false
+        },
+        count: {
+        handler: function (count, oldValue) { 
+        let query = {
+            count,
+            page: this.page
+        }
+        this.$router.replace({ query })
+
+        },
+        deep: false
+        },
     },
     }
 </script>

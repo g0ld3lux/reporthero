@@ -92,6 +92,31 @@ const routes = [
         ]
     },
     {
+        path: '/flows', component: LayoutHorizontal,
+        meta: { requiresAuth: true },
+        children: [
+            {
+                path: '/flows',
+                name: 'flows.index',
+                component: require('./views/admin/flows/Index.vue'),
+                meta: {
+                title: 'Klaviyo Flows',
+                breadcrumb: 'Flows'
+                },
+            },
+            {
+                path: '/flow/:id',
+                name: 'flows.show',
+                component: require('./views/admin/flows/Show.vue'),
+                meta: {
+                title: 'Klaviyo Flow',
+                breadcrumb: 'Flow'
+                },
+            },
+        
+        ]
+    },
+    {
         path: '/calculator', component: LayoutHorizontal,  // Change the desired Layout here
         meta: { requiresAuth: true },
         children: [
