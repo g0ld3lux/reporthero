@@ -45327,7 +45327,7 @@ exports.push([module.i, "", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(21)();
-exports.push([module.i, "\ndiv.item {\n  width: 10% !important;\n}\n.weeks .item {\n  font-size: 14px !important;\n}\n.date-num {\n  font-size: 14px !important;\n}\n.is-today {\n  background-color: #fff176 !important;\n  border-color: #fff176 !important;\n}\nh2.date {\n  background-color: #fff176 !important;\n}\np.time {\n  display: none;\n}\ndiv.cal-wrapper {\n  margin: 0 !important;\n  padding: 0 !important;\n}\ndiv.events-wrapper {\n  margin-left: 20px !important;\n  margin-bottom: 20px !important;\n  padding: 0 !important;\n  background-color: transparent !important;\n}\n.styled-select {\n  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;\n  height: 29px;\n  overflow: hidden;\n  width: 100%;\n  -webkit-appearance: none;\n}\n.styled-select select {\n  background: transparent;\n  border: none;\n  font-size: 14px;\n  height: 29px;\n  padding: 5px;\n  /* If you add too much padding here, the options won't show in IE */\n  width: 100%;\n}\n.styled-select.slate {\n  background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;\n  height: 34px;\n  width: 100%;\n}\n.styled-select.slate select {\n  border: 5px solid #ccc;\n  font-size: 16px;\n  height: 34px;\n  width: 100%;\n}\n.slate {\n  background-color: #ddd;\n}\n.slate select {\n  color: #000;\n}\n", ""]);
+exports.push([module.i, "\ndiv.datepicker-wrapper-left {\n  padding-top: 0;\n  padding-bottom: 0;\n  padding-right: 0;\n}\ndiv.datepicker-wrapper-right {\n  padding-top: 0;\n  padding-bottom: 0;\n  padding-left: 0;\n}\ndiv.item {\n  width: 10% !important;\n}\n.weeks .item {\n  font-size: 14px !important;\n}\n.date-num {\n  font-size: 14px !important;\n}\n.is-today {\n  background-color: #fff176 !important;\n  border-color: #fff176 !important;\n}\nh2.date {\n  background-color: #fff176 !important;\n}\np.time {\n  display: none;\n}\ndiv.cal-wrapper {\n  margin: 0 !important;\n  padding: 0 !important;\n}\ndiv.events-wrapper {\n  margin-left: 20px !important;\n  margin-bottom: 20px !important;\n  padding: 0 !important;\n  background-color: transparent !important;\n}\n.styled-select {\n  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;\n  height: 29px;\n  overflow: hidden;\n  width: 100%;\n  -webkit-appearance: none;\n}\n.styled-select select {\n  background: transparent;\n  border: none;\n  font-size: 14px;\n  height: 29px;\n  padding: 5px;\n  /* If you add too much padding here, the options won't show in IE */\n  width: 100%;\n}\n.styled-select.slate {\n  background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;\n  height: 34px;\n  width: 100%;\n}\n.styled-select.slate select {\n  border: 5px solid #ccc;\n  font-size: 16px;\n  height: 34px;\n  width: 100%;\n}\n.slate {\n  background-color: #ddd;\n}\n.slate select {\n  color: #000;\n}\n", ""]);
 
 /***/ }),
 /* 495 */
@@ -69837,7 +69837,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "input-group input-daterange col-xl-2 col-sm-4 col-md-4"
+    staticClass: "col-xl-1 col-lg-1 col-md-2 col-sm-3 datepicker-wrapper-left"
   }, [_c('date-picker', {
     attrs: {
       "placeholder": "Start Date",
@@ -69846,7 +69846,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "limitTo": _vm.limitTo
     }
   })], 1), _vm._v(" "), _c('div', {
-    staticClass: "input-group input-daterange col-xl-2 col-sm-4 col-md-4"
+    staticClass: "col-xl-1 col-lg-1 col-md-2 col-sm-3 datepicker-wrapper-right"
   }, [_c('date-picker', {
     attrs: {
       "placeholder": "End Date",
@@ -69878,11 +69878,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "value": "xGqcAu"
     }
-  }, [_vm._v("Clicked")]), _vm._v(" "), _c('option', {
+  }, [_vm._v("Clicked Email")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "xM3sVS"
     }
-  }, [_vm._v("Opened")]), _vm._v(" "), _c('option', {
+  }, [_vm._v("Opened Email")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "s7fMbn"
     }
@@ -69894,11 +69894,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "value": "yq4vyv"
     }
-  }, [_vm._v("Spam")]), _vm._v("sNU69p\n        "), _c('option', {
+  }, [_vm._v("Mark as Spam")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "sNU69p"
     }
-  }, [_vm._v("Bounced")])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Bounced Email")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "yYthYf"
+    }
+  }, [_vm._v("Dropped Email")])])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12 col-xl-12 mt-2"

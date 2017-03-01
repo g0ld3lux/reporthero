@@ -56,12 +56,13 @@
         <div class="col-xl-2 col-sm-4 col-md-4">
         <!-- form-control ls-select2 -->
         <select class="styled-select slate" v-model="selected">
-            <option value="xGqcAu">Clicked</option>
-            <option value="xM3sVS">Opened</option>
+            <option value="xGqcAu">Clicked Email</option>
+            <option value="xM3sVS">Opened Email</option>
             <option value="s7fMbn">Unsubscribed</option>
             <option value="teDBUH">Delivered</option>
-            <option value="yq4vyv">Spam</option>sNU69p
-            <option value="sNU69p">Bounced</option>
+            <option value="yq4vyv">Mark as Spam</option>
+            <option value="sNU69p">Bounced Email</option>
+            <option value="yYthYf">Dropped Email</option>
         </select>
 
         </div>
