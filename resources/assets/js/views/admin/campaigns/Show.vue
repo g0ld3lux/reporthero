@@ -33,7 +33,7 @@
                  </div>
 
                  <div class="row">
-                 <product-list></product-list>
+                 <!-- <product-list></product-list> -->
                  </div>
                 
                 
