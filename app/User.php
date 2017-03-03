@@ -19,6 +19,10 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    protected $casts = [
+        'klaviyo_api' => 'array',
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *

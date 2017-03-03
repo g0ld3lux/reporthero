@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Laraspace\User;
+use Reporthero\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -14,8 +14,8 @@ class UsersTableSeeder extends Seeder
     {
         User::create([
             'email' => 'admin@reporthero.io',
-            'name' => 'John Doe',
-            'role' => 'admin',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
             'password' => bcrypt('adminpass')
         ]);
     }
