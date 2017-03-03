@@ -1,0 +1,35 @@
+https://a.klaviyo.com/api/v1/person/EAXjz4/metrics/timeline?api_key=pk_b293845bc579c6a24a4ff29e0d813f5987
+We Fetch A Person By Email 
+
+and Find All the Metrics He Perform
+
+Note: We Will itterate in all Person OBject/Email and do this over and over again...
+
+Step: 1
+we filter by 
+event_name of Fulfilled Order
+
+the array is return with that object
+Step: 2
+we parse the landing site properties to get 
+?utm_campaign
+which has Campaign Name  and  Campaign ID
+
+
+if next properties is not null we proceed to another page, where we can repeat Back to Step 1
+
+From Here We Can Save It at the back end...
+
+The Campaign ID 
+The Campaign Name 
+The Product Name 
+THe Product Amount
+The Product Quantity
+The Date....
+
+To Get Top Seller ...
+We Will Find By Campaign ID 
+
+
+
+

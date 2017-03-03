@@ -1,5 +1,5 @@
 <template>
-<div class="col-md-6 col-lg-6 col-xl-6">  
+<div class="col-md-12 col-lg-6 col-xl-3">  
     <a class="dashbox" href="#">
         <i :class="[icon, color]"></i>
         <span class="title">

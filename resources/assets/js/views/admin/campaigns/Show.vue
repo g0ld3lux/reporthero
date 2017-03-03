@@ -17,6 +17,13 @@
                     <total-revenue></total-revenue>
                     
                 </div>
+                <div class="row">
+                    <total-recipients :total="campaign.num_recipients"></total-recipients>
+                    <bounced></bounced>
+                    <unsubscribed></unsubscribed>
+                    <spam-count></spam-count>
+                    
+                </div>
             </div>
 
             <div class="col-lg-4 col-xl-4">
@@ -24,22 +31,14 @@
                 <div class="row" id="campaign-calendar">
                     <vue-event-calendar :events="campaignEvents"></vue-event-calendar>
                  </div>
+
+                 <div class="row">
+                 <product-list></product-list>
+                 </div>
                 
                 
             </div>
-  
-            <!--
-            <div class="col-lg-4 col-xl-4">
-            <div class="row">
-            <unsubscribed></unsubscribed>
-            <bounced></bounced>
-            <spam-count></spam-count>
-            <total-recipients :total="campaign.num_recipients"></total-recipients>
-            </div>
-            <div class="row">
-            </div>
-            </div>
-            -->
+
         </div>
 
        
@@ -104,6 +103,7 @@
     import Bounced from '../../../components/Campaigns/Bounced.vue'
     import SpamCount from '../../../components/Campaigns/SpamCount.vue'
     import TotalRecipients from '../../../components/Campaigns/TotalRecipients.vue'
+    import ProductList from '../../../components/Campaigns/ProductList.vue'
     Vue.use(vueEventCalendar, {locale: 'en'})
     export default {
         props: {
@@ -158,7 +158,7 @@
             } // End Return
         },
         components : {
-        TotalRecipients,SpamCount,Bounced,ClickRate,datePicker, opened, delivered, clicked, unsubscribed,placeOrder, rateOrder,totalRevenue, OpenRate, MetricChart
+        ProductList,TotalRecipients,SpamCount,Bounced,ClickRate,datePicker, opened, delivered, clicked, unsubscribed,placeOrder, rateOrder,totalRevenue, OpenRate, MetricChart
         },
          methods: {
             ...mapMutations({
