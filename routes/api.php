@@ -74,3 +74,32 @@ Route::get('report/rateOfNewCustomer', 'ReportController@rateOfNewCustomer');
 Route::get('report/rateOfReturningCUstomer', 'ReportController@rateOfReturningCUstomer');
 Route::get('report/conversionRate', 'ReportController@conversionRate');
 
+// All Admin Related Actions
+Route::group([
+    'middleware' => ['jwt.auth','roles'],
+    'roles' => ['admin'],
+    'prefix' => 'admin'
+], function() {
+
+Route::get('users' , 'UsersController@index');
+Route::get('users/showDeletedUsers' , 'UsersController@showDeletedUsers');
+Route::post('users/addUser' , 'UsersController@addUser');
+Route::post('users/editUser/{id?}' , 'UsersController@editUser');
+Route::get('users/deleteUser/{id?}' , 'UsersController@deleteUser');
+Route::get('users/recoverUser/{id?}' , 'UsersController@recoverUser');
+Route::get('users/permaDeleteUser/{id?}' , 'UsersController@permaDeleteUser');
+});
+
+
+// Authenticated User Related Actions
+Route::group([
+    'middleware' => ['jwt.auth'],
+    'prefix' => '@me'
+], function() {
+
+Route::get('/' , 'UsersController@me');
+Route::post('addKlaviyoApiKeys' , 'UsersController@addKlaviyoApiKeys');
+Route::post('changePassword' , 'UsersController@changePassword');
+Route::get('viewApiKeys' , 'UsersController@viewApiKeys');
+Route::get('editProfile' , 'UsersController@editProfile');
+});

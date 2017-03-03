@@ -15,7 +15,7 @@
             <li>
                 <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="avatar"><img src="/assets/img/avatars/avatar.png" alt="Avatar"></a>
                 <div class="dropdown-menu dropdown-menu-right notification-dropdown">
-                    <router-link class="dropdown-item" to="/admin/settings"><i class="fa fa-cogs"></i> Settings</router-link>
+                    <router-link class="dropdown-item" to="/profile"><i class="fa fa-cogs"></i> Profile</router-link>
                     <a href="#" class="dropdown-item" @click.prevent="logout"><i class="fa fa-sign-out"></i> Logout</a>
                 </div>
             </li>

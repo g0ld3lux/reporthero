@@ -26,7 +26,7 @@
     </form>
 </template>
 
-<script type="text/babel">
+<script>
     import Auth from '../../services/auth'
 
     export default {

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from './vuex/store'
 import AuthService from './services/auth'
 
 /*
@@ -19,7 +19,7 @@ import LayoutLogin from './views/layouts/LayoutLogin.vue'
 //Auth
 import Login from './views/auth/Login.vue'
 import Register from './views/auth/Register.vue'
-import Settings from './views/admin/Settings.vue'
+import Profile from './views/admin/Profile.vue'
 
 import NotFoundPage from './views/errors/404.vue'
 
@@ -134,12 +134,13 @@ const routes = [
         ]
     },
     {
-        path: '/admin', component: LayoutHorizontal,
+        path: '/profile', component: LayoutHorizontal,
+        meta: { requiresAuth: true },
         children: [
             {
-                path: 'settings',
-                component: Settings,
-                name: 'settings'
+                path: '/',
+                component: Profile,
+                name: 'profile'
             }
             
         ]
@@ -187,7 +188,12 @@ router.beforeEach((to, from, next) => {
             if(!authenticated){
                 return next({ path : '/login'})
             }
-
+            // We check if the auth Object is Empty 
+            // If it is Empty we Dispatch An Event to Get Auth User
+            if(_.isEmpty(store.getters.getAuthUser)){
+                store.dispatch('setAuthUser')
+            }
+            
             return next()
         })
     }

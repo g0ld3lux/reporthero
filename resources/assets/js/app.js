@@ -23,20 +23,15 @@ const app = new Vue({
     router,
     store,
     methods : {
+        
         onOverlayClick(){
             Layout.toggleSidebar()
         },
-        getMe(){
-        // Save this current user in vuex 
-        // Save the users object in vuex
-        // Create a New Module of vuex for user
-        axios.get('/@me').then(({data}) => console.log(data))
-        axios.get('/users').then(({data}) => console.log(data))
-        },
+
     },
-    // We Shoul Save this in Vuex for the Auth Module
+
     mounted() {
-        this.getMe();
+
     }
 }).$mount('#app')
 

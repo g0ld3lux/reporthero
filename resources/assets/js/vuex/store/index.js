@@ -5,6 +5,7 @@ import * as getters from './getters'
 import campaigns from './modules/campaigns'
 import metrics from './modules/metrics'
 import flows from './modules/flows'
+import users from './modules/users'
 import createLogger from '../debug/logger'
 
 
@@ -18,7 +19,8 @@ export default new Vuex.Store({
   modules: {
    campaigns,
    metrics,
-   flows
+   flows,
+   users
 
    // add modules here
   },
