@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Reporthero\User;
 
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -12,11 +13,18 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        \Bouncer::seeder(function () {
+        \Bouncer::allow('admin')->to(['ban-user', 'add-user', 'delete-user', 'view-user', 'edit-user']);
+        \Bouncer::allow('user')->to('update-profile');
+        });
+
+        $user = User::create([
             'email' => 'admin@reporthero.io',
             'first_name' => 'John',
             'last_name' => 'Doe',
             'password' => bcrypt('adminpass')
         ]);
+        \Bouncer::assign('admin')->to($user);
+
     }
 }

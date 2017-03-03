@@ -30836,7 +30836,24 @@ var app = new Vue({
     methods: {
         onOverlayClick: function onOverlayClick() {
             _layout2.default.toggleSidebar();
+        },
+        getMe: function getMe() {
+            // Save this current user in vuex 
+            // Save the users object in vuex
+            // Create a New Module of vuex for user
+            axios.get('/@me').then(function (_ref) {
+                var data = _ref.data;
+                return console.log(data);
+            });
+            axios.get('/users').then(function (_ref2) {
+                var data = _ref2.data;
+                return console.log(data);
+            });
         }
+    },
+    // We Shoul Save this in Vuex for the Auth Module
+    mounted: function mounted() {
+        this.getMe();
     }
 }).$mount('#app'); /**
                     * First we will load all of this project's JavaScript dependencies which

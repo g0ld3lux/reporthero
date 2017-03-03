@@ -15,10 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Bouncer::cache();
-        Bouncer::seeder(function () {
-        Bouncer::allow('admin')->to(['ban-users', 'add-users', 'delete-users', 'view-users', 'edit-users']);
-        Bouncer::allow('users')->to('update-profile');
-        });
+        
     }
 
     /**

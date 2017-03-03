@@ -19,6 +19,8 @@ class AddKlaviyoToUsers extends Migration
             $table->dropColumn('role');
             $table->text('klaviyo_api')->nullable();
             $table->string('store_type')->nullable();
+            $table->boolean('public')->default(false);
+            $table->softDeletes();
         });
     }
 
@@ -30,7 +32,7 @@ class AddKlaviyoToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['store_type', 'klaviyo_api', 'last_name']);
+            $table->dropColumn(['store_type', 'klaviyo_api', 'last_name', 'deleted_at']);
             $table->string('role')->default('user');
             $table->renameColumn('first_name', 'name');
         });
