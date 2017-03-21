@@ -1,11 +1,12 @@
 <template>
     <div class="main-content">
         <div class="page-header">
-            <h3 class="page-title">View User Profile</h3>
+            <h3 class="page-title">Edit User Profile</h3>
             <ol class="breadcrumb">
                 <router-link class="breadcrumb-item" :to="{name: 'home'}" tag="li">Home</router-link>
                 <router-link class="breadcrumb-item" :to="{ name: 'users.index', params: { id: user.id }}" tag="li">Users</router-link>
-                <router-link class="breadcrumb-item" :to="{ name: 'users.show', params: { id: user.id }}" tag="li">Show User</router-link>
+                <router-link class="breadcrumb-item" :to="{ name: 'users.edit', params: { id: user.id }}" tag="li">Edit User</router-link>
+                
             </ol>
         </div>
         <div class="row">
@@ -24,7 +25,7 @@
                             <div class="col-md-8 col-lg-10">
                                 <div class="input-icon">
                                     <i class="fa fa-pencil"></i>
-                                    <input type="text" class="form-control" name="first_name" v-model="user.first_name" readonly>
+                                    <input type="text" class="form-control" name="first_name" :value="first_name" @blur="updateFirstName">
                                 </div>
                             </div>
                         </div>
@@ -33,7 +34,7 @@
                             <div class="col-md-8 col-lg-10">
                                 <div class="input-icon">
                                     <i class="fa fa-pencil"></i>
-                                    <input type="text" class="form-control" name="last_name" v-model="user.last_name" readonly>
+                                    <input type="text" class="form-control" name="last_name" :value="last_name" @blur="updateLastName">
                                 </div>
                             </div>
                         </div>
@@ -43,16 +44,25 @@
                             <div class="col-md-8 col-lg-10">
                                 <div class="input-icon">
                                     <i class="fa fa-envelope"></i>
-                                    <input type="text" class="form-control" name="email" v-model="user.email" readonly>
+                                    <input type="text" class="form-control" name="email" :value="email" @blur="updateEmail">
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-lg-2 form-control-label">Password</label>
+                                <div class="col-md-8 col-lg-10">
+                                    <div class="input-icon">
+                                        <i class="fa fa-lock"></i>
+                                        <input type="password" class="form-control" name="password" :value="password" @blur="updatePassword">
+                                    </div>
+                                </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-lg-2 form-control-label">Store Type</label>
                                 <div class="col-md-8 col-lg-10">
                                     <div class="input-icon">
-                                        <i class="fa fa-pencil"></i>
-                                        <input type="text" class="form-control" name="store" readonly>
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <input type="text" class="form-control" name="store" :value="store_type" @blur="updateStoreType">
                                     </div>
                                 </div>
                         </div>
@@ -73,8 +83,8 @@
                             <label class="col-md-4 col-lg-2 form-control-label">Klaviyo Token</label>
                                 <div class="col-md-8 col-lg-10">
                                     <div class="input-icon">
-                                        <i class="fa fa-pencil"></i>
-                                        <input type="text" class="form-control" name="public_key" v-model="klaviyo_keys.token" readonly>
+                                        <i class="fa fa-plug"></i>
+                                        <input type="password" class="form-control" name="public_key" :value="token" @blur="updateToken">
                                     </div>
                                 </div>
                         </div>
@@ -82,13 +92,12 @@
                             <label class="col-md-4 col-lg-2 form-control-label">Klaviyo Api Key</label>
                                 <div class="col-md-8 col-lg-10">
                                     <div class="input-icon">
-                                        <i class="fa fa-pencil"></i>
-                                        <input type="text" class="form-control" name="secret_key" v-model="klaviyo_keys.api_key" readonly>
+                                        <i class="fa fa-user-secret"></i>
+                                        <input type="password" class="form-control" name="secret_key" :value="api_key" @blur="updateApiKey">
                                     </div>
                                 </div>
                         </div>
     
-                        <button type="button" class="btn btn-info btn-full" @click="toggleView()"><span v-if="visible == false"><i class="fa fa-eye"></i>Show Api Keys</span><span v-else><i class="fa fa-eye-slash"></i>Hide Api Keys</span></button>
                     </div>
 
                 </form>
@@ -101,40 +110,49 @@
 <script>
 import { mapGetters, mapActions , mapState , mapMutations } from 'vuex'
 export default {
-data() {
-    return {
-        visible: false
-    }
-},
     computed: {
             // Your Initial Data
             ...mapState({
                 user: state => state.users.selected,
+                first_name: state => state.users.selected.first_name,
+                last_name: state => state.users.selected.last_name,
+                email: state => state.users.selected.email,
+                password: state => state.users.selected.password,
+                store_type: state => state.users.selected.store_type,
+                token: state => state.users.selected.token,
+                api_key: state => state.users.selected.api_key,
                 klaviyo_keys: state => state.users.klaviyo_keys
-            }),
+            })
 
         },
     methods: {
         ...mapActions({
                 viewKlaviyoKeys: 'viewKlaviyoKeys',
-                setSelectedUser: 'setSelectedUser'
+                setSelectedUser: 'setSelectedUser',
             }),
-            toggleView(){
-                if(!this.visible){
-                this.viewKlaviyoKeys(this.$route.params.id)
-                this.visible = true;
-            }
-            else{
-                let klaviyo_keys = {
-                    token: '**********',
-                    api_key: '***********'
-                }
-                this.$store.commit('setKlaviyoApiKeys', klaviyo_keys.token)
-                this.$store.commit('setKlaviyoToken', klaviyo_keys.api_key)
-                this.visible = false
-            }
-                
-            }
+            updateFirstName (e) {
+            this.$store.dispatch('updateFirstName', e.target.value)
+            },
+            updateLastName (e) {
+            this.$store.dispatch('updateLastName', e.target.value)
+            },
+            updateEmail (e) {
+            this.$store.dispatch('updateEmail', e.target.value)
+            },
+            updatePassword (e) {
+            this.$store.dispatch('updatePassword', e.target.value)
+            },
+            updateStoreType (e) {
+            this.$store.dispatch('updateStoreType', e.target.value)
+            },
+            updateToken (e) {
+            this.$store.dispatch('updateToken', e.target.value)
+            },
+            updateApiKey (e) {
+            this.$store.dispatch('updateApiKey', e.target.value)
+            },
+
+        
     },
     mounted(){
         this.setSelectedUser(this.$route.params.id)
@@ -143,8 +161,7 @@ data() {
 
         user: {
                handler: function (user, oldValue) { 
-                   // Do Something when a User Var Change 
-                   console.log(user)
+                
                  },
                 deep: true
            },

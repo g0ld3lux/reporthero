@@ -26,6 +26,16 @@ class UsersController extends Controller
     {
         return response()->json(['users'=>User::all()], 200);
     }
+
+    public function show($id)
+    {
+        try{
+            $user = User::withTrashed()->where('id' ,$id)->firstOrFail();
+        }catch  (\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+            return response()->json(['error' => 'user_not_found'], 404);
+        }
+        return response()->json(['user' => $user]);
+    }
     // Show All Deleted Users That Can Be Force Delete or Restored!
     public function showDeletedUsers()
     {
@@ -41,22 +51,110 @@ class UsersController extends Controller
     // Admin Can Create a New User
     public function addUser() 
     {
+        $data = request()->input('params');
+
         $user = new User();
-        $user->first_name = request()->input('first_name');
-        $user->last_name = request()->input('last_name');
-        $user->password = bcrypt($request->input('password'));
-        $user->email = request()->input('email');
+        $user->first_name = $data['first_name'];
+        $user->last_name = $data['last_name'];
+        $user->password = bcrypt($data['password']);
+        $user->email = $data['email'];
+        $apikeys = $user->klaviyo_api;
+        $apikeys['token'] = $data['klaviyo_keys']['token'];
+        $apikeys['api_key'] = $data['klaviyo_keys']['api_key'];
+        $user->klaviyo_api = $apikeys;
+        $user->store_type = $data['store_type'];
         $user->save();
         return response()->json(['message'=> 'A New User Has Been Created!', 'user'=> $user], 200);
     }
     // Admin Can Edit User
     public function editUser($id)
     {
-        $data = request()->all();
+        $data = request()->input('params');
         $user = User::find($id);
-        $user->fill($data);
+        $user->first_name = $data['first_name'];
+        $user->last_name = $data['last_name'];
+        $user->password = bcrypt($data['password']);
+        $user->email = $data['email'];
+        $apikeys = $user->klaviyo_api;
+        $apikeys['token'] = $data['klaviyo_keys']['token'];
+        $apikeys['api_key'] = $data['klaviyo_keys']['api_key'];
+        $user->klaviyo_api = $apikeys;
+        $user->store_type = $data['store_type'];
         $user->save();
-        return response()->json(['message'=> 'You Have Edit A User'], 200);
+        return response()->json(['message'=> 'You Have Edit A User', 'user' => $user], 200);
+    }
+
+    public function updateFirstName($id)
+    {
+        $data = request()->input('params');
+        $user = User::find($id);
+        $user->first_name = $data['first_name'];
+        $user->save();
+        return response()->json(['message'=> 'First Name Updated', 'user' => $user], 200);
+    }
+    public function updateLastName($id)
+    {
+        $data = request()->input('params');
+        $user = User::find($id);
+        $user->last_name = $data['last_name'];
+        $user->save();
+        return response()->json(['message'=> 'Last Name Updated', 'user' => $user], 200);
+    }
+    public function updateEmail($id)
+    {
+        $data = request()->input('params');
+        $user = User::find($id);
+        
+        try {
+        $user->email = $data['email'];
+        $user->save();
+        } catch ( \Illuminate\Database\QueryException $e) {
+        $user = User::find($id);
+        return response()->json(['message'=> 'Email Already Taken', 'user' => $user], 200);
+        }
+        return response()->json(['message'=> 'Email Updated', 'user' => $user], 200);
+    }
+    public function updatePassword($id)
+    {
+        $data = request()->input('params');
+        $user = User::find($id);
+        $user->password = $data['password'];
+        $user->save();
+        return response()->json(['message'=> 'Password Updated', 'user' => $user], 200);
+    }
+    public function updateStoreType($id)
+    {
+        $data = request()->input('params');
+        $user = User::find($id);
+        $user->store_type = $data['store_type'];
+        $user->save();
+        return response()->json(['message'=> 'Store Type Updated', 'user' => $user], 200);
+    }
+    public function updateToken($id)
+    {
+        $data = request()->input('params');
+        $user = User::find($id);
+        if(!$data['token']){
+        return response()->json(['message'=> 'Token Updated', 'user' => $user], 200);  
+        }
+        $apikeys = $user->klaviyo_api;
+        $apikeys['token'] = $data['token'];
+        $user->klaviyo_api = $apikeys;
+        $user->save();
+        return response()->json(['message'=> 'Token Updated', 'user' => $user], 200);
+    }
+    public function updateApiKey($id)
+    {
+        $data = request()->input('params');
+        $user = User::find($id);
+        if(!$data['api_key']){
+        return response()->json(['message'=> 'Token Updated', 'user' => $user], 200);  
+        }
+        $apikeys = $user->klaviyo_api;
+        $apikeys['api_key'] = $data['api_key'];
+        $user->klaviyo_api = $apikeys;
+        $user->save();
+        return response()->json(['message'=> 'Api Key Updated', 'user' => $user], 200);
     }
     // User Can Add Their Api Keys
     public function addKlaviyoApiKeys()
@@ -97,16 +195,24 @@ class UsersController extends Controller
 
     public function viewApiKeys()
     {
+        // for Authenticated user
         $user = $this->user();
-        $id = $user['id'];
-        $user = User::find($id);
+        // If your Admin
+        if($this->isAdmin()){
+            $userId = request()->input('id');
+            try{
+                $user = User::findOrFail($userId);
+            }catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+                return response()->json(['error' => 'user_not_found'], 404);
+            }
+        }
         $user->public = true;
         $user->save();
         $user->fresh();
         $apikeys = $user->klaviyo_api;
         $user->public = false;
         $user->save();
-        return response()->json(['message'=> 'You Can Now Vie Your Api Keys', 'api_keys'=> $apikeys], 200);
+        return response()->json(['message'=> 'Api Key Retrieved!', 'klaviyo_api'=> $apikeys], 200);
 
     }
 

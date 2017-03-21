@@ -21,6 +21,12 @@ import Login from './views/auth/Login.vue'
 import Register from './views/auth/Register.vue'
 import Profile from './views/admin/Profile.vue'
 
+// User Management
+import AllUsers from './views/admin/users/Index.vue'
+import ShowUser from './views/admin/users/Show.vue'
+import AddUser from './views/admin/users/AddUser.vue'
+import updateUser from './views/admin/users/UpdateUser.vue'
+import DeletedUsers from './views/admin/users/DeletedUsers.vue'
 import NotFoundPage from './views/errors/404.vue'
 
 /*
@@ -145,6 +151,59 @@ const routes = [
             
         ]
     },
+    {
+        path: '/users', component: LayoutHorizontal,
+        meta: { isAdmin: true},
+        children: [
+            {
+                path: '/users',
+                name: 'users.index',
+                component: AllUsers,
+                meta: {
+                title: 'All Users',
+                breadcrumb: 'Users'
+                },
+            },
+            {
+                path: '/users/create',
+                name: 'users.create',
+                component: AddUser,
+                meta: {
+                title: 'Create New User',
+                breadcrumb: 'Add User'
+                },
+            },
+            {
+                path: '/user/edit/:id',
+                name: 'users.edit',
+                component: updateUser,
+                meta: {
+                title: 'Edit User',
+                breadcrumb: 'Edit User'
+                },
+            },
+            {
+                path: '/users/deleted',
+                name: 'users.deleted',
+                component: DeletedUsers,
+                meta: {
+                title: 'Deleted Users',
+                breadcrumb: 'Deleted Users'
+                },
+            },
+            {
+                path: '/user/:id',
+                name: 'users.show',
+                component: ShowUser,
+                meta: {
+                title: 'Show User',
+                breadcrumb: 'User'
+                },
+            },
+        
+        ]
+    },
+    
 
     /*
      |--------------------------------------------------------------------------
@@ -180,7 +239,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-
+    
     // If the next route is requires user to be Logged IN
     if (to.matched.some(m => m.meta.requiresAuth)){
 
@@ -194,6 +253,14 @@ router.beforeEach((to, from, next) => {
                 store.dispatch('setAuthUser')
             }
             
+            return next()
+        })
+    }
+    if (to.matched.some(m => m.meta.isAdmin)){
+    return AuthService.checkIsAdmin().then(admin => {
+            if(!admin){
+                return next({ path : '/campaigns'})
+            }
             return next()
         })
     }

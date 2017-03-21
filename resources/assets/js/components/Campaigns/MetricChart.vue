@@ -4,8 +4,9 @@
 <b>Data Value: </b>
 </div>
 <div id="metricChart" class="ct-chart-line">
-<div
 </div>
+</div>
+
 </template>
 
 <script>

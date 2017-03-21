@@ -1,5 +1,5 @@
 <template>
-<date-picker :date.sync="date" :option="option" :limit="limit">
+<date-picker :date.sync="date" :option="option" :limit="limit"></date-picker>
 </template>
 
 <script>

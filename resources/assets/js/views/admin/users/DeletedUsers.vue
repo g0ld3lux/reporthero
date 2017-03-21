@@ -5,7 +5,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                <li class="breadcrumb-item active">Users</li>
+                <li class="breadcrumb-item active">Deleted Users</li>
             </ol>
 
         </div>
@@ -49,10 +49,10 @@
                                 <div class="btn-group mr-2" role="group" aria-label="First group">
                                         <button type="button" class="btn btn-icon btn-outline-info" @click="view(user)"><i
                                                 class="fa fa-eye"></i></button>
-                                        <button type="button" class="btn btn-icon btn-outline-info" @click="editUser(user)"><i
-                                        class="fa fa-edit"></i></button>
-                                        <button type="button" class="btn btn-icon btn-outline-info" @click="userDelete(user.id)"><i
-                                                class="fa fa-trash"></i></button>
+                                        <button type="button" class="btn btn-icon btn-outline-info" @click="recover(user)"><i
+                                                class="fa fa-refresh"></i></button>
+                                        <button type="button" class="btn btn-icon btn-outline-info" @click="permaDelete(user)"><i
+                                                class="fa fa-user-times"></i></button>
                                         
                                 </div>
                                 </td>
@@ -74,9 +74,9 @@ import { mapGetters, mapActions , mapState , mapMutations } from 'vuex'
 
         methods: {
             ...mapActions({
-                setAllUsers: 'setAllUsers',
-                setAuthUser: 'setAuthUser',
-                deleteUser: 'deleteUser'
+                showDeletedUsers: 'showDeletedUsers',
+                recoverUser: 'recoverUser',
+                permaDeleteUser: 'permaDeleteUser',
 
             }),
             name(user){
@@ -91,27 +91,28 @@ import { mapGetters, mapActions , mapState , mapMutations } from 'vuex'
             },
             view(user){
                 this.$router.push({ name: 'users.show', params: { id: user.id }})
-
             },
-            editUser(user){
-                this.$router.push({ name: 'users.edit', params: { id: user.id }})
-
+            recover(user){
+                // this.$router.push({ name: 'users.show', params: { id: user.id }})
+                this.recoverUser(user.id)
             },
-            userDelete(id){
-             this.deleteUser(id)
+            permaDelete(user){
+             this.permaDeleteUser(user.id)
             },
 
         },
         computed: {
             ...mapState({
-                users: state => state.users.all,
-                admin: state => state.users.admin,
-            })
+                users: state => state.users.deleted_list,
+            }),
+            ...mapGetters({
+                getAllDeletedUsersCount: 'getAllDeletedUsersCount',
+            }),
             
 
         },
         mounted: function () {
-            this.setAllUsers()
+            this.showDeletedUsers()
             // Temporary Fix for DataTables Not Being Rendered
             setTimeout(function() { $('#responsive-datatable').DataTable({
                 responsive: true
@@ -127,15 +128,8 @@ import { mapGetters, mapActions , mapState , mapMutations } from 'vuex'
 
             },
         deep: true
-        },
-        admin: {
-        handler: function (admin, oldValue) { 
+        }
 
-            console.log(admin)
-
-            },
-        deep: false
-        },
     }
     }
 </script>

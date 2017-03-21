@@ -34,5 +34,12 @@ export default {
             console.log('Error', error.message);
         });
     },
+    checkIsAdmin(){
+        return axios.get('/api/auth/checkIsAdmin').then(response =>  {
+            return response.data.admin;
+        }).catch(error => {
+            console.log('Error', error.message);
+        });
+    },
 
 }

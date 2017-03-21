@@ -39,6 +39,21 @@ class AuthController extends Controller
         return response(['authenticated' => true]);
     }
 
+    public function checkIsAdmin()
+    {
+
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+        } catch (JWTException $e) {
+            return response(['authenticated' => false]);
+        }
+        if($user->isA('admin')){
+            return response(['admin' => true]);
+        }
+
+        return response(['admin' => false]);
+    }
+
     public function logout()
     {
 

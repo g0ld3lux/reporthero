@@ -13,7 +13,9 @@ export default {
                 first_name: query.first_name,
                 last_name: query.last_name,
                 password: query.password,
-                email: query.email
+                email: query.email,
+                store_type: query.store_type,
+                klaviyo_keys: query.klaviyo_keys
             }
         })
   },
@@ -34,6 +36,10 @@ export default {
     return axios.get('/api/@me')
   },
 
+  showUser(id) {
+    return axios.get('/api/admin/users/'+id)
+  },
+
   addKlaviyoKeys(query) {
     return axios.post('/api/@me/addKlaviyoApiKeys', {
             params: {
@@ -49,8 +55,12 @@ export default {
             }
         })
   },
-  viewApiKeys(query) {
-      return axios.get('/api/@me/viewApiKeys')
+  viewApiKeys(id) {
+      return axios.get('/api/@me/viewApiKeys', {
+          params: {
+            id
+          }
+      })
   },
   editProfile() {
         return axios.post('/api/@me/editProfile', {
@@ -60,16 +70,66 @@ export default {
             }
         })
   },
-  editUser(id) {
-    return axios.post('/api/admin/users/editUser' + id, {
+  updateUser(id,query) {
+    return axios.post('/api/admin/users/editUser/' + id, {
             params: {
                 first_name: query.first_name,
                 last_name: query.last_name,
                 password: query.password,
                 email: query.email,
-                klaviyo_api: quer.klaviyo_api
+                store_type: query.store_type,
+                klaviyo_keys: query.klaviyo_keys
             }
         })
-  }
+  },
+  updateFirstName(id,first_name) {
+    return axios.post('/api/admin/users/updateFirstName/' + id, {
+            params: {
+                first_name
+            }
+        })
+  },
+  updateLastName(id,last_name) {
+    return axios.post('/api/admin/users/updateLastName/' + id, {
+            params: {
+                last_name
+            }
+        })
+  },
+  updateEmail(id,email) {
+    return axios.post('/api/admin/users/updateEmail/' + id, {
+            params: {
+                email
+            }
+        })
+  },
+  updatePassword(id,password) {
+    return axios.post('/api/admin/users/updatePassword/' + id, {
+            params: {
+                password
+            }
+        })
+  },
+  updateStoreType(id,store_type) {
+    return axios.post('/api/admin/users/updateStoreType/' + id, {
+            params: {
+                store_type
+            }
+        })
+  },
+  updateToken(id,token) {
+    return axios.post('/api/admin/users/updateToken/' + id, {
+            params: {
+                token
+            }
+        })
+  },
+  updateApiKey(id,api_key) {
+    return axios.post('/api/admin/users/updateApiKey/' + id, {
+            params: {
+                api_key
+            }
+        })
+  },
 
 }

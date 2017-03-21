@@ -68,6 +68,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('login','AuthController@authenticate');
     Route::get('logout','AuthController@logout');
     Route::get('check','AuthController@check');
+    Route::get('checkIsAdmin','AuthController@checkIsAdmin');
 });
 
 Route::get('report/rateOfNewCustomer', 'ReportController@rateOfNewCustomer');
@@ -83,11 +84,19 @@ Route::group([
 
 Route::get('users' , 'UsersController@index');
 Route::get('users/showDeletedUsers' , 'UsersController@showDeletedUsers');
+Route::post('users/updateFirstName/{id}' , 'UsersController@updateFirstName');
+Route::post('users/updateLastName/{id}' , 'UsersController@updateLastName');
+Route::post('users/updateEmail/{id}' , 'UsersController@updateEmail');
+Route::post('users/updatePassword/{id}' , 'UsersController@updatePassword');
+Route::post('users/updateStoreType/{id}' , 'UsersController@updateStoreType');
+Route::post('users/updateToken/{id}' , 'UsersController@updateToken');
+Route::post('users/updateApiKey/{id}' , 'UsersController@updateApiKey');
 Route::post('users/addUser' , 'UsersController@addUser');
 Route::post('users/editUser/{id?}' , 'UsersController@editUser');
 Route::get('users/deleteUser/{id?}' , 'UsersController@deleteUser');
 Route::get('users/recoverUser/{id?}' , 'UsersController@recoverUser');
 Route::get('users/permaDeleteUser/{id?}' , 'UsersController@permaDeleteUser');
+Route::get('users/{id}' , 'UsersController@show');
 });
 
 

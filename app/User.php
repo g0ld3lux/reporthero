@@ -17,11 +17,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'email', 'password', 'last_name', 'klaviyo_api'
+        'first_name', 'email', 'password', 'last_name', 'klaviyo_api', 'store_type', 'settings'
     ];
 
     protected $casts = [
+        'verified' => 'boolean',
+        'activated' => 'boolean',
+        'banned' => 'boolean',
+        'on_trial' => 'boolean',
+        'subscribed' => 'boolean',
+        'settings' => 'array',
         'klaviyo_api' => 'array',
+        // this will show hidden attributes when set true
         'public' => 'boolean'
     ];
 
@@ -49,7 +56,7 @@ class User extends Authenticatable
 
     public function setAttributeVisibility(){
         if($this->public){
-            $this->setVisible(['id', 'klaviyo_api' , 'first_name', 'last_name']);
+            $this->setVisible(['id', 'klaviyo_api', 'password']);
         }
     }
 
