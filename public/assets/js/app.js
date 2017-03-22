@@ -37872,6 +37872,9 @@ exports.default = {
         },
         updateApiKey: function updateApiKey(e) {
             this.$store.dispatch('updateApiKey', e.target.value);
+        },
+        isActive: function isActive(url) {
+            return this.$route.path.indexOf(url) > -1;
         }
     }),
     mounted: function mounted() {
@@ -39183,6 +39186,10 @@ var routes = [
     children: [{
         path: '/',
         component: _Home2.default,
+        name: 'front'
+    }, {
+        path: '/home',
+        component: _Home2.default,
         name: 'home'
     }]
 },
@@ -39264,7 +39271,7 @@ var routes = [
             breadcrumb: 'Users'
         }
     }, {
-        path: '/users/create',
+        path: '/user/create',
         name: 'users.create',
         component: _AddUser2.default,
         meta: {
@@ -49576,7 +49583,7 @@ exports.push([module.i, "\n.ct-end{\r\ndisplay: none;\n}\r\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(10)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 519 */
@@ -75013,7 +75020,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       "tag": "li"
     }
-  }, [_vm._v("Edit User")])], 1)]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Show User")])], 1)]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "card col-xl-6"

@@ -3,9 +3,9 @@
         <div class="page-header">
             <h3 class="page-title">Edit User Profile</h3>
             <ol class="breadcrumb">
-                <router-link class="breadcrumb-item" :to="{name: 'home'}" tag="li">Home</router-link>
+               <router-link class="breadcrumb-item" :to="{name: 'home'}" tag="li">Home</router-link>
                 <router-link class="breadcrumb-item" :to="{ name: 'users.index'}" tag="li">Users</router-link>
-                <router-link class="breadcrumb-item" :to="{ name: 'users.edit', params: { id: $route.params.id }}" tag="li">Edit User</router-link>
+                <router-link class="breadcrumb-item" :to="{ name: 'users.edit', params: { id: $route.params.id }}" tag="li">Show User</router-link>
             </ol>
         </div>
         <div class="row">
@@ -150,6 +150,9 @@ export default {
             updateApiKey (e) {
             this.$store.dispatch('updateApiKey', e.target.value)
             },
+            isActive(url){
+                return (this.$route.path.indexOf(url) > -1)
+            }
 
         
     },

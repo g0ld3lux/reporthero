@@ -61,6 +61,11 @@ const routes = [
             {
                 path: '/',
                 component: Home,
+                name: 'front'
+            },
+            {
+                path: '/home',
+                component: Home,
                 name: 'home'
             },
         ]
@@ -165,7 +170,7 @@ const routes = [
                 },
             },
             {
-                path: '/users/create',
+                path: '/user/create',
                 name: 'users.create',
                 component: AddUser,
                 meta: {
