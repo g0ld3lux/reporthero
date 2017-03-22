@@ -5,7 +5,7 @@
             <ol class="breadcrumb">
                <router-link class="breadcrumb-item" :to="{name: 'home'}" tag="li">Home</router-link>
                 <router-link class="breadcrumb-item" :to="{ name: 'users.index'}" tag="li">Users</router-link>
-                <router-link class="breadcrumb-item" :to="{ name: 'users.edit', params: { id: $route.params.id }}" tag="li">Show User</router-link>
+                <router-link class="breadcrumb-item" :to="{ name: 'users.edit', params: { id: $route.params.id }}" tag="li">Edit User</router-link>
             </ol>
         </div>
         <div class="row">

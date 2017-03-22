@@ -75020,7 +75020,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       "tag": "li"
     }
-  }, [_vm._v("Show User")])], 1)]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Edit User")])], 1)]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "card col-xl-6"
