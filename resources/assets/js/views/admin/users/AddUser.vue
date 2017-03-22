@@ -3,8 +3,9 @@
         <div class="page-header">
             <h3 class="page-title">Create A New User</h3>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="#">Add User</a></li>
+                <router-link class="breadcrumb-item" :to="{name: 'home'}" tag="li">Home</router-link>
+                <router-link class="breadcrumb-item" :to="{ name: 'users.index'}" tag="li">Users</router-link>
+                <router-link class="breadcrumb-item" :to="{ name: 'users.create'}" tag="li">Create User</router-link>
             </ol>
         </div>
         <div class="row">
@@ -142,6 +143,20 @@ export default {
                     klaviyo_keys: this.user.klaviyo_keys
                 }
                 this.addUser(query)
+                this.resetUser()
+            },
+            resetUser(){
+                this.user = {
+                first_name: null,
+                last_name: null,
+                email: null,
+                password: null,
+                store_type: null,
+                klaviyo_keys: {
+                    token: null,
+                    api_key:null
+                }
+            }
             }
     },
     mounted(){

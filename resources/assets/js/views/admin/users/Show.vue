@@ -4,7 +4,7 @@
             <h3 class="page-title">View User Profile</h3>
             <ol class="breadcrumb">
                 <router-link class="breadcrumb-item" :to="{name: 'home'}" tag="li">Home</router-link>
-                <router-link class="breadcrumb-item" :to="{ name: 'users.index', params: { id: user.id }}" tag="li">Users</router-link>
+                <router-link class="breadcrumb-item" :to="{ name: 'users.index'}" tag="li">Users</router-link>
                 <router-link class="breadcrumb-item" :to="{ name: 'users.show', params: { id: user.id }}" tag="li">Show User</router-link>
             </ol>
         </div>

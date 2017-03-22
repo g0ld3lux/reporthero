@@ -37166,6 +37166,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 var _vuex = __webpack_require__(12);
 
@@ -37200,6 +37201,20 @@ exports.default = {
                 klaviyo_keys: this.user.klaviyo_keys
             };
             this.addUser(query);
+            this.resetUser();
+        },
+        resetUser: function resetUser() {
+            this.user = {
+                first_name: null,
+                last_name: null,
+                email: null,
+                password: null,
+                store_type: null,
+                klaviyo_keys: {
+                    token: null,
+                    api_key: null
+                }
+            };
         }
     }),
     mounted: function mounted() {},
@@ -37374,6 +37389,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; //
+//
+//
+//
+//
 //
 //
 //
@@ -37689,7 +37708,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; //
-//
 //
 //
 //
@@ -40799,7 +40817,7 @@ var mutations = _defineProperty({
     state.all = payload;
   },
   addUser: function addUser(state, payload) {
-    state.users.push(payload);
+    state.all.push(payload);
   },
   updateUser: function updateUser(state, payload) {
     // const user = state.all.find(user => {
@@ -49537,7 +49555,7 @@ exports.push([module.i, "", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(10)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 516 */
@@ -49558,7 +49576,7 @@ exports.push([module.i, "\n.ct-end{\r\ndisplay: none;\n}\r\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(10)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 519 */
@@ -73787,13 +73805,47 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "main-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('div', {
+    staticClass: "page-header"
+  }, [_c('h3', {
+    staticClass: "page-title"
+  }, [_vm._v("User Management")]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('router-link', {
+    staticClass: "breadcrumb-item",
+    attrs: {
+      "to": {
+        name: 'home'
+      },
+      "tag": "li"
+    }
+  }, [_vm._v("Home")]), _vm._v(" "), _c('router-link', {
+    staticClass: "breadcrumb-item",
+    attrs: {
+      "to": {
+        name: 'users.index'
+      },
+      "tag": "li"
+    }
+  }, [_vm._v("Users")]), _vm._v(" "), _c('div', {
+    staticClass: "pull-right"
+  }, [_c('router-link', {
+    staticClass: "btn btn-icon btn-outline-info",
+    attrs: {
+      "to": {
+        name: 'users.create'
+      },
+      "tag": "button"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-user-plus"
+  }), _vm._v("Create New User")])], 1)], 1)]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-sm-12"
   }, [_c('div', {
     staticClass: "card"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "card-block"
   }, [_c('table', {
     staticClass: "table ",
@@ -73802,7 +73854,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "cellspacing": "0",
       "width": "100%"
     }
-  }, [_vm._m(2), _vm._v(" "), _c('tfoot', [_c('tr', [_c('th', [_vm._v("Id")]), _vm._v(" "), _c('th', [_vm._v("Name")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Date Created")]), _vm._v(" "), _c('th', [_vm._v("Date Updated")]), _vm._v(" "), _c('th', [_vm._v("Actions")])])]), _vm._v(" "), _c('tbody', _vm._l((_vm.users), function(user) {
+  }, [_vm._m(1), _vm._v(" "), _c('tfoot', [_c('tr', [_c('th', [_vm._v("Id")]), _vm._v(" "), _c('th', [_vm._v("Name")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Date Created")]), _vm._v(" "), _c('th', [_vm._v("Date Updated")]), _vm._v(" "), _c('th', [_vm._v("Actions")])])]), _vm._v(" "), _c('tbody', _vm._l((_vm.users), function(user) {
     return _c('tr', [_c('td', [_vm._v(_vm._s(user.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.name(user)))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(user.email))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.createAt(user)))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.updatedAt(user)))]), _vm._v(" "), _c('td', [_c('div', {
       staticClass: "btn-group mr-2",
       attrs: {
@@ -73849,30 +73901,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }))], 1)])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "page-header"
-  }, [_c('h3', {
-    staticClass: "page-title"
-  }, [_vm._v("User Management")]), _vm._v(" "), _c('ol', {
-    staticClass: "breadcrumb"
-  }, [_c('li', {
-    staticClass: "breadcrumb-item"
-  }, [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Dashboard")])]), _vm._v(" "), _c('li', {
-    staticClass: "breadcrumb-item"
-  }, [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Admin")])]), _vm._v(" "), _c('li', {
-    staticClass: "breadcrumb-item active"
-  }, [_vm._v("Users")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
     staticClass: "card-header"
-  }, [_c('h6', [_vm._v("Responsive")])])
+  }, [_c('h6', [_vm._v("Users Lists")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th', [_vm._v("Id")]), _vm._v(" "), _c('th', [_vm._v("Name")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Date Created")]), _vm._v(" "), _c('th', [_vm._v("Date Updated")]), _vm._v(" "), _c('th', [_vm._v("Actions")])])])
 }]}
@@ -74138,11 +74168,41 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "main-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('div', {
+    staticClass: "page-header"
+  }, [_c('h3', {
+    staticClass: "page-title"
+  }, [_vm._v("Create A New User")]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('router-link', {
+    staticClass: "breadcrumb-item",
+    attrs: {
+      "to": {
+        name: 'home'
+      },
+      "tag": "li"
+    }
+  }, [_vm._v("Home")]), _vm._v(" "), _c('router-link', {
+    staticClass: "breadcrumb-item",
+    attrs: {
+      "to": {
+        name: 'users.index'
+      },
+      "tag": "li"
+    }
+  }, [_vm._v("Users")]), _vm._v(" "), _c('router-link', {
+    staticClass: "breadcrumb-item",
+    attrs: {
+      "to": {
+        name: 'users.create'
+      },
+      "tag": "li"
+    }
+  }, [_vm._v("Create User")])], 1)]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "card col-xl-6"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "card-block"
   }, [_c('form', [_c('div', {
     staticClass: "form-body"
@@ -74303,7 +74363,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })])])])])])])]), _vm._v(" "), _c('div', {
     staticClass: "card col-xl-6"
-  }, [_vm._m(2), _vm._v(" "), _c('div', {
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "card-block"
   }, [_c('form', [_c('div', {
     staticClass: "form-body"
@@ -74383,26 +74443,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-eye"
   }), _vm._v("Create")])])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "page-header"
-  }, [_c('h3', {
-    staticClass: "page-title"
-  }, [_vm._v("Create A New User")]), _vm._v(" "), _c('ol', {
-    staticClass: "breadcrumb"
-  }, [_c('li', {
-    staticClass: "breadcrumb-item"
-  }, [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Dashboard")])]), _vm._v(" "), _c('li', {
-    staticClass: "breadcrumb-item active"
-  }, [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Add User")])])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "card-header"
   }, [_c('h6', [_vm._v("Create A New User")])])
@@ -74958,10 +74998,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "breadcrumb-item",
     attrs: {
       "to": {
-        name: 'users.index',
-        params: {
-          id: _vm.user.id
-        }
+        name: 'users.index'
       },
       "tag": "li"
     }
@@ -74971,7 +75008,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "to": {
         name: 'users.edit',
         params: {
-          id: _vm.user.id
+          id: _vm.$route.params.id
         }
       },
       "tag": "li"
@@ -76044,10 +76081,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "breadcrumb-item",
     attrs: {
       "to": {
-        name: 'users.index',
-        params: {
-          id: _vm.user.id
-        }
+        name: 'users.index'
       },
       "tag": "li"
     }

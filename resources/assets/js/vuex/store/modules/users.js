@@ -127,7 +127,7 @@ const actions = {
 // mutations
 const mutations = {
     setAllUsers: (state,payload) => { state.all = payload },
-    addUser: (state,payload) => {state.users.push(payload)},
+    addUser: (state,payload) => {state.all.push(payload)},
     updateUser: (state,payload) => {
       // const user = state.all.find(user => {
       //   return user.id == payload.id

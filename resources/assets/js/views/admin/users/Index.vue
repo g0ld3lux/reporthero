@@ -3,18 +3,22 @@
         <div class="page-header">
             <h3 class="page-title">User Management</h3>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                <li class="breadcrumb-item active">Users</li>
+                <router-link class="breadcrumb-item" :to="{name: 'home'}" tag="li">Home</router-link>
+                <router-link class="breadcrumb-item" :to="{ name: 'users.index'}" tag="li">Users</router-link>
+                <div class="pull-right">
+            <router-link class="btn btn-icon btn-outline-info" :to="{ name: 'users.create'}" tag="button"><i
+                                                class="fa fa-user-plus"></i>Create New User</router-link>
+            </div>
             </ol>
-
+            
         </div>
+        
         <div class="row">
             <div class="col-sm-12">
 
                 <div class="card">
                     <div class="card-header">
-                        <h6>Responsive</h6>
+                        <h6>Users Lists</h6>
                     </div>
                     <div class="card-block">
                         <table id="responsive-datatable" class="table " cellspacing="0" width="100%">
