@@ -22,7 +22,9 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@reporthero.io',
             'first_name' => 'John',
             'last_name' => 'Doe',
-            'password' => bcrypt('adminpass')
+            'password' => bcrypt('adminpass'),
+            'activated' => true,
+            'verified' => true
         ]);
         \Bouncer::assign('admin')->to($user);
 

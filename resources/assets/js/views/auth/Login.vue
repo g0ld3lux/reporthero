@@ -33,8 +33,8 @@
         data() {
             return {
                 loginData: {
-                    email: 'admin@reporthero.io',
-                    password: 'adminpass',
+                    email: '',
+                    password: '',
                     remember: ''
                 }
             }

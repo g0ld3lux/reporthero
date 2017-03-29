@@ -10,7 +10,7 @@
             <li :class="{ active: isActive('/calculator') }">
                 <router-link to="/calculator/"><i class="fa fa-calculator"></i> Calculator</router-link>
             </li>
-            <li :class="{ active: isActive('/users') }">
+            <li v-if="$store.state.users.isAdmin" :class="{ active: isActive('/users') }">
                 <router-link to="/users/"><i class="fa fa-user"></i> Users</router-link>
             </li>
 

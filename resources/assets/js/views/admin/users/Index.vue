@@ -27,6 +27,7 @@
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Status</th>
                                 <th>Date Created</th>
                                 <th>Date Updated</th>
                                 <th>Actions</th>
@@ -37,6 +38,7 @@
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Status</th>
                                 <th>Date Created</th>
                                 <th>Date Updated</th>
                                 <th>Actions</th>
@@ -47,6 +49,8 @@
                                 <td>{{ user.id }}</td>
                                 <td>{{ name(user) }}</td>
                                 <td>{{ user.email }}</td>
+                                <td v-if="user.activated">Active</td>
+                                <td v-else>Not Active</td>
                                 <td>{{ createAt(user) }}</td>
                                 <td>{{ updatedAt(user) }}</td>
                                 <td>
@@ -57,7 +61,10 @@
                                         class="fa fa-edit"></i></button>
                                         <button type="button" class="btn btn-icon btn-outline-info" @click="userDelete(user.id)"><i
                                                 class="fa fa-trash"></i></button>
-                                        
+                                        <button v-if="!user.activated" type="button" class="btn btn-icon btn-outline-info" @click="toggleUserStatus(user.id)"><i
+                                        class="fa fa-toggle-off"></i></button>
+                                        <button v-else="user.activated" type="button" class="btn btn-icon btn-outline-info" @click="toggleUserStatus(user.id)"><i
+                                        class="fa fa-toggle-on"></i></button>
                                 </div>
                                 </td>
                             </tr>
@@ -80,7 +87,8 @@ import { mapGetters, mapActions , mapState , mapMutations } from 'vuex'
             ...mapActions({
                 setAllUsers: 'setAllUsers',
                 setAuthUser: 'setAuthUser',
-                deleteUser: 'deleteUser'
+                deleteUser: 'deleteUser',
+                toggleActive: 'toggleActive'
 
             }),
             name(user){
@@ -99,7 +107,9 @@ import { mapGetters, mapActions , mapState , mapMutations } from 'vuex'
             },
             editUser(user){
                 this.$router.push({ name: 'users.edit', params: { id: user.id }})
-
+            },
+            toggleUserStatus(id){
+                this.toggleActive(id)
             },
             userDelete(id){
              this.deleteUser(id)

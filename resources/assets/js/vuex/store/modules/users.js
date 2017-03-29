@@ -120,6 +120,10 @@ const actions = {
   let payload = (await api.updateApiKey(state.selected.id,api_key)).data
   commit('updateUser', await payload.user)
   },
+  async toggleActive({commit,state},id){
+    let payload = (await api.toggleActive(id)).data
+    commit('toggleActive', await payload.user)
+  }
 
 
 }
@@ -133,6 +137,14 @@ const mutations = {
       //   return user.id == payload.id
       // })
       state.selected = payload
+    },
+    toggleActive: (state,payload) => {
+      const user = state.all.find(user => {
+        return user.id == payload.id
+      })
+      // We Remove Old User and replace with New Value
+      state.all.splice(state.all.indexOf(user),1,payload)
+
     },
     setAuthUser: (state, payload ) => {  state.auth = payload},
     setIsAdmin: (state,payload) => { state.isAdmin = payload },

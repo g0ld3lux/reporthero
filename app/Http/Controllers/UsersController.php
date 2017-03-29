@@ -237,4 +237,21 @@ class UsersController extends Controller
         $user->save();
         return response()->json(['message'=> 'You Have Successfully Edit Your Profile'], 200);
     }
+
+    public function toggleActive($id)
+    {
+        if($this->isAdmin()){
+   
+            try{
+                $user = User::findOrFail($id);
+            }catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e){
+                return response()->json(['error' => 'user_not_found'], 404);
+            }
+        }
+        $toggle = $user->activated;
+        $user->activated = !$toggle;
+        $user->save();
+        $user->fresh();
+        return response()->json(['user'=> $user, 'message' => 'User Status Toggled!'], 200);
+    }
 }

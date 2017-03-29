@@ -82,6 +82,9 @@ export default {
             }
         })
   },
+  toggleActive(id){
+      return axios.get('/api/admin/users/toggleActive/' +id)
+  },
   updateFirstName(id,first_name) {
     return axios.post('/api/admin/users/updateFirstName/' + id, {
             params: {

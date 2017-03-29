@@ -69,6 +69,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('logout','AuthController@logout');
     Route::get('check','AuthController@check');
     Route::get('checkIsAdmin','AuthController@checkIsAdmin');
+    Route::post('register','AuthController@register');
 });
 
 Route::get('report/rateOfNewCustomer', 'ReportController@rateOfNewCustomer');
@@ -83,6 +84,7 @@ Route::group([
 ], function() {
 
 Route::get('users' , 'UsersController@index');
+Route::get('users/toggleActive/{id}' , 'UsersController@toggleActive');
 Route::get('users/showDeletedUsers' , 'UsersController@showDeletedUsers');
 Route::post('users/updateFirstName/{id}' , 'UsersController@updateFirstName');
 Route::post('users/updateLastName/{id}' , 'UsersController@updateLastName');

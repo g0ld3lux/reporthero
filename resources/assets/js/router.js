@@ -56,16 +56,16 @@ const routes = [
      */
 
     {
-        path: '/', component: LayoutFront,
+        path: '/', component: LayoutLogin,
         children: [
             {
                 path: '/',
-                component: Home,
+                component: Login,
                 name: 'front'
             },
             {
                 path: '/home',
-                component: Home,
+                component: Login,
                 name: 'home'
             },
         ]

@@ -18,6 +18,20 @@ export default {
 
     },
 
+    register(registerData){
+        return axios.post('/api/auth/register', registerData).then(response =>  {
+
+            toastr['success']('Account Registered', 'Success');
+        }).catch(error => {
+            if (error.response.status == 401) {
+                toastr['error']('Email Already Registered', 'Error');
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+        });
+    },
+
     logout(){
         return axios.get('/api/auth/logout').then(response =>  {
             Ls.remove('auth.token')
