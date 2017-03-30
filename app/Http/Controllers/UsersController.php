@@ -84,27 +84,43 @@ class UsersController extends Controller
         return response()->json(['message'=> 'You Have Edit A User', 'user' => $user], 200);
     }
 
-    public function updateFirstName($id)
+    public function updateFirstName($id = null)
     {
+ 
         $data = request()->input('params');
+        if($id === null)
+        {
+        $user = $this->user();
+        }else {
         $user = User::find($id);
+        }
         $user->first_name = $data['first_name'];
         $user->save();
         return response()->json(['message'=> 'First Name Updated', 'user' => $user], 200);
     }
-    public function updateLastName($id)
+    public function updateLastName($id = null)
     {
         $data = request()->input('params');
+        if($id === null)
+        {
+        $user = $this->user();
+        }else{
         $user = User::find($id);
+        }
         $user->last_name = $data['last_name'];
         $user->save();
         return response()->json(['message'=> 'Last Name Updated', 'user' => $user], 200);
     }
-    public function updateEmail($id)
+    public function updateEmail($id = null)
     {
         $data = request()->input('params');
-        $user = User::find($id);
         
+        if($id === null)
+        {
+        $user = $this->user();
+        }else {
+        $user = User::find($id);
+        }
         try {
         $user->email = $data['email'];
         $user->save();
@@ -114,26 +130,41 @@ class UsersController extends Controller
         }
         return response()->json(['message'=> 'Email Updated', 'user' => $user], 200);
     }
-    public function updatePassword($id)
+    public function updatePassword($id = null)
     {
         $data = request()->input('params');
+         if($id === null)
+        {
+        $user = $this->user();
+        }else {
         $user = User::find($id);
+        }
         $user->password = $data['password'];
         $user->save();
         return response()->json(['message'=> 'Password Updated', 'user' => $user], 200);
     }
-    public function updateStoreType($id)
+    public function updateStoreType($id = null)
     {
         $data = request()->input('params');
+         if($id === null)
+        {
+        $user = $this->user();
+        }else {
         $user = User::find($id);
+        }
         $user->store_type = $data['store_type'];
         $user->save();
         return response()->json(['message'=> 'Store Type Updated', 'user' => $user], 200);
     }
-    public function updateToken($id)
+    public function updateToken($id = null)
     {
         $data = request()->input('params');
+         if($id === null)
+        {
+        $user = $this->user();
+        }else {
         $user = User::find($id);
+        }
         if(!$data['token']){
         return response()->json(['message'=> 'Token Updated', 'user' => $user], 200);  
         }
@@ -143,10 +174,15 @@ class UsersController extends Controller
         $user->save();
         return response()->json(['message'=> 'Token Updated', 'user' => $user], 200);
     }
-    public function updateApiKey($id)
+    public function updateApiKey($id = null)
     {
         $data = request()->input('params');
+        if($id === null)
+        {
+        $user = $this->user();
+        }else {
         $user = User::find($id);
+        }
         if(!$data['api_key']){
         return response()->json(['message'=> 'Token Updated', 'user' => $user], 200);  
         }
@@ -201,7 +237,12 @@ class UsersController extends Controller
         if($this->isAdmin()){
             $userId = request()->input('id');
             try{
+                if($userId === null)
+                {
+                $user = $this->user();
+                }else {
                 $user = User::findOrFail($userId);
+                }
             }catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e){
                 return response()->json(['error' => 'user_not_found'], 404);
             }

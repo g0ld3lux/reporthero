@@ -113,4 +113,12 @@ Route::post('addKlaviyoApiKeys' , 'UsersController@addKlaviyoApiKeys');
 Route::post('changePassword' , 'UsersController@changePassword');
 Route::get('viewApiKeys' , 'UsersController@viewApiKeys');
 Route::get('editProfile' , 'UsersController@editProfile');
+
+Route::post('updateFirstName' , 'UsersController@updateFirstName');
+Route::post('updateLastName' , 'UsersController@updateLastName');
+Route::post('updateEmail' , 'UsersController@updateEmail');
+Route::post('updatePassword' , 'UsersController@updatePassword');
+Route::post('updateStoreType' , 'UsersController@updateStoreType');
+Route::post('updateToken' , 'UsersController@updateToken');
+Route::post('updateApiKey' , 'UsersController@updateApiKey');
 });

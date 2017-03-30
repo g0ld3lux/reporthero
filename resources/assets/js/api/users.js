@@ -56,11 +56,16 @@ export default {
         })
   },
   viewApiKeys(id) {
+      if(id === undefined){
+      return axios.get('/api/@me/viewApiKeys')    
+      }
+      else{
       return axios.get('/api/@me/viewApiKeys', {
           params: {
             id
           }
       })
+      }
   },
   editProfile() {
         return axios.post('/api/@me/editProfile', {
@@ -86,53 +91,117 @@ export default {
       return axios.get('/api/admin/users/toggleActive/' +id)
   },
   updateFirstName(id,first_name) {
-    return axios.post('/api/admin/users/updateFirstName/' + id, {
+    if(id === undefined){
+        return axios.post('/api/@me/updateFirstName', {
             params: {
                 first_name
             }
         })
+    }
+    else{
+        return axios.post('/api/admin/users/updateFirstName/' + id, {
+            params: {
+                first_name
+            }
+        })
+    }
+    
   },
   updateLastName(id,last_name) {
+    if(id === undefined){
+        return axios.post('/api/@me/updateLastName', {
+            params: {
+                last_name
+            }
+        })
+    }
+    else{
     return axios.post('/api/admin/users/updateLastName/' + id, {
             params: {
                 last_name
             }
         })
+    }
   },
   updateEmail(id,email) {
+    if(id === undefined){
+        return axios.post('/api/@me/updateEmail', {
+            params: {
+                email
+            }
+        })
+    }
+    else{
     return axios.post('/api/admin/users/updateEmail/' + id, {
             params: {
                 email
             }
         })
+    }
   },
   updatePassword(id,password) {
+    if(id === undefined){
+        return axios.post('/api/@me/updatePassword', {
+            params: {
+                password
+            }
+        })
+    }
+    else{
     return axios.post('/api/admin/users/updatePassword/' + id, {
             params: {
                 password
             }
         })
+    }
   },
   updateStoreType(id,store_type) {
+    if(id === undefined){
+        return axios.post('/api/@me/updateStoreType', {
+            params: {
+                store_type
+            }
+        })
+    }
+    else{
     return axios.post('/api/admin/users/updateStoreType/' + id, {
             params: {
                 store_type
             }
         })
+    }
   },
   updateToken(id,token) {
+    if(id === undefined){
+        return axios.post('/api/@me/updateToken', {
+            params: {
+                store_type
+            }
+        })
+    }
+    else{
     return axios.post('/api/admin/users/updateToken/' + id, {
             params: {
                 token
             }
         })
+    }
   },
   updateApiKey(id,api_key) {
+    if(id === undefined){
+        return axios.post('/api/@me/updateApiKey', {
+            params: {
+                api_key
+            }
+        })
+    }
+    else{
     return axios.post('/api/admin/users/updateApiKey/' + id, {
             params: {
                 api_key
             }
         })
+    }
   },
 
 }
